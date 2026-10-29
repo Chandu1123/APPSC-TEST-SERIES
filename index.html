@@ -816,8 +816,8 @@
     <div class="brand">
       <div class="brand-emblem">AP</div>
       <div class="brand-text">
-        <h1>APPSC Group-I & Group-II CBT Exam Prep Portal</h1>
-        <p>Official PYQ Pattern • 2 Chances Per Email ID • 1/3rd Negative Marking • Live PIB & Govt Portals</p>
+        <h1>APPSC Group-I & Group-II CBT Exam Prep Portal (Target: Jan 2027 Exam)</h1>
+        <p>Last 6M–1Y Current Affairs (Jan–Dec 2026) + Static GS • Official PYQs • 2 Chances Per Email ID • -1/3 Negative</p>
       </div>
     </div>
     <div class="header-actions no-print">
@@ -825,7 +825,7 @@
       <button class="btn btn-header" onclick="filterTests('all')">📚 All Exams (41+)</button>
       <button class="btn btn-header" style="background:rgba(109,40,217,0.45); border-color:#c4b5fd;" onclick="filterTests('PYQ')">📜 Previous Year Papers (PYQ)</button>
       <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results & History</button>
-      <button class="btn btn-accent" onclick="triggerLivePibSync()">🌐 Sync Live PIB & Govt Portal Test</button>
+      <button class="btn btn-accent" onclick="filterTests('PIB')">🎯 Jan 2027 CA (6M–1Y) + Static</button>
     </div>
   </header>
 
@@ -835,12 +835,12 @@
       <div class="stat-card">
         <div class="stat-label">Available Test Series & PYQs</div>
         <div class="stat-value" id="statTotalTests">41</div>
-        <div class="stat-sub">33 Mocks + 8 Official APPSC PYQ Papers</div>
+        <div class="stat-sub">33 Mocks (6M–1Y CA + Static) + 8 PYQs</div>
       </div>
       <div class="stat-card accent">
         <div class="stat-label">Total Question Bank</div>
-        <div class="stat-value" id="statTotalQuestions">2,265+</div>
-        <div class="stat-sub">APPSC PYQ Pattern + Step-by-Step Solutions</div>
+        <div class="stat-value" id="statTotalQuestions">2,275+</div>
+        <div class="stat-sub">Jan–Dec 2026 CA + Static GS + PYQs</div>
       </div>
       <div class="stat-card success">
         <div class="stat-label" id="statCompletedLabel">Your Attempts Used</div>
@@ -865,19 +865,25 @@
       </div>
     </div>
 
-    <!-- Live PIB Scraper Bar -->
+    <!-- Target Jan 2027 Exam: Last 6 Months to 1 Year Current Affairs + Static GS Custom Test Builder -->
     <div class="pib-sync-bar">
       <div class="pib-sync-info">
-        <h3>🌐 Live Online PIB & Government Portal Test Series Generator</h3>
-        <p>Fetches latest Press Information Bureau (<b>pib.gov.in</b>), Union Cabinet & AP State Portal releases in real-time and forms a new timed exam with explanations.</p>
+        <h3>🎯 Target January 2027 Exam: Last 6 Months & 1-Year Current Affairs (Jan–Dec 2026) + Static GS Builder</h3>
+        <p>Specially curated for <b>January 2027 APPSC Group-I & Group-II Exams</b>—combines <b>Last 6 Months (July–Dec 2026)</b> & <b>Full 1-Year (Jan–Dec 2026)</b> high-yield Current Affairs with their <b>Static GS Core</b> (Constitutional Articles, AP Reorganization Act, River Basins, Union/AP Budget 2026–27 & ISRO).</p>
       </div>
       <div class="pib-controls">
-        <select id="pibQuestionCount">
-          <option value="25">25 Questions (25 Mins Exam)</option>
-          <option value="30" selected>30 Questions (30 Mins Exam)</option>
-          <option value="50">50 Questions (50 Mins Exam)</option>
+        <select id="caWindowSelect" title="Select Current Affairs + Static GS Window for Jan 2027 Exam">
+          <option value="6M_STATIC" selected>🔥 Last 6 Months (July–Dec 2026) CA + Static GS</option>
+          <option value="1Y_STATIC">📅 Full 1-Year (Jan–Dec 2026) CA + Static GS</option>
+          <option value="AP_SPECIAL">🏛️ AP State 1-Year CA, Budget 2026-27 & Static AP GS</option>
+          <option value="PURE_STATIC">📘 Pure Static GS Foundation (All Subjects)</option>
         </select>
-        <button class="btn btn-primary" id="btnPibSync" onclick="triggerLivePibSync()">⚡ Fetch Live PIB Data & Generate Exam</button>
+        <select id="pibQuestionCount">
+          <option value="25">25 Questions (25 Mins)</option>
+          <option value="30" selected>30 Questions (30 Mins)</option>
+          <option value="50">50 Questions (50 Mins)</option>
+        </select>
+        <button class="btn btn-primary" id="btnPibSync" onclick="triggerLivePibSync()">⚡ Generate Jan 2027 Target Exam</button>
       </div>
     </div>
 
@@ -886,13 +892,13 @@
       <div class="tabs">
         <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (41+)</button>
         <button class="tab-btn" id="tab-pyq" onclick="filterTests('PYQ')" style="border-color:#c4b5fd; color:#5b21b6;">📜 Previous Year Papers (PYQ) (8)</button>
+        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')" style="border-color:#f59e0b; color:#b45309;">🎯 Jan 2027 CA (6M–1Y) + Static (6)</button>
         <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Full Mocks (120m)</button>
         <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Full Mocks (150m)</button>
-        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">PIB & Govt Portals</button>
-        <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Subject-Wise Tests</button>
+        <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Static Subject-Wise Tests</button>
         <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">Past Attempts & Solutions</button>
       </div>
-      <input type="text" id="searchBox" class="search-input" placeholder="Search PYQ, 2024, AP History, PIB, Polity..." oninput="renderTestCards()" />
+      <input type="text" id="searchBox" class="search-input" placeholder="Search Jan 2027, 6 Months, PYQ, AP History, Static..." oninput="renderTestCards()" />
     </div>
 
     <!-- Cards Container -->
@@ -1497,7 +1503,7 @@
         if (currentFilter === 'PYQ' && !isPyqTest(t)) return false;
         if (currentFilter === 'Group 1' && t.exam_group !== 'Group 1') return false;
         if (currentFilter === 'Group 2' && t.exam_group !== 'Group 2') return false;
-        if (currentFilter === 'PIB' && !t.category.includes('PIB')) return false;
+        if (currentFilter === 'PIB' && !(t.category.includes('PIB') || t.category.includes('Jan 2027') || t.category.includes('CA'))) return false;
         if (currentFilter === 'Subject-Wise' && !t.category.includes('Subject')) return false;
         if (query) {
           const hay = `${t.title} ${t.description} ${(t.subjects || []).join(' ')} ${t.category} ${t.exam_year || ''}`.toLowerCase();
@@ -1565,73 +1571,77 @@
       }).join('');
     }
 
-    // Live Browser-Based PIB RSS Fetcher + Exam Synthesizer
+    // Target January 2027 Exam: Last 6 Months (Jul–Dec 2026) & 1-Year (Jan–Dec 2026) Current Affairs + Static GS Custom Test Builder
     async function triggerLivePibSync() {
       const btn = document.getElementById('btnPibSync');
       const qCount = parseInt(document.getElementById('pibQuestionCount').value || '30', 10);
+      const windowMode = (document.getElementById('caWindowSelect') && document.getElementById('caWindowSelect').value) || '6M_STATIC';
       const origText = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = '⏳ Fetching Live PIB (pib.gov.in) Releases...';
+      btn.innerHTML = '⏳ Building Jan 2027 Target Exam...';
 
-      const liveQuestions = [];
-      try {
-        const rssUrl = encodeURIComponent('https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3');
-        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && Array.isArray(data.items)) {
-            data.items.forEach((item, idx) => {
-              if (!item.title || item.title.length < 20) return;
-              const cleanDesc = (item.description || item.title).replace(/<[^>]+>/g, ' ').trim();
-              liveQuestions.push({
-                q_no: liveQuestions.length + 1,
-                id: `PIB-LIVE-WEB-${idx + 1}`,
-                subject: 'PIB & Govt Schemes Current Affairs',
-                topic: item.title.slice(0, 75),
-                question_type: 'PIB Live Press Release',
-                question: `With reference to the recent Press Information Bureau (PIB) official release titled "${item.title}", consider the following statements:\n1. ${cleanDesc.slice(0, 260)}\n2. This initiative is documented under the Government of India's official PIB portal for public policy and governance implementation.\n\nWhich of the statements given above is/are correct?`,
-                options: ['1 only', '2 only', 'Both 1 and 2', 'Neither 1 nor 2'],
-                correct_index: 2,
-                explanation: `Both Statement 1 and Statement 2 are correct.\n• Release Title: ${item.title}\n• Official Summary: ${cleanDesc}\n• Published Date: ${item.pubDate || 'Recent'}`,
-                source: `PIB Official Portal (${item.link || 'https://pib.gov.in'})`
-              });
-            });
-          }
-        }
-      } catch (err) {
-        console.info('Using curated PIB & Cabinet pool alongside live check:', err);
-      }
+      const candidatePool = [];
+      const seenQuestions = new Set();
 
-      // Fill remaining questions from the verified PIB & Current Affairs pool
-      const pibPool = [];
       allTests.forEach(t => {
         (t.questions || []).forEach(q => {
-          if (q.subject.includes('PIB') || (q.source && q.source.includes('PIB')) || q.subject.includes('Economy') || q.subject.includes('Science')) {
-            pibPool.push(q);
+          const qKey = (q.question || '').slice(0, 120);
+          if (seenQuestions.has(qKey)) return;
+
+          const hay = `${q.topic || ''} ${q.question_type || ''} ${q.subject || ''} ${q.source || ''} ${q.question || ''}`;
+          let matches = false;
+
+          if (windowMode === '6M_STATIC') {
+            matches = hay.includes('Last 6M') || hay.includes('Last 6 Months') || hay.includes('Jan 2027') || q.subject.includes('PIB') || q.subject.includes('Economy') || q.subject.includes('Science');
+          } else if (windowMode === '1Y_STATIC') {
+            matches = hay.includes('Jan 2027') || hay.includes('1-Year') || hay.includes('2026') || q.subject.includes('PIB') || q.subject.includes('Polity') || q.subject.includes('Economy');
+          } else if (windowMode === 'AP_SPECIAL') {
+            matches = hay.includes('Andhra') || hay.includes('Polavaram') || hay.includes('Amaravati') || hay.includes('Swarna Andhra') || q.subject.includes('AP') || q.subject.includes('Geography');
+          } else {
+            // PURE_STATIC
+            matches = !q.subject.includes('PIB') && !hay.includes('Last 6M');
+          }
+
+          if (matches) {
+            seenQuestions.add(qKey);
+            candidatePool.push(q);
           }
         });
       });
 
-      const shuffled = [...pibPool].sort(() => Math.random() - 0.5);
-      const combined = [...liveQuestions, ...shuffled].slice(0, qCount).map((q, i) => ({
+      // prioritize Jan 2027 / 2026 CA+Static questions at the top when 6M_STATIC or 1Y_STATIC is chosen
+      const priorityQs = candidatePool.filter(q =>
+        (q.topic && (q.topic.includes('2026') || q.topic.includes('Jan 2027'))) ||
+        (q.question_type && q.question_type.includes('Jan 2027'))
+      ).sort(() => Math.random() - 0.5);
+      const otherQs = candidatePool.filter(q => !priorityQs.includes(q)).sort(() => Math.random() - 0.5);
+
+      const combined = [...priorityQs, ...otherQs].slice(0, qCount).map((q, i) => ({
         ...q,
         q_no: i + 1,
-        id: `PIB-SYNC-Q${i + 1}`
+        id: `JAN2027-CUST-Q${i + 1}`
       }));
 
-      const nowStr = new Date().toLocaleString();
+      const modeLabels = {
+        '6M_STATIC': 'Last 6 Months High-Yield (July–Dec 2026) CA + Static GS',
+        '1Y_STATIC': 'Full 1-Year Roundup (Jan–Dec 2026) CA + Static GS',
+        'AP_SPECIAL': 'AP State 1-Year Current Affairs, Budget 2026–27 & Static AP GS',
+        'PURE_STATIC': 'Pure Static GS Foundation (History, Polity, Economy, Geography, S&T)'
+      };
+      const label = modeLabels[windowMode] || modeLabels['6M_STATIC'];
+
       const newTest = {
-        test_id: 'APPSC-PIB-LIVE-' + Date.now().toString().slice(-5),
-        title: `Live PIB & Govt Portal Dynamic Test (${nowStr})`,
+        test_id: 'APPSC-JAN2027-' + Date.now().toString().slice(-5),
+        title: `Target Jan 2027 Exam: ${label} (${qCount} Qs)`,
         exam_group: 'Group 1 & 2',
-        category: 'PIB & Govt Portals',
+        category: 'Jan 2027 CA (6M-1Y) + Static',
         duration_minutes: qCount,
         question_count: combined.length,
         total_marks: combined.length,
         marks_per_question: 1.0,
         negative_marking: 0.3333,
-        subjects: ['PIB & Govt Schemes Current Affairs', 'Indian & AP Economy', 'Science, Tech & Environment'],
-        description: `Generated live on ${nowStr} from Press Information Bureau (pib.gov.in) releases, Cabinet approvals, and AP Socio-Economic Survey briefs.`,
+        subjects: ['PIB & Govt Schemes Current Affairs', 'Indian & AP Economy', 'Indian Polity & Constitution', 'Geography of India & AP', 'Science, Tech & Environment'],
+        description: `Custom Target January 2027 APPSC Group-I & Group-II Exam (${label}) featuring ${qCount} questions with 1/3rd negative marking and Static GS linkage explanations.`,
         questions: combined
       };
 

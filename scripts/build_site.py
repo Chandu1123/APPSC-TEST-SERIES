@@ -25,8 +25,8 @@ def build_website():
     print("[1/3] Generating 32 APPSC Group-I & Group-II Exam Test Series...")
     subprocess.run([sys.executable, os.path.join(SCRIPTS_DIR, "generate_test_series.py")], check=True)
 
-    print("[2/3] Running Live PIB (pib.gov.in) & Govt Portal Scraper...")
-    subprocess.run([sys.executable, os.path.join(SCRIPTS_DIR, "pib_scraper.py"), "--questions", "30"], check=True)
+    print("[2/3] Compiling Target Jan 2027 Exam: Last 6 Months & 1-Year Current Affairs + Static GS...")
+    subprocess.run([sys.executable, os.path.join(SCRIPTS_DIR, "pib_scraper.py"), "--questions", "40"], check=True)
 
     db_json_path = os.path.join(DATA_DIR, "tests_db.json")
     db_js_path = os.path.join(DATA_DIR, "tests_db.js")
