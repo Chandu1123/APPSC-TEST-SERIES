@@ -9,42 +9,46 @@
   <title>APPSC Group-I & Group-II Online CBT Test Series Portal</title>
   <style>
     :root {
-      --primary: #0f3d6e;
-      --primary-dark: #092748;
-      --primary-light: #1d5ca0;
+      --primary: #1e40af;
+      --primary-dark: #0f172a;
+      --primary-light: #eff6ff;
       --accent: #d97706;
       --accent-light: #fef3c7;
       --success: #15803d;
       --success-bg: #dcfce7;
-      --danger: #b91c1c;
+      --danger: #dc2626;
       --danger-bg: #fee2e2;
       --purple: #6d28d9;
-      --purple-bg: #ede9fe;
-      --bg: #f1f5f9;
+      --purple-bg: #f3e8ff;
+      --bg: #f8fafc;
       --card: #ffffff;
       --text: #0f172a;
-      --muted: #475569;
-      --border: #cbd5e1;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 14px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.55;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
-    /* Top Header */
+
+    /* Clean Sticky Top Navbar */
     .top-header {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(10px);
       color: #fff;
-      padding: 14px 28px;
+      padding: 12px 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+      gap: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -52,105 +56,120 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      cursor: pointer;
     }
     .brand-emblem {
-      width: 46px;
-      height: 46px;
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 16px;
       color: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(59,130,246,0.35);
       flex-shrink: 0;
     }
     .brand-text h1 {
-      font-size: 19px;
+      font-size: 16.5px;
       font-weight: 700;
-      letter-spacing: 0.2px;
+      letter-spacing: -0.2px;
+      color: #f8fafc;
     }
     .brand-text p {
-      font-size: 12.5px;
-      color: #cbd5e1;
+      font-size: 12px;
+      color: #94a3b8;
     }
     .header-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
       flex-wrap: wrap;
     }
+
+    /* Buttons */
     .btn {
       border: none;
-      border-radius: 7px;
-      padding: 9px 16px;
-      font-size: 13.5px;
+      border-radius: 9px;
+      padding: 8px 15px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.16s ease;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       text-decoration: none;
+      white-space: nowrap;
     }
-    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.04); }
     .btn:active { transform: translateY(0); }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-accent { background: #f59e0b; color: #0f172a; }
-    .btn-success { background: var(--success); color: #fff; }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 2px 6px rgba(30,64,175,0.22); }
+    .btn-accent { background: #f59e0b; color: #0f172a; font-weight: 700; }
+    .btn-success { background: var(--success); color: #fff; box-shadow: 0 2px 6px rgba(21,128,61,0.2); }
     .btn-danger { background: var(--danger); color: #fff; }
-    .btn-purple { background: var(--purple); color: #fff; }
+    .btn-purple { background: var(--purple); color: #fff; box-shadow: 0 2px 6px rgba(109,40,217,0.2); }
     .btn-outline {
       background: #fff;
-      color: var(--primary);
-      border: 1.5px solid var(--border);
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+    .btn-outline:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
     }
     .btn-header {
-      background: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 7px 13px;
+      font-size: 12.5px;
+    }
+    .btn-header:hover {
+      background: rgba(255,255,255,0.16);
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.28);
     }
 
     /* Main Container */
     .container {
-      max-width: 1360px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 22px 24px 48px;
+      padding: 24px 24px 56px;
     }
 
-    /* Stats Banner */
+    /* Compact KPI Summary Bar */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 22px;
+      gap: 14px;
+      margin-bottom: 20px;
     }
     .stat-card {
       background: var(--card);
-      border-radius: 10px;
-      padding: 16px 20px;
-      border-left: 5px solid var(--primary);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 15px 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 2px rgba(15,23,42,0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .stat-card.accent { border-left-color: var(--accent); }
-    .stat-card.success { border-left-color: var(--success); }
-    .stat-card.purple { border-left-color: var(--purple); }
     .stat-label {
-      font-size: 12px;
+      font-size: 11.5px;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       color: var(--muted);
       font-weight: 700;
     }
     .stat-value {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 800;
       color: var(--text);
-      margin-top: 4px;
+      margin-top: 2px;
+      letter-spacing: -0.5px;
     }
     .stat-sub {
       font-size: 12px;
@@ -158,173 +177,191 @@
       margin-top: 2px;
     }
 
-    /* Live PIB Scraper Banner */
-    .pib-sync-bar {
-      background: linear-gradient(90deg, #eff6ff 0%, #fef3c7 100%);
-      border: 1px solid #bfdbfe;
-      border-radius: 10px;
+    /* Unified Quick-Builder Card (Replaces 2 Cluttered Banners) */
+    .quick-builder-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       padding: 16px 20px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,0.03);
     }
-    .pib-sync-info h3 {
-      font-size: 15.5px;
-      color: var(--primary-dark);
+    .qb-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 14px;
+      flex: 1;
+      min-width: 280px;
     }
-    .pib-sync-info p {
-      font-size: 13px;
-      color: #334155;
-      margin-top: 3px;
+    .qb-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .qb-info h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .qb-info p {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 2px;
     }
     .pib-controls {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
       flex-wrap: wrap;
     }
     .pib-controls select {
       padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      font-size: 13px;
-      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 12.5px;
+      background: #f8fafc;
+      color: var(--text);
       font-weight: 600;
+      cursor: pointer;
+    }
+    .pib-controls select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
     }
 
-    /* Filter Tabs & Search */
+    /* Filter Tabs & Search Bar */
     .toolbar {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
     .tab-btn {
-      padding: 8px 15px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #475569;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
     }
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: var(--text);
+    }
     .tab-btn.active {
       background: var(--primary);
       color: #fff;
-      border-color: var(--primary);
+      box-shadow: 0 1px 3px rgba(30,64,175,0.25);
     }
     .search-input {
-      padding: 9px 14px;
+      padding: 8px 14px;
       border-radius: 8px;
-      border: 1px solid var(--border);
-      width: 280px;
+      border: 1px solid #cbd5e1;
+      width: 260px;
       max-width: 100%;
-      font-size: 13.5px;
+      font-size: 13px;
+      background: #f8fafc;
+      transition: all 0.15s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
       background: #fff;
+      box-shadow: 0 0 0 3px rgba(30,64,175,0.1);
     }
 
-    /* Test Cards Grid */
+    /* Clean Test Cards Grid */
     .tests-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 18px;
     }
     .test-card {
       background: var(--card);
-      border-radius: 11px;
-      border: 1px solid #e2e8f0;
-      padding: 18px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.03);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
     }
     .test-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(15, 61, 110, 0.09);
-      border-color: #93c5fd;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+      border-color: #cbd5e1;
+    }
+    .test-card.pyq-card {
+      border-top: 3px solid var(--purple);
     }
     .test-badges {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       gap: 8px;
     }
     .badge {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 12px;
-      display: inline-block;
+      padding: 3.5px 9px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.1px;
     }
     .badge-g1 { background: #dbeafe; color: #1e40af; }
     .badge-g2 { background: #dcfce7; color: #166534; }
     .badge-pib { background: #fef3c7; color: #92400e; }
-    .badge-pyq { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
+    .badge-pyq { background: #f3e8ff; color: #6d28d9; }
     .badge-cat { background: #f1f5f9; color: #475569; }
-    .badge-chance-2 { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-    .badge-chance-1 { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
-    .badge-chance-0 { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
-    .test-card.pyq-card {
-      border-top: 4px solid #6d28d9;
-      background: linear-gradient(180deg, #faf5ff 0%, #ffffff 38%);
-    }
-    .pyq-showcase-bar {
-      background: linear-gradient(90deg, #f5f3ff 0%, #ede9fe 55%, #fef3c7 100%);
-      border: 1px solid #c4b5fd;
-      border-left: 5px solid #6d28d9;
-      border-radius: 10px;
-      padding: 15px 20px;
-      margin-bottom: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-    .pyq-showcase-info h3 {
-      font-size: 15.5px;
-      color: #4c1d95;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .pyq-showcase-info p {
-      font-size: 13px;
-      color: #334155;
-      margin-top: 3px;
-    }
+    .badge-chance-2 { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    .badge-chance-1 { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+    .badge-chance-0 { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+
     .user-profile-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(15, 23, 42, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 10px;
       border-radius: 8px;
-      font-size: 12.5px;
-      color: #fff;
+      font-size: 12px;
+      color: #f8fafc;
     }
     .user-profile-pill .user-email {
-      color: #fde047;
-      font-weight: 700;
+      color: #93c5fd;
+      font-weight: 600;
     }
     .login-field {
       margin-bottom: 14px;
@@ -332,36 +369,36 @@
     .login-field label {
       display: block;
       font-size: 13px;
-      font-weight: 700;
-      color: var(--primary-dark);
+      font-weight: 600;
+      color: var(--text);
       margin-bottom: 5px;
     }
     .login-field input, .login-field select {
       width: 100%;
       padding: 10px 14px;
       border-radius: 8px;
-      border: 1.5px solid var(--border);
+      border: 1px solid #cbd5e1;
       font-size: 14px;
       background: #fff;
     }
     .login-field input:focus, .login-field select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(15, 61, 110, 0.12);
+      box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12);
     }
     .saved-users-box {
       margin-top: 14px;
       padding-top: 12px;
-      border-top: 1px dashed var(--border);
+      border-top: 1px solid var(--border);
     }
     .saved-user-chip {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 8px 12px;
-      border-radius: 7px;
+      border-radius: 8px;
       background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--border);
       margin-top: 6px;
       cursor: pointer;
       font-size: 13px;
@@ -372,23 +409,23 @@
       border-color: #93c5fd;
     }
     .btn-disabled {
-      background: #e2e8f0 !important;
-      color: #64748b !important;
+      background: #f1f5f9 !important;
+      color: #94a3b8 !important;
       cursor: not-allowed !important;
-      border: 1px solid #cbd5e1 !important;
+      border: 1px solid #e2e8f0 !important;
       transform: none !important;
-      filter: none !important;
+      box-shadow: none !important;
     }
     .attempt-banner {
       padding: 12px 16px;
       border-radius: 8px;
       margin: 12px 0;
       font-size: 13.5px;
-      line-height: 1.45;
+      line-height: 1.5;
     }
     .attempt-banner.chance-1 {
       background: #eff6ff;
-      border-left: 4px solid #0284c7;
+      border-left: 4px solid #2563eb;
       color: #0f172a;
     }
     .attempt-banner.chance-2 {
@@ -397,28 +434,31 @@
       color: #78350f;
     }
     .test-title {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.35;
+      margin-bottom: 6px;
+      line-height: 1.4;
     }
     .test-desc {
-      font-size: 12.8px;
+      font-size: 12.5px;
       color: var(--muted);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .test-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      font-size: 12.5px;
-      color: #334155;
+      gap: 10px;
+      font-size: 12px;
+      color: #475569;
+      padding: 8px 12px;
       background: #f8fafc;
-      padding: 9px 12px;
-      border-radius: 7px;
+      border-radius: 8px;
       margin-bottom: 14px;
-      border: 1px solid #e2e8f0;
     }
     .test-meta span {
       display: inline-flex;
@@ -431,7 +471,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      padding-top: 8px;
+      padding-top: 12px;
       border-top: 1px solid #f1f5f9;
     }
 
@@ -439,11 +479,11 @@
     .hidden { display: none !important; }
     .exam-wrapper {
       display: grid;
-      grid-template-columns: 1fr 330px;
-      gap: 18px;
-      height: calc(100vh - 82px);
-      padding: 14px 20px;
-      max-width: 1600px;
+      grid-template-columns: 1fr 320px;
+      gap: 16px;
+      height: calc(100vh - 68px);
+      padding: 16px 20px;
+      max-width: 1560px;
       margin: 0 auto;
     }
     @media (max-width: 960px) {
@@ -454,15 +494,16 @@
     }
     .exam-main {
       background: #fff;
-      border-radius: 10px;
+      border-radius: var(--radius);
       border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
     }
     .exam-top-bar {
-      background: #f8fafc;
-      padding: 12px 20px;
+      background: #ffffff;
+      padding: 14px 22px;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
@@ -473,10 +514,10 @@
     .timer-box {
       background: #0f172a;
       color: #38bdf8;
-      padding: 7px 16px;
+      padding: 6px 14px;
       border-radius: 8px;
       font-family: 'Consolas', monospace;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       letter-spacing: 1px;
       display: flex;
@@ -495,7 +536,7 @@
     .question-scroll {
       flex: 1;
       overflow-y: auto;
-      padding: 24px 28px;
+      padding: 24px 30px;
     }
     .q-header-meta {
       display: flex;
@@ -503,48 +544,49 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed var(--border);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
     .q-number-label {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       color: var(--primary);
     }
     .q-marks-pill {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
-      background: #f1f5f9;
+      background: #f8fafc;
+      border: 1px solid var(--border);
       padding: 4px 10px;
       border-radius: 6px;
     }
     .q-marks-pill .pos { color: var(--success); }
     .q-marks-pill .neg { color: var(--danger); }
     .q-statement-text {
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 500;
       color: #0f172a;
       white-space: pre-line;
       background: #f8fafc;
-      padding: 16px 18px;
-      border-radius: 8px;
+      padding: 18px 20px;
+      border-radius: 10px;
       border-left: 4px solid var(--primary);
       margin-bottom: 20px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
     .options-list {
       display: flex;
       flex-direction: column;
-      gap: 11px;
+      gap: 10px;
     }
     .option-row {
       display: flex;
       align-items: flex-start;
       gap: 12px;
       padding: 13px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.12s;
       background: #fff;
@@ -558,13 +600,13 @@
       background: #eff6ff;
     }
     .opt-letter {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      background: #e2e8f0;
-      color: #1e293b;
+      background: #f1f5f9;
+      color: #334155;
       font-weight: 700;
-      font-size: 13.5px;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -575,12 +617,12 @@
       color: #fff;
     }
     .opt-text {
-      font-size: 15px;
+      font-size: 14.5px;
       color: #1e293b;
       padding-top: 2px;
     }
     .exam-bottom-bar {
-      padding: 14px 20px;
+      padding: 14px 22px;
       background: #f8fafc;
       border-top: 1px solid var(--border);
       display: flex;
@@ -593,18 +635,19 @@
     /* Right Question Palette */
     .exam-sidebar {
       background: #fff;
-      border-radius: 10px;
+      border-radius: var(--radius);
       border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
     }
     .palette-header {
-      padding: 13px 16px;
-      background: var(--primary-dark);
+      padding: 14px 16px;
+      background: #0f172a;
       color: #fff;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
     }
     .palette-legend {
       padding: 12px 14px;
@@ -613,8 +656,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      font-size: 11.8px;
+      font-size: 11.5px;
       font-weight: 600;
+      color: #475569;
     }
     .legend-item {
       display: flex;
@@ -622,8 +666,8 @@
       gap: 6px;
     }
     .legend-dot {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       border-radius: 4px;
       display: inline-block;
     }
@@ -639,16 +683,17 @@
     }
     .q-pal-btn {
       height: 36px;
-      border-radius: 6px;
+      border-radius: 7px;
       border: 1px solid #cbd5e1;
-      background: #f1f5f9;
+      background: #f8fafc;
       color: #334155;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12.5px;
       cursor: pointer;
+      transition: all 0.12s;
     }
     .q-pal-btn.current {
-      outline: 2.5px solid #0284c7;
+      outline: 2px solid var(--primary);
       outline-offset: 1px;
     }
     .q-pal-btn.answered {
@@ -679,11 +724,11 @@
 
     /* RESULTS & SOLUTIONS SCREEN */
     .result-banner {
-      background: linear-gradient(135deg, #0f3d6e, #1e3a8a);
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
       color: #fff;
       padding: 24px 28px;
-      border-radius: 12px;
-      margin-bottom: 22px;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -691,14 +736,14 @@
       gap: 16px;
     }
     .score-circle {
-      background: rgba(255,255,255,0.12);
-      border: 2px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 12px;
-      padding: 14px 24px;
+      padding: 14px 22px;
       text-align: center;
     }
     .score-circle .big-score {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 800;
       color: #fde047;
     }
@@ -706,39 +751,38 @@
       width: 100%;
       border-collapse: collapse;
       background: #fff;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       margin-bottom: 24px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
     }
     .subject-table th, .subject-table td {
       padding: 11px 16px;
       text-align: left;
-      border-bottom: 1px solid #e2e8f0;
-      font-size: 13.5px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
     }
     .subject-table th {
       background: #f8fafc;
       font-weight: 700;
-      color: var(--primary-dark);
+      color: var(--text);
     }
     .solution-card {
       background: #fff;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      border: 1px solid var(--border);
       padding: 20px 24px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 14px;
     }
-    .solution-card.sol-correct { border-left: 5px solid var(--success); }
-    .solution-card.sol-wrong { border-left: 5px solid var(--danger); }
-    .solution-card.sol-unattempted { border-left: 5px solid #94a3b8; }
+    .solution-card.sol-correct { border-left: 4px solid var(--success); }
+    .solution-card.sol-wrong { border-left: 4px solid var(--danger); }
+    .solution-card.sol-unattempted { border-left: 4px solid #94a3b8; }
     .sol-opt {
       padding: 9px 14px;
-      border-radius: 7px;
-      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
       margin-bottom: 7px;
-      font-size: 14px;
+      font-size: 13.5px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -758,30 +802,31 @@
     .explanation-box {
       margin-top: 14px;
       background: #f8fafc;
-      border: 1px solid #cbd5e1;
+      border: 1px solid var(--border);
       border-left: 4px solid var(--accent);
       padding: 14px 16px;
-      border-radius: 7px;
-      font-size: 14px;
+      border-radius: 8px;
+      font-size: 13.5px;
       white-space: pre-line;
       color: #1e293b;
     }
     .source-tag {
       display: inline-block;
       margin-top: 8px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       color: var(--primary);
       background: #eff6ff;
       padding: 3px 10px;
-      border-radius: 5px;
+      border-radius: 6px;
     }
 
     /* Modal */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.65);
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -790,16 +835,16 @@
     }
     .modal-box {
       background: #fff;
-      max-width: 680px;
+      max-width: 620px;
       width: 100%;
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 24px 28px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
-    .modal-box h2 { color: var(--primary-dark); margin-bottom: 10px; }
+    .modal-box h2 { color: var(--text); font-size: 20px; margin-bottom: 8px; }
     .inst-list {
       margin: 14px 0 20px 18px;
-      font-size: 14px;
+      font-size: 13.5px;
       color: #334155;
     }
     .inst-list li { margin-bottom: 7px; }
@@ -813,19 +858,19 @@
 
   <!-- TOP NAVIGATION HEADER -->
   <header class="top-header">
-    <div class="brand">
+    <div class="brand" onclick="filterTests('all')">
       <div class="brand-emblem">AP</div>
       <div class="brand-text">
-        <h1>APPSC Group-I & Group-II CBT Exam Prep Portal (Target: Jan 2027 Exam)</h1>
-        <p>Last 6M–1Y Current Affairs (Jan–Dec 2026) + Static GS • Official PYQs • 2 Chances Per Email ID • -1/3 Negative</p>
+        <h1>APPSC Group-I & Group-II Test Series</h1>
+        <p>Target Jan 2027 Exam • 6M–1Y CA + Static • Official PYQs</p>
       </div>
     </div>
     <div class="header-actions no-print">
-      <div id="headerUserArea" style="display:flex; align-items:center; gap:8px;"></div>
-      <button class="btn btn-header" onclick="filterTests('all')">📚 All Exams (41+)</button>
-      <button class="btn btn-header" style="background:rgba(109,40,217,0.45); border-color:#c4b5fd;" onclick="filterTests('PYQ')">📜 Previous Year Papers (PYQ)</button>
-      <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results & History</button>
-      <button class="btn btn-accent" onclick="filterTests('PIB')">🎯 Jan 2027 CA (6M–1Y) + Static</button>
+      <button class="btn btn-header" onclick="filterTests('all')">📚 All Exams</button>
+      <button class="btn btn-header" onclick="filterTests('PYQ')">📜 PYQ Papers</button>
+      <button class="btn btn-header" onclick="filterTests('PIB')">🎯 Jan 2027 CA</button>
+      <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results</button>
+      <div id="headerUserArea" style="display:flex; align-items:center; gap:6px;"></div>
     </div>
   </header>
 
@@ -833,72 +878,64 @@
   <main id="dashboardView" class="container">
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Available Test Series & PYQs</div>
+        <div class="stat-label">Total Exams & PYQs</div>
         <div class="stat-value" id="statTotalTests">41</div>
-        <div class="stat-sub">33 Mocks (6M–1Y CA + Static) + 8 PYQs</div>
+        <div class="stat-sub">33 Mocks + 8 Official PYQs</div>
       </div>
-      <div class="stat-card accent">
-        <div class="stat-label">Total Question Bank</div>
-        <div class="stat-value" id="statTotalQuestions">2,275+</div>
-        <div class="stat-sub">Jan–Dec 2026 CA + Static GS + PYQs</div>
+      <div class="stat-card">
+        <div class="stat-label">Question Bank</div>
+        <div class="stat-value" id="statTotalQuestions">2,365</div>
+        <div class="stat-sub">Jan–Dec 2026 CA + Static GS</div>
       </div>
-      <div class="stat-card success">
-        <div class="stat-label" id="statCompletedLabel">Your Attempts Used</div>
+      <div class="stat-card">
+        <div class="stat-label" id="statCompletedLabel">Attempts Completed</div>
         <div class="stat-value" id="statCompleted">0</div>
-        <div class="stat-sub" id="statUserSub">2 Chances Per Exam Per Email ID</div>
+        <div class="stat-sub" id="statUserSub">2 Chances Per Exam</div>
       </div>
-      <div class="stat-card purple">
-        <div class="stat-label">Average Net Accuracy</div>
+      <div class="stat-card">
+        <div class="stat-label">Average Accuracy</div>
         <div class="stat-value" id="statAccuracy">--</div>
-        <div class="stat-sub">With -0.33 Negative Penalty</div>
+        <div class="stat-sub">+1 Mark • -0.33 Negative</div>
       </div>
     </div>
 
-    <!-- Official APPSC Group-1 & Group-2 Previous Year Question Papers (PYQ) Showcase Bar -->
-    <div class="pyq-showcase-bar">
-      <div class="pyq-showcase-info">
-        <h3>📜 Official APPSC Group-I & Group-II Previous Year Question Papers (PYQs) & Pattern</h3>
-        <p>Includes <b>8 Full Official PYQ Papers (2024, 2023 & 2019 Group-I & Group-II Prelims & Mains)</b> and enforces the authentic APPSC PYQ pattern across all mocks (<i>"How many of the above statements/pairs are correct: Only one / Only two / All three / None"</i>, Match List-I & II, Chronological Order & Assertion-Reason).</p>
-      </div>
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-        <button class="btn btn-purple" onclick="filterTests('PYQ')">📜 Open All 8 Previous Year Papers (PYQ)</button>
-      </div>
-    </div>
-
-    <!-- Target Jan 2027 Exam: Last 6 Months to 1 Year Current Affairs + Static GS Custom Test Builder -->
-    <div class="pib-sync-bar">
-      <div class="pib-sync-info">
-        <h3>🎯 Target January 2027 Exam: Last 6 Months & 1-Year Current Affairs (Jan–Dec 2026) + Static GS Builder</h3>
-        <p>Specially curated for <b>January 2027 APPSC Group-I & Group-II Exams</b>—combines <b>Last 6 Months (July–Dec 2026)</b> & <b>Full 1-Year (Jan–Dec 2026)</b> high-yield Current Affairs with their <b>Static GS Core</b> (Constitutional Articles, AP Reorganization Act, River Basins, Union/AP Budget 2026–27 & ISRO).</p>
+    <!-- Single Clean Custom Exam Builder Bar -->
+    <div class="quick-builder-card">
+      <div class="qb-left">
+        <div class="qb-icon">🎯</div>
+        <div class="qb-info">
+          <h3>Custom Practice Builder (Target Jan 2027 Exam)</h3>
+          <p>Generate an instant timed test from Last 6M–1Y Current Affairs (Jan–Dec 2026) & Static GS</p>
+        </div>
       </div>
       <div class="pib-controls">
-        <select id="caWindowSelect" title="Select Current Affairs + Static GS Window for Jan 2027 Exam">
-          <option value="6M_STATIC" selected>🔥 Last 6 Months (July–Dec 2026) CA + Static GS</option>
-          <option value="1Y_STATIC">📅 Full 1-Year (Jan–Dec 2026) CA + Static GS</option>
-          <option value="AP_SPECIAL">🏛️ AP State 1-Year CA, Budget 2026-27 & Static AP GS</option>
-          <option value="PURE_STATIC">📘 Pure Static GS Foundation (All Subjects)</option>
+        <select id="caWindowSelect" title="Select Topic Window">
+          <option value="6M_STATIC" selected>🔥 Last 6 Months (Jul–Dec 2026) + Static</option>
+          <option value="1Y_STATIC">📅 Full 1-Year (Jan–Dec 2026) + Static</option>
+          <option value="AP_SPECIAL">🏛️ AP State CA, Budget & Static AP GS</option>
+          <option value="PURE_STATIC">📘 Pure Static GS Foundation</option>
         </select>
         <select id="pibQuestionCount">
-          <option value="25">25 Questions (25 Mins)</option>
-          <option value="30" selected>30 Questions (30 Mins)</option>
-          <option value="50">50 Questions (50 Mins)</option>
+          <option value="25">25 Qs (25m)</option>
+          <option value="30" selected>30 Qs (30m)</option>
+          <option value="50">50 Qs (50m)</option>
         </select>
-        <button class="btn btn-primary" id="btnPibSync" onclick="triggerLivePibSync()">⚡ Generate Jan 2027 Target Exam</button>
+        <button class="btn btn-primary" id="btnPibSync" onclick="triggerLivePibSync()">⚡ Create Custom Test</button>
       </div>
     </div>
 
     <!-- Filter Tabs & Search -->
     <div class="toolbar">
       <div class="tabs">
-        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (41+)</button>
-        <button class="tab-btn" id="tab-pyq" onclick="filterTests('PYQ')" style="border-color:#c4b5fd; color:#5b21b6;">📜 Previous Year Papers (PYQ) (8)</button>
-        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')" style="border-color:#f59e0b; color:#b45309;">🎯 Jan 2027 CA (6M–1Y) + Static (6)</button>
-        <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Full Mocks (120m)</button>
-        <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Full Mocks (150m)</button>
-        <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Static Subject-Wise Tests</button>
-        <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">Past Attempts & Solutions</button>
+        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (41)</button>
+        <button class="tab-btn" id="tab-pyq" onclick="filterTests('PYQ')">📜 Official PYQs (8)</button>
+        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">🎯 Jan 2027 CA + Static (6)</button>
+        <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Mocks</button>
+        <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Mocks</button>
+        <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Subject-Wise</button>
+        <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">📊 My Attempts</button>
       </div>
-      <input type="text" id="searchBox" class="search-input" placeholder="Search Jan 2027, 6 Months, PYQ, AP History, Static..." oninput="renderTestCards()" />
+      <input type="text" id="searchBox" class="search-input" placeholder="🔍 Search exams, PYQ, Polity, Economy..." oninput="renderTestCards()" />
     </div>
 
     <!-- Cards Container -->
@@ -1197,14 +1234,14 @@
       if (currentUser && currentUser.email) {
         container.innerHTML = `
           <div class="user-profile-pill" title="Logged in as ${currentUser.name} (${currentUser.email}) — 2 Chances Per Exam">
-            <span>👤 <b>${currentUser.name}</b> (<span class="user-email">${currentUser.email}</span>)</span>
-            <button class="btn btn-header" style="padding:4px 9px; font-size:11.5px;" onclick="openLoginModal()">🔁 Switch Email</button>
-            <button class="btn btn-header" style="padding:4px 9px; font-size:11.5px; background:rgba(185,28,28,0.55);" onclick="logoutCurrentUser()">Logout</button>
+            <span>👤 <b>${currentUser.name}</b></span>
+            <button class="btn btn-header" style="padding:3px 8px; font-size:11px;" onclick="openLoginModal()" title="Switch Email ID (${currentUser.email})">Switch</button>
+            <button class="btn btn-header" style="padding:3px 8px; font-size:11px; color:#fca5a5;" onclick="logoutCurrentUser()">Logout</button>
           </div>
         `;
       } else {
         container.innerHTML = `
-          <button class="btn btn-accent" onclick="openLoginModal()">🔑 Login with Email ID (Get 2 Chances/Exam)</button>
+          <button class="btn btn-accent" style="padding:7px 13px; font-size:12.5px;" onclick="openLoginModal()">🔑 Login</button>
         `;
       }
     }
@@ -1401,13 +1438,13 @@
       const tabAllEl = document.getElementById('tab-all');
       if (tabAllEl) tabAllEl.textContent = `All Exams (${allTests.length})`;
       const tabPyqEl = document.getElementById('tab-pyq');
-      if (tabPyqEl) tabPyqEl.textContent = `📜 Previous Year Papers (PYQ) (${pyqCount})`;
+      if (tabPyqEl) tabPyqEl.textContent = `📜 Official PYQs (${pyqCount})`;
 
       const userSubEl = document.getElementById('statUserSub');
       if (userSubEl) {
         userSubEl.textContent = currentUser
-          ? `Account: ${currentUser.email}`
-          : 'Login with Email for 2 Chances/Exam';
+          ? `${currentUser.email}`
+          : '2 Chances Per Exam';
       }
 
       if (userAttempts.length > 0) {
@@ -1524,24 +1561,24 @@
         let startBtnHtml = '';
 
         if (used === 0) {
-          chanceBadgeHtml = `<span class="badge badge-chance-2">🎯 2 / 2 Chances Available</span>`;
-          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">🔒 Solutions unlock after test</span>`;
+          chanceBadgeHtml = `<span class="badge badge-chance-2">2/2 Chances</span>`;
+          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">🔒 Solutions after test</span>`;
           solutionsBtnHtml = '';
-          startBtnHtml = `<button class="btn ${pyq ? 'btn-purple' : 'btn-primary'}" onclick="openInstructionsModal('${t.test_id}')">▶ Start (Chance 1/2)</button>`;
+          startBtnHtml = `<button class="btn ${pyq ? 'btn-purple' : 'btn-primary'}" onclick="openInstructionsModal('${t.test_id}')">Start Exam →</button>`;
         } else if (used === 1) {
           const a1 = examAtts[0];
-          chanceBadgeHtml = `<span class="badge badge-chance-1">⚠️ 1 / 2 Chances Left</span>`;
-          scoreSummaryHtml = `<span class="badge badge-g2">Attempt 1: ${a1.netScore.toFixed(2)}/${a1.totalMarks}</span>`;
-          solutionsBtnHtml = `<button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Your Attempt 1 Solutions & Explanations">📖 Solutions</button>`;
-          startBtnHtml = `<button class="btn btn-accent" onclick="openInstructionsModal('${t.test_id}')">🔄 Retake (Chance 2/2)</button>`;
+          chanceBadgeHtml = `<span class="badge badge-chance-1">1/2 Left</span>`;
+          scoreSummaryHtml = `<span class="badge badge-g2">Score: ${a1.netScore.toFixed(2)}/${a1.totalMarks}</span>`;
+          solutionsBtnHtml = `<button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Attempt 1 Solutions">📖 Solutions</button>`;
+          startBtnHtml = `<button class="btn btn-accent" onclick="openInstructionsModal('${t.test_id}')">🔄 Retake (2/2)</button>`;
         } else {
           const a1 = examAtts[0];
           const a2 = examAtts[1];
           const best = Math.max(a1.netScore, a2.netScore);
-          chanceBadgeHtml = `<span class="badge badge-chance-0">🔒 0 / 2 Chances Left</span>`;
-          scoreSummaryHtml = `<span class="badge badge-g2" title="Attempt 1: ${a1.netScore.toFixed(2)} | Attempt 2: ${a2.netScore.toFixed(2)}">Best: ${best.toFixed(2)}/${a1.totalMarks} (2/2 Used)</span>`;
-          solutionsBtnHtml = `<button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Solutions & Explanations">📖 Solutions</button>`;
-          startBtnHtml = `<button class="btn btn-disabled" disabled title="Both 2 allowed chances used for ${currentUser ? currentUser.email : 'this account'}">🔒 2/2 Chances Used</button>`;
+          chanceBadgeHtml = `<span class="badge badge-chance-0">Completed (2/2)</span>`;
+          scoreSummaryHtml = `<span class="badge badge-g2" title="Attempt 1: ${a1.netScore.toFixed(2)} | Attempt 2: ${a2.netScore.toFixed(2)}">Best: ${best.toFixed(2)}/${a1.totalMarks}</span>`;
+          solutionsBtnHtml = `<button class="btn btn-primary" onclick="previewTestSolutions('${t.test_id}')" title="View Solutions & Explanations">📖 View Solutions</button>`;
+          startBtnHtml = `<button class="btn btn-disabled" disabled title="Both 2 allowed chances used">Locked</button>`;
         }
 
         return `
@@ -1550,17 +1587,16 @@
               <div class="test-badges">
                 <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
                   <span class="badge ${badgeClass}">${t.exam_group}</span>
-                  ${pyq ? `<span class="badge badge-pyq">📜 Official PYQ Paper</span>` : `<span class="badge badge-cat">${t.category}</span>`}
+                  ${pyq ? `<span class="badge badge-pyq">📜 Official PYQ</span>` : `<span class="badge badge-cat">${t.category}</span>`}
                 </div>
                 ${chanceBadgeHtml}
               </div>
               <div class="test-title">${t.title}</div>
               <div class="test-desc">${t.description}</div>
               <div class="test-meta">
-                <span>📝 ${t.question_count} Questions</span>
-                <span>⏱️ ${t.duration_minutes} Mins</span>
-                <span>⚖️ +1 / -0.33 Marks</span>
-                <span>🔁 ${used}/${MAX_ATTEMPTS_PER_EXAM} Attempts</span>
+                <span>📝 ${t.question_count} Qs</span>
+                <span>⏱️ ${t.duration_minutes}m</span>
+                <span>⚖️ +1 / -0.33</span>
               </div>
             </div>
             <div class="test-footer">
