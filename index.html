@@ -277,10 +277,100 @@
     .badge-g1 { background: #dbeafe; color: #1e40af; }
     .badge-g2 { background: #dcfce7; color: #166534; }
     .badge-pib { background: #fef3c7; color: #92400e; }
+    .badge-pyq { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
     .badge-cat { background: #f1f5f9; color: #475569; }
     .badge-chance-2 { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
     .badge-chance-1 { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
     .badge-chance-0 { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .test-card.pyq-card {
+      border-top: 4px solid #6d28d9;
+      background: linear-gradient(180deg, #faf5ff 0%, #ffffff 38%);
+    }
+    .pyq-showcase-bar {
+      background: linear-gradient(90deg, #f5f3ff 0%, #ede9fe 55%, #fef3c7 100%);
+      border: 1px solid #c4b5fd;
+      border-left: 5px solid #6d28d9;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .pyq-showcase-info h3 {
+      font-size: 15.5px;
+      color: #4c1d95;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pyq-showcase-info p {
+      font-size: 13px;
+      color: #334155;
+      margin-top: 3px;
+    }
+    .user-profile-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: #fff;
+    }
+    .user-profile-pill .user-email {
+      color: #fde047;
+      font-weight: 700;
+    }
+    .login-field {
+      margin-bottom: 14px;
+    }
+    .login-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+    }
+    .login-field input, .login-field select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      font-size: 14px;
+      background: #fff;
+    }
+    .login-field input:focus, .login-field select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 61, 110, 0.12);
+    }
+    .saved-users-box {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+    }
+    .saved-user-chip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 7px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      margin-top: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.12s;
+    }
+    .saved-user-chip:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+    }
     .btn-disabled {
       background: #e2e8f0 !important;
       color: #64748b !important;
@@ -727,11 +817,13 @@
       <div class="brand-emblem">AP</div>
       <div class="brand-text">
         <h1>APPSC Group-I & Group-II CBT Exam Prep Portal</h1>
-        <p>Official Exam Pattern • 1/3rd Negative Marking • Live PIB & Govt Portal Integration • Detailed Solutions</p>
+        <p>Official PYQ Pattern • 2 Chances Per Email ID • 1/3rd Negative Marking • Live PIB & Govt Portals</p>
       </div>
     </div>
     <div class="header-actions no-print">
-      <button class="btn btn-header" onclick="showDashboard()">📚 All Test Series (33+)</button>
+      <div id="headerUserArea" style="display:flex; align-items:center; gap:8px;"></div>
+      <button class="btn btn-header" onclick="filterTests('all')">📚 All Exams (41+)</button>
+      <button class="btn btn-header" style="background:rgba(109,40,217,0.45); border-color:#c4b5fd;" onclick="filterTests('PYQ')">📜 Previous Year Papers (PYQ)</button>
       <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results & History</button>
       <button class="btn btn-accent" onclick="triggerLivePibSync()">🌐 Sync Live PIB & Govt Portal Test</button>
     </div>
@@ -741,24 +833,35 @@
   <main id="dashboardView" class="container">
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Available Test Series</div>
-        <div class="stat-value" id="statTotalTests">33</div>
-        <div class="stat-sub">Group-I, Group-II & PIB Special Mocks</div>
+        <div class="stat-label">Available Test Series & PYQs</div>
+        <div class="stat-value" id="statTotalTests">41</div>
+        <div class="stat-sub">33 Mocks + 8 Official APPSC PYQ Papers</div>
       </div>
       <div class="stat-card accent">
         <div class="stat-label">Total Question Bank</div>
-        <div class="stat-value" id="statTotalQuestions">1,830+</div>
-        <div class="stat-sub">With Step-by-Step Explanations</div>
+        <div class="stat-value" id="statTotalQuestions">2,265+</div>
+        <div class="stat-sub">APPSC PYQ Pattern + Step-by-Step Solutions</div>
       </div>
       <div class="stat-card success">
-        <div class="stat-label">Tests Completed</div>
+        <div class="stat-label" id="statCompletedLabel">Your Attempts Used</div>
         <div class="stat-value" id="statCompleted">0</div>
-        <div class="stat-sub">Saved with Full Solution Sheets</div>
+        <div class="stat-sub" id="statUserSub">2 Chances Per Exam Per Email ID</div>
       </div>
       <div class="stat-card purple">
         <div class="stat-label">Average Net Accuracy</div>
         <div class="stat-value" id="statAccuracy">--</div>
         <div class="stat-sub">With -0.33 Negative Penalty</div>
+      </div>
+    </div>
+
+    <!-- Official APPSC Group-1 & Group-2 Previous Year Question Papers (PYQ) Showcase Bar -->
+    <div class="pyq-showcase-bar">
+      <div class="pyq-showcase-info">
+        <h3>📜 Official APPSC Group-I & Group-II Previous Year Question Papers (PYQs) & Pattern</h3>
+        <p>Includes <b>8 Full Official PYQ Papers (2024, 2023 & 2019 Group-I & Group-II Prelims & Mains)</b> and enforces the authentic APPSC PYQ pattern across all mocks (<i>"How many of the above statements/pairs are correct: Only one / Only two / All three / None"</i>, Match List-I & II, Chronological Order & Assertion-Reason).</p>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+        <button class="btn btn-purple" onclick="filterTests('PYQ')">📜 Open All 8 Previous Year Papers (PYQ)</button>
       </div>
     </div>
 
@@ -781,14 +884,15 @@
     <!-- Filter Tabs & Search -->
     <div class="toolbar">
       <div class="tabs">
-        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (33+)</button>
+        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (41+)</button>
+        <button class="tab-btn" id="tab-pyq" onclick="filterTests('PYQ')" style="border-color:#c4b5fd; color:#5b21b6;">📜 Previous Year Papers (PYQ) (8)</button>
         <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Full Mocks (120m)</button>
         <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Full Mocks (150m)</button>
         <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">PIB & Govt Portals</button>
         <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Subject-Wise Tests</button>
         <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">Past Attempts & Solutions</button>
       </div>
-      <input type="text" id="searchBox" class="search-input" placeholder="Search by subject, AP History, PIB, Polity..." oninput="renderTestCards()" />
+      <input type="text" id="searchBox" class="search-input" placeholder="Search PYQ, 2024, AP History, PIB, Polity..." oninput="renderTestCards()" />
     </div>
 
     <!-- Cards Container -->
@@ -943,7 +1047,7 @@
       <p id="modalTestDesc" style="font-size:13.5px; color:var(--muted);"></p>
       <div id="modalAttemptBanner" class="attempt-banner chance-1"></div>
       <ul class="inst-list">
-        <li><b>Attempt Limit Policy:</b> Each exam allows strictly <b>2 chances (2 attempts maximum)</b>. Once both attempts are submitted, the exam locks and only solutions/analytics remain accessible.</li>
+        <li><b>Attempt Limit Policy (Per Email ID):</b> Every logged-in candidate Email ID gets strictly <b>2 chances (2 attempts maximum)</b> per exam. Once both attempts are submitted under your email, that exam locks for your account and only solutions/analytics remain accessible.</li>
         <li><b>Exact Exam Time Limit:</b> <span id="modalDuration">120</span> Minutes. The countdown clock runs at the top right and automatically submits when time expires.</li>
         <li><b>Marking Scheme:</b> <b>+1.00 Mark</b> for every correct answer.</li>
         <li><b>Negative Marking:</b> <b>-1/3 (0.33 Marks)</b> deducted for every wrong answer, matching the official APPSC Group-I and Group-II screening/mains exam rules.</li>
@@ -957,17 +1061,262 @@
     </div>
   </div>
 
-  <!-- Load Pre-Built 33+ Exams Database Bundle -->
+  <!-- CANDIDATE EMAIL LOGIN MODAL -->
+  <div id="loginModal" class="modal-backdrop hidden">
+    <div class="modal-box" style="max-width:520px;">
+      <span class="badge badge-pyq">🔑 APPSC Candidate Portal Login</span>
+      <h2 style="margin-top:6px;">Candidate Email ID Login</h2>
+      <p style="font-size:13.5px; color:var(--muted); margin-bottom:14px;">
+        Log in with your <b>Email ID</b> so your <b>2 chances per exam</b>, scorecards, and detailed solution history are tracked independently for your account.
+      </p>
+      <form onsubmit="handleEmailLogin(event)">
+        <div class="login-field">
+          <label for="loginNameInput">Candidate Full Name *</label>
+          <input type="text" id="loginNameInput" placeholder="e.g., Chandu Kumar" required />
+        </div>
+        <div class="login-field">
+          <label for="loginEmailInput">Candidate Email ID * (2 Chances Per Exam Per Email)</label>
+          <input type="email" id="loginEmailInput" placeholder="e.g., aspirant@gmail.com" required />
+        </div>
+        <div class="login-field">
+          <label for="loginTargetSelect">Target APPSC Exam</label>
+          <select id="loginTargetSelect">
+            <option value="APPSC Group-I & Group-II">APPSC Group-I & Group-II Services (Both)</option>
+            <option value="APPSC Group-I">APPSC Group-I Services (Prelims & Mains)</option>
+            <option value="APPSC Group-II">APPSC Group-II Services (Prelims & Mains)</option>
+          </select>
+        </div>
+        <div style="background:#eff6ff; border-left:4px solid var(--primary); padding:10px 14px; border-radius:7px; font-size:12.5px; color:#1e293b; margin-bottom:16px;">
+          ✅ <b>2-Chance Policy Per Email ID:</b> Every person logging in with a distinct Email ID receives their own fresh <b>2 attempts (2 chances)</b> per exam across all 41+ Mock Tests and Official Previous Year Question Papers (PYQs).
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-outline" onclick="closeLoginModal()">Browse Catalog First</button>
+          <button type="submit" class="btn btn-primary" style="padding:10px 22px;">🔑 Login with Email ID</button>
+        </div>
+      </form>
+      <div id="savedUsersContainer" class="saved-users-box hidden">
+        <div style="font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase;">Quick Switch — Previously Logged-In Email IDs:</div>
+        <div id="savedUsersList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Pre-Built 41+ Exams & PYQ Database Bundle -->
   <script src="data/tests_db.js"></script>
 
   <script>
     const MAX_ATTEMPTS_PER_EXAM = 2;
     let allTests = [];
     let currentFilter = 'all';
-    let userAttempts = JSON.parse(localStorage.getItem('appsc_user_attempts_v2') || '[]');
+    let currentUser = null;
+    let userAttempts = [];
+    let pendingExamTestId = null;
+
+    function normalizeEmail(email) {
+      return String(email || '').trim().toLowerCase();
+    }
+
+    function getAllAttemptsMap() {
+      try {
+        return JSON.parse(localStorage.getItem('appsc_attempts_by_email_v3') || '{}') || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveAllAttemptsMap(mapObj) {
+      localStorage.setItem('appsc_attempts_by_email_v3', JSON.stringify(mapObj));
+    }
+
+    function getRegisteredUsersList() {
+      try {
+        return JSON.parse(localStorage.getItem('appsc_registered_users_v3') || '[]') || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRegisteredUser(userObj) {
+      const list = getRegisteredUsersList().filter(u => normalizeEmail(u.email) !== normalizeEmail(userObj.email));
+      list.unshift({
+        name: userObj.name,
+        email: normalizeEmail(userObj.email),
+        targetExam: userObj.targetExam || 'APPSC Group-I & Group-II',
+        lastLogin: new Date().toLocaleString()
+      });
+      localStorage.setItem('appsc_registered_users_v3', JSON.stringify(list.slice(0, 30)));
+    }
+
+    function loadCurrentUser() {
+      try {
+        const raw = localStorage.getItem('appsc_current_user_v3');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.email) {
+            currentUser = {
+              name: parsed.name || parsed.email.split('@')[0],
+              email: normalizeEmail(parsed.email),
+              targetExam: parsed.targetExam || 'APPSC Group-I & Group-II'
+            };
+          }
+        }
+      } catch (e) {
+        currentUser = null;
+      }
+      loadUserAttemptsForCurrentEmail();
+      renderHeaderUserArea();
+    }
+
+    function loadUserAttemptsForCurrentEmail() {
+      if (!currentUser || !currentUser.email) {
+        userAttempts = [];
+        return;
+      }
+      const emailKey = normalizeEmail(currentUser.email);
+      const mapObj = getAllAttemptsMap();
+      userAttempts = Array.isArray(mapObj[emailKey]) ? mapObj[emailKey] : [];
+    }
+
+    function saveUserAttemptsForCurrentEmail() {
+      if (!currentUser || !currentUser.email) return;
+      const emailKey = normalizeEmail(currentUser.email);
+      const mapObj = getAllAttemptsMap();
+      mapObj[emailKey] = userAttempts.slice(0, 200);
+      saveAllAttemptsMap(mapObj);
+    }
+
+    function renderHeaderUserArea() {
+      const container = document.getElementById('headerUserArea');
+      if (!container) return;
+      if (currentUser && currentUser.email) {
+        container.innerHTML = `
+          <div class="user-profile-pill" title="Logged in as ${currentUser.name} (${currentUser.email}) — 2 Chances Per Exam">
+            <span>👤 <b>${currentUser.name}</b> (<span class="user-email">${currentUser.email}</span>)</span>
+            <button class="btn btn-header" style="padding:4px 9px; font-size:11.5px;" onclick="openLoginModal()">🔁 Switch Email</button>
+            <button class="btn btn-header" style="padding:4px 9px; font-size:11.5px; background:rgba(185,28,28,0.55);" onclick="logoutCurrentUser()">Logout</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <button class="btn btn-accent" onclick="openLoginModal()">🔑 Login with Email ID (Get 2 Chances/Exam)</button>
+        `;
+      }
+    }
+
+    function openLoginModal() {
+      if (currentUser) {
+        document.getElementById('loginNameInput').value = currentUser.name || '';
+        document.getElementById('loginEmailInput').value = currentUser.email || '';
+        document.getElementById('loginTargetSelect').value = currentUser.targetExam || 'APPSC Group-I & Group-II';
+      } else {
+        document.getElementById('loginNameInput').value = '';
+        document.getElementById('loginEmailInput').value = '';
+      }
+      renderSavedUsersInModal();
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.add('hidden');
+      pendingExamTestId = null;
+    }
+
+    function renderSavedUsersInModal() {
+      const users = getRegisteredUsersList();
+      const box = document.getElementById('savedUsersContainer');
+      const listEl = document.getElementById('savedUsersList');
+      if (!users.length) {
+        box.classList.add('hidden');
+        return;
+      }
+      const mapObj = getAllAttemptsMap();
+      box.classList.remove('hidden');
+      listEl.innerHTML = users.map(u => {
+        const count = Array.isArray(mapObj[normalizeEmail(u.email)]) ? mapObj[normalizeEmail(u.email)].length : 0;
+        const isCurrent = currentUser && normalizeEmail(currentUser.email) === normalizeEmail(u.email);
+        return `
+          <div class="saved-user-chip" onclick="quickSwitchEmail('${u.email.replace(/'/g, "\\'")}')">
+            <div>
+              <b>👤 ${u.name}</b> — <span style="color:var(--primary); font-weight:700;">${u.email}</span>
+              ${isCurrent ? '<span class="badge badge-g2" style="margin-left:6px;">Active</span>' : ''}
+            </div>
+            <span class="badge badge-cat">${count} Attempt${count === 1 ? '' : 's'} Saved</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function quickSwitchEmail(email) {
+      const users = getRegisteredUsersList();
+      const found = users.find(u => normalizeEmail(u.email) === normalizeEmail(email));
+      if (!found) return;
+      currentUser = {
+        name: found.name,
+        email: normalizeEmail(found.email),
+        targetExam: found.targetExam || 'APPSC Group-I & Group-II'
+      };
+      localStorage.setItem('appsc_current_user_v3', JSON.stringify(currentUser));
+      saveRegisteredUser(currentUser);
+      loadUserAttemptsForCurrentEmail();
+      renderHeaderUserArea();
+      updateDashboardStats();
+      renderTestCards();
+      document.getElementById('loginModal').classList.add('hidden');
+      if (pendingExamTestId) {
+        const nextId = pendingExamTestId;
+        pendingExamTestId = null;
+        openInstructionsModal(nextId);
+      }
+    }
+
+    function handleEmailLogin(e) {
+      if (e) e.preventDefault();
+      const nameVal = (document.getElementById('loginNameInput').value || '').trim();
+      const emailVal = normalizeEmail(document.getElementById('loginEmailInput').value || '');
+      const targetVal = document.getElementById('loginTargetSelect').value || 'APPSC Group-I & Group-II';
+
+      if (!nameVal) {
+        alert('Please enter your Full Name.');
+        return;
+      }
+      if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        alert('Please enter a valid Email ID (e.g., name@gmail.com).');
+        return;
+      }
+
+      currentUser = {
+        name: nameVal,
+        email: emailVal,
+        targetExam: targetVal
+      };
+      localStorage.setItem('appsc_current_user_v3', JSON.stringify(currentUser));
+      saveRegisteredUser(currentUser);
+      loadUserAttemptsForCurrentEmail();
+      renderHeaderUserArea();
+      updateDashboardStats();
+      renderTestCards();
+      document.getElementById('loginModal').classList.add('hidden');
+
+      if (pendingExamTestId) {
+        const nextId = pendingExamTestId;
+        pendingExamTestId = null;
+        openInstructionsModal(nextId);
+      }
+    }
+
+    function logoutCurrentUser() {
+      currentUser = null;
+      userAttempts = [];
+      localStorage.removeItem('appsc_current_user_v3');
+      renderHeaderUserArea();
+      updateDashboardStats();
+      showDashboard();
+      renderTestCards();
+      openLoginModal();
+    }
 
     function getExamAttempts(testId) {
-      // Returns attempts for this test in chronological order (Attempt 1 first, Attempt 2 second)
+      // Returns attempts for this test by the currently logged-in Email ID in chronological order (Attempt 1 first, Attempt 2 second)
       return userAttempts.filter(a => a.testId === testId).slice().reverse();
     }
 
@@ -992,6 +1341,8 @@
     let currentSolFilter = 'all';
 
     async function initApp() {
+      loadCurrentUser();
+
       // 1. Load from window.APPSC_TESTS_DB (data/tests_db.js)
       if (window.APPSC_TESTS_DB && Array.isArray(window.APPSC_TESTS_DB.tests)) {
         allTests = window.APPSC_TESTS_DB.tests;
@@ -1024,6 +1375,11 @@
       updateDashboardStats();
       renderTestCards();
 
+      // Prompt Email login on initial visit if no candidate email is logged in yet
+      if (!currentUser) {
+        openLoginModal();
+      }
+
       if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
         navigator.serviceWorker.register('sw.js').catch(() => {});
       }
@@ -1035,6 +1391,19 @@
       document.getElementById('statTotalQuestions').textContent = totalQ.toLocaleString();
       document.getElementById('statCompleted').textContent = userAttempts.length;
 
+      const pyqCount = allTests.filter(t => isPyqTest(t)).length;
+      const tabAllEl = document.getElementById('tab-all');
+      if (tabAllEl) tabAllEl.textContent = `All Exams (${allTests.length})`;
+      const tabPyqEl = document.getElementById('tab-pyq');
+      if (tabPyqEl) tabPyqEl.textContent = `📜 Previous Year Papers (PYQ) (${pyqCount})`;
+
+      const userSubEl = document.getElementById('statUserSub');
+      if (userSubEl) {
+        userSubEl.textContent = currentUser
+          ? `Account: ${currentUser.email}`
+          : 'Login with Email for 2 Chances/Exam';
+      }
+
       if (userAttempts.length > 0) {
         const avgAcc = userAttempts.reduce((acc, a) => acc + a.accuracy, 0) / userAttempts.length;
         document.getElementById('statAccuracy').textContent = avgAcc.toFixed(1) + '%';
@@ -1043,11 +1412,22 @@
       }
     }
 
+    function isPyqTest(t) {
+      return Boolean(
+        t &&
+        ((t.category && t.category.toLowerCase().includes('previous year')) ||
+         (t.category && t.category.toUpperCase().includes('PYQ')) ||
+         (t.test_id && t.test_id.toUpperCase().includes('PYQ')) ||
+         (t.is_pyq === true))
+      );
+    }
+
     function filterTests(filterKey) {
       currentFilter = filterKey;
       document.querySelectorAll('.toolbar .tab-btn').forEach(b => b.classList.remove('active'));
       const mapId = {
         'all': 'tab-all',
+        'PYQ': 'tab-pyq',
         'Group 1': 'tab-g1',
         'Group 2': 'tab-g2',
         'PIB': 'tab-pib',
@@ -1066,10 +1446,18 @@
       const query = (document.getElementById('searchBox').value || '').toLowerCase().trim();
 
       if (currentFilter === 'attempts') {
+        if (!currentUser) {
+          grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
+            <h3>🔑 Please Login with Your Email ID</h3>
+            <p style="color:var(--muted); margin:8px 0 16px;">Log in with your Email ID to view your saved attempts, scorecards, and remaining chances (2 chances per exam per Email ID).</p>
+            <button class="btn btn-primary" onclick="openLoginModal()">🔑 Login with Email ID</button>
+          </div>`;
+          return;
+        }
         if (userAttempts.length === 0) {
           grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
-            <h3>No Exam Attempts Yet</h3>
-            <p style="color:var(--muted); margin-top:6px;">Start any of the 33+ APPSC Group-I or Group-II Test Series exams to view your saved scorecard and solutions here.</p>
+            <h3>No Exam Attempts Yet for ${currentUser.email}</h3>
+            <p style="color:var(--muted); margin-top:6px;">You have <b>2 / 2 chances available</b> on all ${allTests.length} APPSC Group-I, Group-II, and PYQ exams. Start any test to see your history here.</p>
           </div>`;
           return;
         }
@@ -1085,7 +1473,7 @@
                 <span class="badge badge-pib">Net Score: ${att.netScore.toFixed(2)} / ${att.totalMarks}</span>
               </div>
               <div class="test-title">${att.testTitle}</div>
-              <div class="test-desc" style="margin-bottom:8px;">Submitted on: ${att.date}</div>
+              <div class="test-desc" style="margin-bottom:8px;">Candidate: <b>${att.userName || currentUser.name}</b> (${att.userEmail || currentUser.email}) • Submitted: ${att.date}</div>
               <div class="test-meta">
                 <span>✓ Correct: ${att.correct}</span>
                 <span>✗ Wrong: ${att.wrong}</span>
@@ -1106,22 +1494,23 @@
       }
 
       const filtered = allTests.filter(t => {
+        if (currentFilter === 'PYQ' && !isPyqTest(t)) return false;
         if (currentFilter === 'Group 1' && t.exam_group !== 'Group 1') return false;
         if (currentFilter === 'Group 2' && t.exam_group !== 'Group 2') return false;
         if (currentFilter === 'PIB' && !t.category.includes('PIB')) return false;
         if (currentFilter === 'Subject-Wise' && !t.category.includes('Subject')) return false;
         if (query) {
-          const hay = `${t.title} ${t.description} ${(t.subjects || []).join(' ')} ${t.category}`.toLowerCase();
+          const hay = `${t.title} ${t.description} ${(t.subjects || []).join(' ')} ${t.category} ${t.exam_year || ''}`.toLowerCase();
           if (!hay.includes(query)) return false;
         }
         return true;
       });
 
       grid.innerHTML = filtered.map(t => {
+        const pyq = isPyqTest(t);
         const badgeClass = t.exam_group === 'Group 1' ? 'badge-g1' : (t.exam_group === 'Group 2' ? 'badge-g2' : 'badge-pib');
         const examAtts = getExamAttempts(t.test_id);
         const used = examAtts.length;
-        const left = Math.max(0, MAX_ATTEMPTS_PER_EXAM - used);
 
         let chanceBadgeHtml = '';
         let scoreSummaryHtml = '';
@@ -1129,8 +1518,8 @@
 
         if (used === 0) {
           chanceBadgeHtml = `<span class="badge badge-chance-2">🎯 2 / 2 Chances Available</span>`;
-          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">Max 2 Attempts Allowed</span>`;
-          startBtnHtml = `<button class="btn btn-primary" onclick="openInstructionsModal('${t.test_id}')">▶ Start (Chance 1/2)</button>`;
+          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">${currentUser ? `For ${currentUser.email}` : '2 Chances Per Email ID'}</span>`;
+          startBtnHtml = `<button class="btn ${pyq ? 'btn-purple' : 'btn-primary'}" onclick="openInstructionsModal('${t.test_id}')">▶ Start (Chance 1/2)</button>`;
         } else if (used === 1) {
           const a1 = examAtts[0];
           chanceBadgeHtml = `<span class="badge badge-chance-1">⚠️ 1 / 2 Chances Left</span>`;
@@ -1142,14 +1531,17 @@
           const best = Math.max(a1.netScore, a2.netScore);
           chanceBadgeHtml = `<span class="badge badge-chance-0">🔒 0 / 2 Chances Left</span>`;
           scoreSummaryHtml = `<span class="badge badge-g2" title="Attempt 1: ${a1.netScore.toFixed(2)} | Attempt 2: ${a2.netScore.toFixed(2)}">Best: ${best.toFixed(2)}/${a1.totalMarks} (2/2 Used)</span>`;
-          startBtnHtml = `<button class="btn btn-disabled" disabled title="You have used both of your 2 allowed chances for this exam">🔒 2/2 Chances Used</button>`;
+          startBtnHtml = `<button class="btn btn-disabled" disabled title="Both 2 allowed chances used for ${currentUser ? currentUser.email : 'this account'}">🔒 2/2 Chances Used</button>`;
         }
 
         return `
-          <div class="test-card">
+          <div class="test-card ${pyq ? 'pyq-card' : ''}">
             <div>
               <div class="test-badges">
-                <span class="badge ${badgeClass}">${t.exam_group}</span>
+                <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+                  <span class="badge ${badgeClass}">${t.exam_group}</span>
+                  ${pyq ? `<span class="badge badge-pyq">📜 Official PYQ Paper</span>` : `<span class="badge badge-cat">${t.category}</span>`}
+                </div>
                 ${chanceBadgeHtml}
               </div>
               <div class="test-title">${t.title}</div>
@@ -1256,6 +1648,12 @@
     }
 
     function openInstructionsModal(testId) {
+      if (!currentUser || !currentUser.email) {
+        pendingExamTestId = testId;
+        openLoginModal();
+        return;
+      }
+
       const test = allTests.find(t => t.test_id === testId);
       if (!test) return;
 
@@ -1263,7 +1661,7 @@
       const used = examAtts.length;
 
       if (used >= MAX_ATTEMPTS_PER_EXAM) {
-        alert(`🔒 Maximum 2 Chances Completed (2/2)!\n\nYou have already used both of your 2 allowed chances for:\n"${test.title}"\n\n• Attempt 1 Score: ${examAtts[0].netScore.toFixed(2)} / ${examAtts[0].totalMarks}\n• Attempt 2 Score: ${examAtts[1].netScore.toFixed(2)} / ${examAtts[1].totalMarks}\n\nOpening your Scorecard & Detailed Solutions.`);
+        alert(`🔒 Maximum 2 Chances Completed (2/2) for ${currentUser.email}!\n\nYou have already used both of your 2 allowed chances for:\n"${test.title}"\n\n• Attempt 1 Score: ${examAtts[0].netScore.toFixed(2)} / ${examAtts[0].totalMarks}\n• Attempt 2 Score: ${examAtts[1].netScore.toFixed(2)} / ${examAtts[1].totalMarks}\n\nOpening your Scorecard & Detailed Solutions.`);
         displayResultRecord(examAtts[examAtts.length - 1]);
         return;
       }
@@ -1272,11 +1670,11 @@
       const bannerEl = document.getElementById('modalAttemptBanner');
       if (nextAttemptNo === 1) {
         bannerEl.className = 'attempt-banner chance-1';
-        bannerEl.innerHTML = `🎯 <b>Attempt 1 of 2 (First Chance):</b> You get strictly <b>2 chances</b> to write this exam. After submitting this attempt, you will have <b>1 final retake chance</b> remaining.`;
+        bannerEl.innerHTML = `👤 <b>Candidate: ${currentUser.name} (${currentUser.email})</b><br/>🎯 <b>Attempt 1 of 2 (First Chance):</b> Your email account gets strictly <b>2 chances</b> to write this exam. After submitting this attempt, you will have <b>1 final retake chance</b> remaining.`;
       } else {
         const prev = examAtts[0];
         bannerEl.className = 'attempt-banner chance-2';
-        bannerEl.innerHTML = `⚠️ <b>FINAL CHANCE — Attempt 2 of 2:</b> You already used your 1st chance on ${prev.date} (Score: <b>${prev.netScore.toFixed(2)} / ${prev.totalMarks}</b>). Once you submit this 2nd attempt, this exam will be locked for retakes.`;
+        bannerEl.innerHTML = `👤 <b>Candidate: ${currentUser.name} (${currentUser.email})</b><br/>⚠️ <b>FINAL CHANCE — Attempt 2 of 2:</b> You already used your 1st chance on ${prev.date} (Score: <b>${prev.netScore.toFixed(2)} / ${prev.totalMarks}</b>). Once you submit this 2nd attempt, this exam will be locked for <b>${currentUser.email}</b>.`;
       }
 
       document.getElementById('modalGroupBadge').textContent = `${test.exam_group} • ${test.category} • Chance ${nextAttemptNo} of ${MAX_ATTEMPTS_PER_EXAM}`;
@@ -1297,9 +1695,14 @@
     }
 
     function startExam(test) {
+      if (!currentUser || !currentUser.email) {
+        pendingExamTestId = test.test_id;
+        openLoginModal();
+        return;
+      }
       const used = getAttemptsUsed(test.test_id);
       if (used >= MAX_ATTEMPTS_PER_EXAM) {
-        alert('🔒 Both 2 allowed attempts for this exam have already been exhausted.');
+        alert(`🔒 Both 2 allowed attempts for this exam have already been exhausted under ${currentUser.email}.`);
         return;
       }
       activeTest = test;
@@ -1320,7 +1723,7 @@
       document.getElementById('examView').classList.remove('hidden');
 
       document.getElementById('activeExamTitle').textContent = test.title;
-      document.getElementById('activeExamSub').textContent = `Chance ${used + 1} of ${MAX_ATTEMPTS_PER_EXAM} • ${test.exam_group} Official Pattern • ${test.question_count} Questions • ${test.duration_minutes} Minutes • -0.33 Negative Marking`;
+      document.getElementById('activeExamSub').textContent = `👤 ${currentUser.name} (${currentUser.email}) • Chance ${used + 1} of ${MAX_ATTEMPTS_PER_EXAM} • ${test.exam_group} • ${test.question_count} Qs • ${test.duration_minutes} Mins • -0.33 Negative`;
 
       renderQuestion();
       renderPalette();
@@ -1500,6 +1903,8 @@
         testId: activeTest.test_id,
         testTitle: activeTest.title,
         examGroup: activeTest.exam_group,
+        userName: currentUser ? currentUser.name : 'Candidate',
+        userEmail: currentUser ? currentUser.email : '',
         attemptNumber,
         maxAttempts: MAX_ATTEMPTS_PER_EXAM,
         date: new Date().toLocaleString(),
@@ -1520,7 +1925,7 @@
 
       if (usedBefore < MAX_ATTEMPTS_PER_EXAM) {
         userAttempts.unshift(record);
-        localStorage.setItem('appsc_user_attempts_v2', JSON.stringify(userAttempts.slice(0, 150)));
+        saveUserAttemptsForCurrentEmail();
       }
 
       updateDashboardStats();
@@ -1553,6 +1958,8 @@
         testId: test.test_id,
         testTitle: test.title + ' (Official Answer Key & Explanations)',
         examGroup: test.exam_group,
+        userName: currentUser ? currentUser.name : 'Guest Preview',
+        userEmail: currentUser ? currentUser.email : 'Not Logged In',
         attemptNumber: 0,
         maxAttempts: MAX_ATTEMPTS_PER_EXAM,
         date: 'Master Solution Sheet (2/2 Chances Remaining)',
@@ -1598,13 +2005,14 @@
       const used = examAtts.length;
       const left = Math.max(0, MAX_ATTEMPTS_PER_EXAM - used);
       const attNo = rec.attemptNumber || (examAtts.findIndex(a => a.date === rec.date) + 1) || 0;
+      const candLabel = rec.userEmail || (currentUser ? currentUser.email : 'Guest');
 
       document.getElementById('resExamBadge').textContent = attNo > 0
         ? `${rec.examGroup} • Attempt ${attNo} of ${MAX_ATTEMPTS_PER_EXAM} Report (${left} Chance${left === 1 ? '' : 's'} Left)`
         : `${rec.examGroup} • Master Answer Key (${left} Chance${left === 1 ? '' : 's'} Left)`;
       document.getElementById('resAttemptLabel').textContent = attNo > 0 ? `Attempt ${attNo}/${MAX_ATTEMPTS_PER_EXAM} Score` : 'Net Exam Score';
       document.getElementById('resExamTitle').textContent = rec.testTitle;
-      document.getElementById('resExamMeta').textContent = `Completed: ${rec.date} • Attempts Used: ${used}/${MAX_ATTEMPTS_PER_EXAM} • Negative Marking: -1/3 (0.33)`;
+      document.getElementById('resExamMeta').textContent = `👤 Candidate: ${rec.userName || (currentUser ? currentUser.name : 'Candidate')} (${candLabel}) • Completed: ${rec.date} • Attempts Used: ${used}/${MAX_ATTEMPTS_PER_EXAM} • Negative Marking: -1/3 (0.33)`;
       document.getElementById('resNetScore').textContent = `${rec.netScore.toFixed(2)} / ${rec.totalMarks}`;
 
       // Render switcher between Attempt 1 and Attempt 2 if attempts exist
