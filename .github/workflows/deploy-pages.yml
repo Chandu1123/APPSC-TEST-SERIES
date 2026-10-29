@@ -1,0 +1,65 @@
+name: Deploy APPSC Test Series Website & Daily 6 AM PIB Scraper
+
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    # Automatically fetches latest PIB Press Releases every day at 06:00 AM IST (00:30 UTC)
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Scrape Live PIB Portal (pib.gov.in) & Rebuild Question Bank
+        run: |
+          python scripts/pib_scraper.py
+          python -c "
+          import json
+          with open('data/tests_db.json', 'r', encoding='utf-8') as f:
+              db = json.load(f)
+          with open('data/tests_db.js', 'w', encoding='utf-8') as f:
+              f.write('window.APPSC_TESTS_DB = ' + json.dumps(db, ensure_ascii=False) + ';\n')
+          "
+
+      - name: Save Newly Scraped PIB Exam to Repository (Scheduled / Manual Runs)
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/tests_db.json data/tests_db.js
+          git diff --staged --quiet || git commit -m "Auto-update: Daily 6:00 AM IST Live PIB Test Series"
+          git push origin HEAD:main || true
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Website Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,2 @@
+# APPSC Group-I & Group-II Website & PIB Scraper uses 100% Python Standard Library (urllib, xml, json, datetime)
+# Zero external pip packages required!

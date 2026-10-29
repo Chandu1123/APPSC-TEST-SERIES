@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="APPSC Group-I and Group-II Online CBT Test Series Portal with 32+ Full Mock Exams, Live PIB Government Portal Current Affairs Generator, 1/3rd Negative Marking, and Detailed Solutions." />
+  <meta name="theme-color" content="#0f3d6e" />
+  <link rel="manifest" href="manifest.json" />
+  <title>APPSC Group-I & Group-II Online CBT Test Series Portal</title>
+  <style>
+    :root {
+      --primary: #0f3d6e;
+      --primary-dark: #092748;
+      --primary-light: #1d5ca0;
+      --accent: #d97706;
+      --accent-light: #fef3c7;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --purple: #6d28d9;
+      --purple-bg: #ede9fe;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    /* Top Header */
+    .top-header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-emblem {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+    .brand-text h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .brand-text p {
+      font-size: 12.5px;
+      color: #cbd5e1;
+    }
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: none;
+      border-radius: 7px;
+      padding: 9px 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+    }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-accent { background: #f59e0b; color: #0f172a; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-purple { background: var(--purple); color: #fff; }
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 1.5px solid var(--border);
+    }
+    .btn-header {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.28);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 22px 24px 48px;
+    }
+
+    /* Stats Banner */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .stat-card {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 16px 20px;
+      border-left: 5px solid var(--primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .stat-card.accent { border-left-color: var(--accent); }
+    .stat-card.success { border-left-color: var(--success); }
+    .stat-card.purple { border-left-color: var(--purple); }
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 4px;
+    }
+    .stat-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Live PIB Scraper Banner */
+    .pib-sync-bar {
+      background: linear-gradient(90deg, #eff6ff 0%, #fef3c7 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .pib-sync-info h3 {
+      font-size: 15.5px;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pib-sync-info p {
+      font-size: 13px;
+      color: #334155;
+      margin-top: 3px;
+    }
+    .pib-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .pib-controls select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      background: #fff;
+      font-weight: 600;
+    }
+
+    /* Filter Tabs & Search */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tab-btn {
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .search-input {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      width: 280px;
+      max-width: 100%;
+      font-size: 13.5px;
+      background: #fff;
+    }
+
+    /* Test Cards Grid */
+    .tests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 18px;
+    }
+    .test-card {
+      background: var(--card);
+      border-radius: 11px;
+      border: 1px solid #e2e8f0;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .test-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 61, 110, 0.09);
+      border-color: #93c5fd;
+    }
+    .test-badges {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+    .badge-g1 { background: #dbeafe; color: #1e40af; }
+    .badge-g2 { background: #dcfce7; color: #166534; }
+    .badge-pib { background: #fef3c7; color: #92400e; }
+    .badge-cat { background: #f1f5f9; color: #475569; }
+    .badge-chance-2 { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+    .badge-chance-1 { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .badge-chance-0 { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .btn-disabled {
+      background: #e2e8f0 !important;
+      color: #64748b !important;
+      cursor: not-allowed !important;
+      border: 1px solid #cbd5e1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    .attempt-banner {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .attempt-banner.chance-1 {
+      background: #eff6ff;
+      border-left: 4px solid #0284c7;
+      color: #0f172a;
+    }
+    .attempt-banner.chance-2 {
+      background: #fffbeb;
+      border-left: 4px solid #d97706;
+      color: #78350f;
+    }
+    .test-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .test-desc {
+      font-size: 12.8px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .test-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12.5px;
+      color: #334155;
+      background: #f8fafc;
+      padding: 9px 12px;
+      border-radius: 7px;
+      margin-bottom: 14px;
+      border: 1px solid #e2e8f0;
+    }
+    .test-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+    .test-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    /* CBT EXAM INTERFACE */
+    .hidden { display: none !important; }
+    .exam-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 18px;
+      height: calc(100vh - 82px);
+      padding: 14px 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    @media (max-width: 960px) {
+      .exam-wrapper {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+    }
+    .exam-main {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .exam-top-bar {
+      background: #f8fafc;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .timer-box {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-family: 'Consolas', monospace;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .timer-box.warning {
+      background: #7f1d1d;
+      color: #fca5a5;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+    .question-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+    }
+    .q-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .q-number-label {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .q-marks-pill {
+      font-size: 12.5px;
+      font-weight: 700;
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .q-marks-pill .pos { color: var(--success); }
+    .q-marks-pill .neg { color: var(--danger); }
+    .q-statement-text {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0f172a;
+      white-space: pre-line;
+      background: #f8fafc;
+      padding: 16px 18px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+      margin-bottom: 20px;
+      line-height: 1.65;
+    }
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .option-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.12s;
+      background: #fff;
+    }
+    .option-row:hover {
+      border-color: #93c5fd;
+      background: #f8fafc;
+    }
+    .option-row.selected {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #1e293b;
+      font-weight: 700;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .option-row.selected .opt-letter {
+      background: var(--primary);
+      color: #fff;
+    }
+    .opt-text {
+      font-size: 15px;
+      color: #1e293b;
+      padding-top: 2px;
+    }
+    .exam-bottom-bar {
+      padding: 14px 20px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Right Question Palette */
+    .exam-sidebar {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .palette-header {
+      padding: 13px 16px;
+      background: var(--primary-dark);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .palette-legend {
+      padding: 12px 14px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 11.8px;
+      font-weight: 600;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .palette-grid {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      align-content: start;
+      max-height: 420px;
+    }
+    .q-pal-btn {
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .q-pal-btn.current {
+      outline: 2.5px solid #0284c7;
+      outline-offset: 1px;
+    }
+    .q-pal-btn.answered {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+    .q-pal-btn.not-answered {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+    .q-pal-btn.review {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .q-pal-btn.ans-review {
+      background: var(--purple);
+      color: #fff;
+      border: 2px solid #22c55e;
+    }
+    .palette-footer {
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    /* RESULTS & SOLUTIONS SCREEN */
+    .result-banner {
+      background: linear-gradient(135deg, #0f3d6e, #1e3a8a);
+      color: #fff;
+      padding: 24px 28px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .score-circle {
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 12px;
+      padding: 14px 24px;
+      text-align: center;
+    }
+    .score-circle .big-score {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fde047;
+    }
+    .subject-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .subject-table th, .subject-table td {
+      padding: 11px 16px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 13.5px;
+    }
+    .subject-table th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .solution-card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .solution-card.sol-correct { border-left: 5px solid var(--success); }
+    .solution-card.sol-wrong { border-left: 5px solid var(--danger); }
+    .solution-card.sol-unattempted { border-left: 5px solid #94a3b8; }
+    .sol-opt {
+      padding: 9px 14px;
+      border-radius: 7px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 7px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sol-opt.right-ans {
+      background: var(--success-bg);
+      border-color: #22c55e;
+      font-weight: 700;
+      color: #14532d;
+    }
+    .sol-opt.user-wrong {
+      background: var(--danger-bg);
+      border-color: #ef4444;
+      color: #7f1d1d;
+      font-weight: 600;
+    }
+    .explanation-box {
+      margin-top: 14px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--accent);
+      padding: 14px 16px;
+      border-radius: 7px;
+      font-size: 14px;
+      white-space: pre-line;
+      color: #1e293b;
+    }
+    .source-tag {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: #eff6ff;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #fff;
+      max-width: 680px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+    .modal-box h2 { color: var(--primary-dark); margin-bottom: 10px; }
+    .inst-list {
+      margin: 14px 0 20px 18px;
+      font-size: 14px;
+      color: #334155;
+    }
+    .inst-list li { margin-bottom: 7px; }
+    @media print {
+      .top-header, .no-print { display: none !important; }
+      body { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="top-header">
+    <div class="brand">
+      <div class="brand-emblem">AP</div>
+      <div class="brand-text">
+        <h1>APPSC Group-I & Group-II CBT Exam Prep Portal</h1>
+        <p>Official Exam Pattern • 1/3rd Negative Marking • Live PIB & Govt Portal Integration • Detailed Solutions</p>
+      </div>
+    </div>
+    <div class="header-actions no-print">
+      <button class="btn btn-header" onclick="showDashboard()">📚 All Test Series (33+)</button>
+      <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results & History</button>
+      <button class="btn btn-accent" onclick="triggerLivePibSync()">🌐 Sync Live PIB & Govt Portal Test</button>
+    </div>
+  </header>
+
+  <!-- VIEW 1: DASHBOARD & TEST SERIES CATALOG -->
+  <main id="dashboardView" class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Available Test Series</div>
+        <div class="stat-value" id="statTotalTests">33</div>
+        <div class="stat-sub">Group-I, Group-II & PIB Special Mocks</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-label">Total Question Bank</div>
+        <div class="stat-value" id="statTotalQuestions">1,830+</div>
+        <div class="stat-sub">With Step-by-Step Explanations</div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-label">Tests Completed</div>
+        <div class="stat-value" id="statCompleted">0</div>
+        <div class="stat-sub">Saved with Full Solution Sheets</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-label">Average Net Accuracy</div>
+        <div class="stat-value" id="statAccuracy">--</div>
+        <div class="stat-sub">With -0.33 Negative Penalty</div>
+      </div>
+    </div>
+
+    <!-- Live PIB Scraper Bar -->
+    <div class="pib-sync-bar">
+      <div class="pib-sync-info">
+        <h3>🌐 Live Online PIB & Government Portal Test Series Generator</h3>
+        <p>Fetches latest Press Information Bureau (<b>pib.gov.in</b>), Union Cabinet & AP State Portal releases in real-time and forms a new timed exam with explanations.</p>
+      </div>
+      <div class="pib-controls">
+        <select id="pibQuestionCount">
+          <option value="25">25 Questions (25 Mins Exam)</option>
+          <option value="30" selected>30 Questions (30 Mins Exam)</option>
+          <option value="50">50 Questions (50 Mins Exam)</option>
+        </select>
+        <button class="btn btn-primary" id="btnPibSync" onclick="triggerLivePibSync()">⚡ Fetch Live PIB Data & Generate Exam</button>
+      </div>
+    </div>
+
+    <!-- Filter Tabs & Search -->
+    <div class="toolbar">
+      <div class="tabs">
+        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (33+)</button>
+        <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Full Mocks (120m)</button>
+        <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Full Mocks (150m)</button>
+        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">PIB & Govt Portals</button>
+        <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Subject-Wise Tests</button>
+        <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">Past Attempts & Solutions</button>
+      </div>
+      <input type="text" id="searchBox" class="search-input" placeholder="Search by subject, AP History, PIB, Polity..." oninput="renderTestCards()" />
+    </div>
+
+    <!-- Cards Container -->
+    <div id="testsGrid" class="tests-grid"></div>
+  </main>
+
+  <!-- VIEW 2: ACTIVE CBT EXAM HALL -->
+  <section id="examView" class="exam-wrapper hidden">
+    <div class="exam-main">
+      <div class="exam-top-bar">
+        <div>
+          <h3 id="activeExamTitle" style="font-size:15.5px; color:var(--primary-dark);">Exam Title</h3>
+          <span id="activeExamSub" style="font-size:12px; color:var(--muted);">APPSC Official CBT Format • Negative Marking: -1/3 (0.33)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="timer-box" id="examTimerBox">
+            <span>⏱️</span>
+            <span id="examClock">120:00</span>
+          </div>
+          <button class="btn btn-outline" onclick="togglePauseExam()" id="btnPauseExam">⏸ Pause</button>
+        </div>
+      </div>
+
+      <div class="question-scroll">
+        <div class="q-header-meta">
+          <div>
+            <span class="q-number-label" id="qNumberLabel">Question 1 of 60</span>
+            <span class="badge badge-g1" id="qSubjectBadge" style="margin-left:10px;">Subject</span>
+            <span class="badge badge-cat" id="qTypeBadge" style="margin-left:6px;">Statement-Based</span>
+          </div>
+          <div class="q-marks-pill">
+            Marks: <span class="pos">+1.00</span> | Negative: <span class="neg">-0.33</span>
+          </div>
+        </div>
+
+        <div class="q-statement-text" id="qTextDisplay"></div>
+        <div class="options-list" id="qOptionsContainer"></div>
+      </div>
+
+      <div class="exam-bottom-bar">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-outline" onclick="prevQuestion()">⬅ Previous</button>
+          <button class="btn btn-outline" onclick="clearResponse()">✖ Clear Response</button>
+          <button class="btn btn-purple" onclick="markForReviewAndNext()">🟣 Mark for Review & Next</button>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-success" onclick="saveAndNext()">💾 Save & Next ➡</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Question Palette Sidebar -->
+    <aside class="exam-sidebar">
+      <div class="palette-header">Question Palette & Status</div>
+      <div class="palette-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:var(--success)"></span> Answered (<span id="cntAns">0</span>)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--danger)"></span> Not Answered (<span id="cntNotAns">0</span>)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#cbd5e1"></span> Not Visited (<span id="cntNotVis">0</span>)</div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--purple)"></span> Review (<span id="cntRev">0</span>)</div>
+      </div>
+      <div class="palette-grid" id="paletteGrid"></div>
+      <div class="palette-footer">
+        <button class="btn btn-danger" style="width:100%; justify-content:center; padding:12px;" onclick="confirmSubmitExam()">
+          ✅ Submit Exam & View Solutions
+        </button>
+      </div>
+    </aside>
+  </section>
+
+  <!-- VIEW 3: RESULTS, SCORE ANALYTICS & SOLUTIONS WITH EXPLANATIONS -->
+  <section id="resultView" class="container hidden">
+    <div class="result-banner">
+      <div>
+        <span class="badge badge-pib" id="resExamBadge">APPSC Official Result & Solutions</span>
+        <h2 id="resExamTitle" style="font-size:22px; margin-top:6px;">Test Title</h2>
+        <p id="resExamMeta" style="font-size:13.5px; color:#cbd5e1; margin-top:4px;"></p>
+      </div>
+      <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+        <div class="score-circle">
+          <div style="font-size:12px; text-transform:uppercase; color:#cbd5e1;" id="resAttemptLabel">Net Exam Score</div>
+          <div class="big-score" id="resNetScore">0.00 / 60</div>
+          <div style="font-size:12.5px;" id="resVerdictBadge">Accuracy: 0%</div>
+        </div>
+        <div class="no-print" style="display:flex; flex-direction:column; gap:8px;">
+          <div id="resAttemptSwitcher" style="display:flex; gap:6px; flex-wrap:wrap;"></div>
+          <button class="btn btn-success hidden" id="btnRetakeFromResult" onclick="">🔄 Write 2nd Chance (1 Left)</button>
+          <button class="btn btn-accent" onclick="window.print()">🖨️ Print / Save PDF Solutions</button>
+          <button class="btn btn-header" onclick="showDashboard()">⬅ Back to All Tests</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Breakdown Cards -->
+    <div class="stats-grid">
+      <div class="stat-card success">
+        <div class="stat-label">Correct Answers (+1.00)</div>
+        <div class="stat-value" id="resCorrectCount">0</div>
+        <div class="stat-sub" id="resPositiveMarks">+0.00 Positive Marks</div>
+      </div>
+      <div class="stat-card" style="border-left-color:var(--danger)">
+        <div class="stat-label">Wrong Answers (-0.33)</div>
+        <div class="stat-value" id="resWrongCount">0</div>
+        <div class="stat-sub" id="resNegativeMarks">-0.00 Penalty Deducted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Unattempted Questions</div>
+        <div class="stat-value" id="resUnattemptedCount">0</div>
+        <div class="stat-sub">0 Marks Deducted</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-label">Time Taken & Accuracy</div>
+        <div class="stat-value" id="resAccuracyVal">0%</div>
+        <div class="stat-sub" id="resTimeTaken">Time: 0m 0s</div>
+      </div>
+    </div>
+
+    <!-- Subject-wise Breakdown Table -->
+    <h3 style="margin-bottom:10px; color:var(--primary-dark);">📊 Subject-Wise Performance Breakdown</h3>
+    <table class="subject-table">
+      <thead>
+        <tr>
+          <th>Subject / Syllabus Module</th>
+          <th>Total Qs</th>
+          <th>Correct (+1)</th>
+          <th>Wrong (-0.33)</th>
+          <th>Unattempted</th>
+          <th>Net Score</th>
+          <th>Accuracy</th>
+        </tr>
+      </thead>
+      <tbody id="resSubjectTableBody"></tbody>
+    </table>
+
+    <!-- Detailed Question-by-Question Solutions & Explanations -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin: 24px 0 14px;">
+      <h3 style="color:var(--primary-dark);">📖 Detailed Solutions & Explanations with Official Sources</h3>
+      <div class="tabs no-print">
+        <button class="tab-btn active" id="sol-tab-all" onclick="filterSolutions('all')">All Questions</button>
+        <button class="tab-btn" id="sol-tab-correct" onclick="filterSolutions('correct')">✓ Correct</button>
+        <button class="tab-btn" id="sol-tab-wrong" onclick="filterSolutions('wrong')">✗ Wrong</button>
+        <button class="tab-btn" id="sol-tab-unattempted" onclick="filterSolutions('unattempted')">○ Unattempted</button>
+      </div>
+    </div>
+    <div id="solutionsContainer"></div>
+  </section>
+
+  <!-- PRE-EXAM INSTRUCTIONS MODAL -->
+  <div id="instructionsModal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <span class="badge badge-g1" id="modalGroupBadge">APPSC CBT Mode</span>
+      <h2 id="modalTestTitle" style="margin-top:6px;">Test Title</h2>
+      <p id="modalTestDesc" style="font-size:13.5px; color:var(--muted);"></p>
+      <div id="modalAttemptBanner" class="attempt-banner chance-1"></div>
+      <ul class="inst-list">
+        <li><b>Attempt Limit Policy:</b> Each exam allows strictly <b>2 chances (2 attempts maximum)</b>. Once both attempts are submitted, the exam locks and only solutions/analytics remain accessible.</li>
+        <li><b>Exact Exam Time Limit:</b> <span id="modalDuration">120</span> Minutes. The countdown clock runs at the top right and automatically submits when time expires.</li>
+        <li><b>Marking Scheme:</b> <b>+1.00 Mark</b> for every correct answer.</li>
+        <li><b>Negative Marking:</b> <b>-1/3 (0.33 Marks)</b> deducted for every wrong answer, matching the official APPSC Group-I and Group-II screening/mains exam rules.</li>
+        <li><b>Unattempted Questions:</b> 0 marks (no penalty for leaving a question unanswered).</li>
+        <li><b>Post-Exam Solutions:</b> Immediately upon submission, you will receive your Net Score, Subject-wise analytics, and detailed explanations with PIB / official government source citations for every question.</li>
+      </ul>
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button class="btn btn-outline" onclick="closeInstructionsModal()">Cancel</button>
+        <button class="btn btn-success" id="btnStartExamNow">🚀 Start Timed Exam Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Pre-Built 33+ Exams Database Bundle -->
+  <script src="data/tests_db.js"></script>
+
+  <script>
+    const MAX_ATTEMPTS_PER_EXAM = 2;
+    let allTests = [];
+    let currentFilter = 'all';
+    let userAttempts = JSON.parse(localStorage.getItem('appsc_user_attempts_v2') || '[]');
+
+    function getExamAttempts(testId) {
+      // Returns attempts for this test in chronological order (Attempt 1 first, Attempt 2 second)
+      return userAttempts.filter(a => a.testId === testId).slice().reverse();
+    }
+
+    function getAttemptsUsed(testId) {
+      return getExamAttempts(testId).length;
+    }
+
+    function getRemainingChances(testId) {
+      return Math.max(0, MAX_ATTEMPTS_PER_EXAM - getAttemptsUsed(testId));
+    }
+
+    let activeTest = null;
+    let currentQIndex = 0;
+    let userResponses = {};
+    let questionStatus = {};
+    let remainingSeconds = 0;
+    let elapsedSeconds = 0;
+    let timerInterval = null;
+    let isPaused = false;
+
+    let activeResultRecord = null;
+    let currentSolFilter = 'all';
+
+    async function initApp() {
+      // 1. Load from window.APPSC_TESTS_DB (data/tests_db.js)
+      if (window.APPSC_TESTS_DB && Array.isArray(window.APPSC_TESTS_DB.tests)) {
+        allTests = window.APPSC_TESTS_DB.tests;
+      } else {
+        // 2. Fallback fetch from data/tests_db.json
+        try {
+          const res = await fetch('data/tests_db.json');
+          if (res.ok) {
+            const db = await res.json();
+            if (db && Array.isArray(db.tests)) {
+              allTests = db.tests;
+            }
+          }
+        } catch (e) {
+          console.warn('Could not fetch data/tests_db.json:', e);
+        }
+      }
+
+      // Merge any custom PIB live tests saved in localStorage
+      const localPibTests = JSON.parse(localStorage.getItem('appsc_custom_pib_tests') || '[]');
+      if (localPibTests.length > 0) {
+        const existingIds = new Set(allTests.map(t => t.test_id));
+        for (const lt of localPibTests) {
+          if (!existingIds.has(lt.test_id)) {
+            allTests.unshift(lt);
+          }
+        }
+      }
+
+      updateDashboardStats();
+      renderTestCards();
+
+      if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      }
+    }
+
+    function updateDashboardStats() {
+      document.getElementById('statTotalTests').textContent = allTests.length;
+      const totalQ = allTests.reduce((acc, t) => acc + (t.question_count || (t.questions ? t.questions.length : 0)), 0);
+      document.getElementById('statTotalQuestions').textContent = totalQ.toLocaleString();
+      document.getElementById('statCompleted').textContent = userAttempts.length;
+
+      if (userAttempts.length > 0) {
+        const avgAcc = userAttempts.reduce((acc, a) => acc + a.accuracy, 0) / userAttempts.length;
+        document.getElementById('statAccuracy').textContent = avgAcc.toFixed(1) + '%';
+      } else {
+        document.getElementById('statAccuracy').textContent = '--';
+      }
+    }
+
+    function filterTests(filterKey) {
+      currentFilter = filterKey;
+      document.querySelectorAll('.toolbar .tab-btn').forEach(b => b.classList.remove('active'));
+      const mapId = {
+        'all': 'tab-all',
+        'Group 1': 'tab-g1',
+        'Group 2': 'tab-g2',
+        'PIB': 'tab-pib',
+        'Subject-Wise': 'tab-sec',
+        'attempts': 'tab-attempts'
+      };
+      if (mapId[filterKey]) {
+        document.getElementById(mapId[filterKey]).classList.add('active');
+      }
+      showDashboard();
+      renderTestCards();
+    }
+
+    function renderTestCards() {
+      const grid = document.getElementById('testsGrid');
+      const query = (document.getElementById('searchBox').value || '').toLowerCase().trim();
+
+      if (currentFilter === 'attempts') {
+        if (userAttempts.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
+            <h3>No Exam Attempts Yet</h3>
+            <p style="color:var(--muted); margin-top:6px;">Start any of the 33+ APPSC Group-I or Group-II Test Series exams to view your saved scorecard and solutions here.</p>
+          </div>`;
+          return;
+        }
+        grid.innerHTML = userAttempts.map((att, idx) => {
+          const examAtts = getExamAttempts(att.testId);
+          const attNo = att.attemptNumber || (examAtts.findIndex(x => x.date === att.date) + 1) || 1;
+          const chancesLeft = getRemainingChances(att.testId);
+          return `
+          <div class="test-card">
+            <div>
+              <div class="test-badges">
+                <span class="badge badge-g1">Attempt ${attNo} of ${MAX_ATTEMPTS_PER_EXAM} (${chancesLeft} Chance${chancesLeft === 1 ? '' : 's'} Left)</span>
+                <span class="badge badge-pib">Net Score: ${att.netScore.toFixed(2)} / ${att.totalMarks}</span>
+              </div>
+              <div class="test-title">${att.testTitle}</div>
+              <div class="test-desc" style="margin-bottom:8px;">Submitted on: ${att.date}</div>
+              <div class="test-meta">
+                <span>✓ Correct: ${att.correct}</span>
+                <span>✗ Wrong: ${att.wrong}</span>
+                <span>○ Skipped: ${att.unattempted}</span>
+                <span>🎯 Accuracy: ${att.accuracy.toFixed(1)}%</span>
+              </div>
+            </div>
+            <div class="test-footer">
+              <span style="font-size:12px; color:var(--muted);">Time Taken: ${formatSeconds(att.timeTaken)}</span>
+              <div style="display:flex; gap:6px;">
+                ${chancesLeft > 0 ? `<button class="btn btn-outline" onclick="openInstructionsModal('${att.testId}')">🔄 Write 2nd Chance</button>` : ''}
+                <button class="btn btn-primary" onclick="openSavedAttempt(${idx})">📖 Solutions & Report</button>
+              </div>
+            </div>
+          </div>
+        `}).join('');
+        return;
+      }
+
+      const filtered = allTests.filter(t => {
+        if (currentFilter === 'Group 1' && t.exam_group !== 'Group 1') return false;
+        if (currentFilter === 'Group 2' && t.exam_group !== 'Group 2') return false;
+        if (currentFilter === 'PIB' && !t.category.includes('PIB')) return false;
+        if (currentFilter === 'Subject-Wise' && !t.category.includes('Subject')) return false;
+        if (query) {
+          const hay = `${t.title} ${t.description} ${(t.subjects || []).join(' ')} ${t.category}`.toLowerCase();
+          if (!hay.includes(query)) return false;
+        }
+        return true;
+      });
+
+      grid.innerHTML = filtered.map(t => {
+        const badgeClass = t.exam_group === 'Group 1' ? 'badge-g1' : (t.exam_group === 'Group 2' ? 'badge-g2' : 'badge-pib');
+        const examAtts = getExamAttempts(t.test_id);
+        const used = examAtts.length;
+        const left = Math.max(0, MAX_ATTEMPTS_PER_EXAM - used);
+
+        let chanceBadgeHtml = '';
+        let scoreSummaryHtml = '';
+        let startBtnHtml = '';
+
+        if (used === 0) {
+          chanceBadgeHtml = `<span class="badge badge-chance-2">🎯 2 / 2 Chances Available</span>`;
+          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">Max 2 Attempts Allowed</span>`;
+          startBtnHtml = `<button class="btn btn-primary" onclick="openInstructionsModal('${t.test_id}')">▶ Start (Chance 1/2)</button>`;
+        } else if (used === 1) {
+          const a1 = examAtts[0];
+          chanceBadgeHtml = `<span class="badge badge-chance-1">⚠️ 1 / 2 Chances Left</span>`;
+          scoreSummaryHtml = `<span class="badge badge-g2">Attempt 1: ${a1.netScore.toFixed(2)}/${a1.totalMarks}</span>`;
+          startBtnHtml = `<button class="btn btn-accent" onclick="openInstructionsModal('${t.test_id}')">🔄 Retake (Chance 2/2)</button>`;
+        } else {
+          const a1 = examAtts[0];
+          const a2 = examAtts[1];
+          const best = Math.max(a1.netScore, a2.netScore);
+          chanceBadgeHtml = `<span class="badge badge-chance-0">🔒 0 / 2 Chances Left</span>`;
+          scoreSummaryHtml = `<span class="badge badge-g2" title="Attempt 1: ${a1.netScore.toFixed(2)} | Attempt 2: ${a2.netScore.toFixed(2)}">Best: ${best.toFixed(2)}/${a1.totalMarks} (2/2 Used)</span>`;
+          startBtnHtml = `<button class="btn btn-disabled" disabled title="You have used both of your 2 allowed chances for this exam">🔒 2/2 Chances Used</button>`;
+        }
+
+        return `
+          <div class="test-card">
+            <div>
+              <div class="test-badges">
+                <span class="badge ${badgeClass}">${t.exam_group}</span>
+                ${chanceBadgeHtml}
+              </div>
+              <div class="test-title">${t.title}</div>
+              <div class="test-desc">${t.description}</div>
+              <div class="test-meta">
+                <span>📝 ${t.question_count} Questions</span>
+                <span>⏱️ ${t.duration_minutes} Mins</span>
+                <span>⚖️ +1 / -0.33 Marks</span>
+                <span>🔁 ${used}/${MAX_ATTEMPTS_PER_EXAM} Attempts</span>
+              </div>
+            </div>
+            <div class="test-footer">
+              <div>${scoreSummaryHtml}</div>
+              <div style="display:flex; gap:6px;">
+                <button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Solutions & Explanations">📖 Solutions</button>
+                ${startBtnHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Live Browser-Based PIB RSS Fetcher + Exam Synthesizer
+    async function triggerLivePibSync() {
+      const btn = document.getElementById('btnPibSync');
+      const qCount = parseInt(document.getElementById('pibQuestionCount').value || '30', 10);
+      const origText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '⏳ Fetching Live PIB (pib.gov.in) Releases...';
+
+      const liveQuestions = [];
+      try {
+        const rssUrl = encodeURIComponent('https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3');
+        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.items)) {
+            data.items.forEach((item, idx) => {
+              if (!item.title || item.title.length < 20) return;
+              const cleanDesc = (item.description || item.title).replace(/<[^>]+>/g, ' ').trim();
+              liveQuestions.push({
+                q_no: liveQuestions.length + 1,
+                id: `PIB-LIVE-WEB-${idx + 1}`,
+                subject: 'PIB & Govt Schemes Current Affairs',
+                topic: item.title.slice(0, 75),
+                question_type: 'PIB Live Press Release',
+                question: `With reference to the recent Press Information Bureau (PIB) official release titled "${item.title}", consider the following statements:\n1. ${cleanDesc.slice(0, 260)}\n2. This initiative is documented under the Government of India's official PIB portal for public policy and governance implementation.\n\nWhich of the statements given above is/are correct?`,
+                options: ['1 only', '2 only', 'Both 1 and 2', 'Neither 1 nor 2'],
+                correct_index: 2,
+                explanation: `Both Statement 1 and Statement 2 are correct.\n• Release Title: ${item.title}\n• Official Summary: ${cleanDesc}\n• Published Date: ${item.pubDate || 'Recent'}`,
+                source: `PIB Official Portal (${item.link || 'https://pib.gov.in'})`
+              });
+            });
+          }
+        }
+      } catch (err) {
+        console.info('Using curated PIB & Cabinet pool alongside live check:', err);
+      }
+
+      // Fill remaining questions from the verified PIB & Current Affairs pool
+      const pibPool = [];
+      allTests.forEach(t => {
+        (t.questions || []).forEach(q => {
+          if (q.subject.includes('PIB') || (q.source && q.source.includes('PIB')) || q.subject.includes('Economy') || q.subject.includes('Science')) {
+            pibPool.push(q);
+          }
+        });
+      });
+
+      const shuffled = [...pibPool].sort(() => Math.random() - 0.5);
+      const combined = [...liveQuestions, ...shuffled].slice(0, qCount).map((q, i) => ({
+        ...q,
+        q_no: i + 1,
+        id: `PIB-SYNC-Q${i + 1}`
+      }));
+
+      const nowStr = new Date().toLocaleString();
+      const newTest = {
+        test_id: 'APPSC-PIB-LIVE-' + Date.now().toString().slice(-5),
+        title: `Live PIB & Govt Portal Dynamic Test (${nowStr})`,
+        exam_group: 'Group 1 & 2',
+        category: 'PIB & Govt Portals',
+        duration_minutes: qCount,
+        question_count: combined.length,
+        total_marks: combined.length,
+        marks_per_question: 1.0,
+        negative_marking: 0.3333,
+        subjects: ['PIB & Govt Schemes Current Affairs', 'Indian & AP Economy', 'Science, Tech & Environment'],
+        description: `Generated live on ${nowStr} from Press Information Bureau (pib.gov.in) releases, Cabinet approvals, and AP Socio-Economic Survey briefs.`,
+        questions: combined
+      };
+
+      allTests.unshift(newTest);
+      const savedLocal = JSON.parse(localStorage.getItem('appsc_custom_pib_tests') || '[]');
+      savedLocal.unshift(newTest);
+      localStorage.setItem('appsc_custom_pib_tests', JSON.stringify(savedLocal.slice(0, 15)));
+
+      updateDashboardStats();
+      renderTestCards();
+      btn.disabled = false;
+      btn.innerHTML = origText;
+      openInstructionsModal(newTest.test_id);
+    }
+
+    function openInstructionsModal(testId) {
+      const test = allTests.find(t => t.test_id === testId);
+      if (!test) return;
+
+      const examAtts = getExamAttempts(testId);
+      const used = examAtts.length;
+
+      if (used >= MAX_ATTEMPTS_PER_EXAM) {
+        alert(`🔒 Maximum 2 Chances Completed (2/2)!\n\nYou have already used both of your 2 allowed chances for:\n"${test.title}"\n\n• Attempt 1 Score: ${examAtts[0].netScore.toFixed(2)} / ${examAtts[0].totalMarks}\n• Attempt 2 Score: ${examAtts[1].netScore.toFixed(2)} / ${examAtts[1].totalMarks}\n\nOpening your Scorecard & Detailed Solutions.`);
+        displayResultRecord(examAtts[examAtts.length - 1]);
+        return;
+      }
+
+      const nextAttemptNo = used + 1;
+      const bannerEl = document.getElementById('modalAttemptBanner');
+      if (nextAttemptNo === 1) {
+        bannerEl.className = 'attempt-banner chance-1';
+        bannerEl.innerHTML = `🎯 <b>Attempt 1 of 2 (First Chance):</b> You get strictly <b>2 chances</b> to write this exam. After submitting this attempt, you will have <b>1 final retake chance</b> remaining.`;
+      } else {
+        const prev = examAtts[0];
+        bannerEl.className = 'attempt-banner chance-2';
+        bannerEl.innerHTML = `⚠️ <b>FINAL CHANCE — Attempt 2 of 2:</b> You already used your 1st chance on ${prev.date} (Score: <b>${prev.netScore.toFixed(2)} / ${prev.totalMarks}</b>). Once you submit this 2nd attempt, this exam will be locked for retakes.`;
+      }
+
+      document.getElementById('modalGroupBadge').textContent = `${test.exam_group} • ${test.category} • Chance ${nextAttemptNo} of ${MAX_ATTEMPTS_PER_EXAM}`;
+      document.getElementById('modalTestTitle').textContent = test.title;
+      document.getElementById('modalTestDesc').textContent = test.description;
+      document.getElementById('modalDuration').textContent = test.duration_minutes;
+      const startBtn = document.getElementById('btnStartExamNow');
+      startBtn.textContent = `🚀 Start Chance ${nextAttemptNo} of ${MAX_ATTEMPTS_PER_EXAM} Now`;
+      startBtn.onclick = () => {
+        closeInstructionsModal();
+        startExam(test);
+      };
+      document.getElementById('instructionsModal').classList.remove('hidden');
+    }
+
+    function closeInstructionsModal() {
+      document.getElementById('instructionsModal').classList.add('hidden');
+    }
+
+    function startExam(test) {
+      const used = getAttemptsUsed(test.test_id);
+      if (used >= MAX_ATTEMPTS_PER_EXAM) {
+        alert('🔒 Both 2 allowed attempts for this exam have already been exhausted.');
+        return;
+      }
+      activeTest = test;
+      currentQIndex = 0;
+      userResponses = {};
+      questionStatus = {};
+      for (let i = 0; i < test.questions.length; i++) {
+        questionStatus[i] = 'not-visited';
+      }
+      questionStatus[0] = 'not-answered';
+
+      remainingSeconds = test.duration_minutes * 60;
+      elapsedSeconds = 0;
+      isPaused = false;
+
+      document.getElementById('dashboardView').classList.add('hidden');
+      document.getElementById('resultView').classList.add('hidden');
+      document.getElementById('examView').classList.remove('hidden');
+
+      document.getElementById('activeExamTitle').textContent = test.title;
+      document.getElementById('activeExamSub').textContent = `Chance ${used + 1} of ${MAX_ATTEMPTS_PER_EXAM} • ${test.exam_group} Official Pattern • ${test.question_count} Questions • ${test.duration_minutes} Minutes • -0.33 Negative Marking`;
+
+      renderQuestion();
+      renderPalette();
+      startTimer();
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        if (isPaused) return;
+        remainingSeconds--;
+        elapsedSeconds++;
+        updateTimerDisplay();
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          alert('⏰ Time is up! Your APPSC exam is being auto-submitted.');
+          submitExam();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(remainingSeconds / 60);
+      const secs = remainingSeconds % 60;
+      const clockEl = document.getElementById('examClock');
+      clockEl.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      const box = document.getElementById('examTimerBox');
+      if (remainingSeconds < 300) {
+        box.classList.add('warning');
+      } else {
+        box.classList.remove('warning');
+      }
+    }
+
+    function togglePauseExam() {
+      isPaused = !isPaused;
+      document.getElementById('btnPauseExam').textContent = isPaused ? '▶ Resume' : '⏸ Pause';
+    }
+
+    function renderQuestion() {
+      const q = activeTest.questions[currentQIndex];
+      document.getElementById('qNumberLabel').textContent = `Question ${currentQIndex + 1} of ${activeTest.questions.length}`;
+      document.getElementById('qSubjectBadge').textContent = q.subject;
+      document.getElementById('qTypeBadge').textContent = q.question_type || 'APPSC MCQ';
+      document.getElementById('qTextDisplay').textContent = q.question;
+
+      const letters = ['A', 'B', 'C', 'D'];
+      const selectedOpt = userResponses[currentQIndex];
+      const container = document.getElementById('qOptionsContainer');
+      container.innerHTML = q.options.map((optText, idx) => `
+        <div class="option-row ${selectedOpt === idx ? 'selected' : ''}" onclick="selectOption(${idx})">
+          <div class="opt-letter">${letters[idx]}</div>
+          <div class="opt-text">${optText}</div>
+        </div>
+      `).join('');
+    }
+
+    function selectOption(optIdx) {
+      userResponses[currentQIndex] = optIdx;
+      if (questionStatus[currentQIndex] === 'review' || questionStatus[currentQIndex] === 'ans-review') {
+        questionStatus[currentQIndex] = 'ans-review';
+      } else {
+        questionStatus[currentQIndex] = 'answered';
+      }
+      renderQuestion();
+      renderPalette();
+    }
+
+    function clearResponse() {
+      delete userResponses[currentQIndex];
+      questionStatus[currentQIndex] = 'not-answered';
+      renderQuestion();
+      renderPalette();
+    }
+
+    function saveAndNext() {
+      if (userResponses[currentQIndex] !== undefined) {
+        questionStatus[currentQIndex] = 'answered';
+      } else {
+        questionStatus[currentQIndex] = 'not-answered';
+      }
+      goToQuestion((currentQIndex + 1) % activeTest.questions.length);
+    }
+
+    function markForReviewAndNext() {
+      if (userResponses[currentQIndex] !== undefined) {
+        questionStatus[currentQIndex] = 'ans-review';
+      } else {
+        questionStatus[currentQIndex] = 'review';
+      }
+      goToQuestion((currentQIndex + 1) % activeTest.questions.length);
+    }
+
+    function prevQuestion() {
+      if (currentQIndex > 0) {
+        goToQuestion(currentQIndex - 1);
+      }
+    }
+
+    function goToQuestion(idx) {
+      currentQIndex = idx;
+      if (questionStatus[currentQIndex] === 'not-visited') {
+        questionStatus[currentQIndex] = 'not-answered';
+      }
+      renderQuestion();
+      renderPalette();
+    }
+
+    function renderPalette() {
+      const grid = document.getElementById('paletteGrid');
+      let cAns = 0, cNotAns = 0, cNotVis = 0, cRev = 0;
+
+      grid.innerHTML = activeTest.questions.map((_, i) => {
+        const st = questionStatus[i] || 'not-visited';
+        if (st === 'answered') cAns++;
+        else if (st === 'not-answered') cNotAns++;
+        else if (st === 'not-visited') cNotVis++;
+        else cRev++;
+
+        return `<button class="q-pal-btn ${st} ${i === currentQIndex ? 'current' : ''}" onclick="goToQuestion(${i})">${i + 1}</button>`;
+      }).join('');
+
+      document.getElementById('cntAns').textContent = cAns;
+      document.getElementById('cntNotAns').textContent = cNotAns;
+      document.getElementById('cntNotVis').textContent = cNotVis;
+      document.getElementById('cntRev').textContent = cRev;
+    }
+
+    function confirmSubmitExam() {
+      const attempted = Object.keys(userResponses).length;
+      const total = activeTest.questions.length;
+      if (confirm(`Are you sure you want to submit the exam?\n\n• Total Questions: ${total}\n• Attempted: ${attempted}\n• Unattempted: ${total - attempted}\n\nClick OK to generate your Score Card & Detailed Solutions.`)) {
+        submitExam();
+      }
+    }
+
+    function submitExam() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      let correct = 0;
+      let wrong = 0;
+      let unattempted = 0;
+      const subjectStats = {};
+
+      activeTest.questions.forEach((q, idx) => {
+        const subj = q.subject || 'General Studies';
+        if (!subjectStats[subj]) {
+          subjectStats[subj] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+        }
+        subjectStats[subj].total++;
+
+        const userChoice = userResponses[idx];
+        if (userChoice === undefined) {
+          unattempted++;
+          subjectStats[subj].unattempted++;
+        } else if (userChoice === q.correct_index) {
+          correct++;
+          subjectStats[subj].correct++;
+        } else {
+          wrong++;
+          subjectStats[subj].wrong++;
+        }
+      });
+
+      const posMarks = correct * 1.0;
+      const negMarks = wrong * (1.0 / 3.0);
+      const netScore = posMarks - negMarks;
+      const totalMarks = activeTest.questions.length * 1.0;
+      const attempted = correct + wrong;
+      const accuracy = attempted > 0 ? (correct / attempted) * 100 : 0;
+
+      const usedBefore = getAttemptsUsed(activeTest.test_id);
+      const attemptNumber = Math.min(MAX_ATTEMPTS_PER_EXAM, usedBefore + 1);
+
+      const record = {
+        testId: activeTest.test_id,
+        testTitle: activeTest.title,
+        examGroup: activeTest.exam_group,
+        attemptNumber,
+        maxAttempts: MAX_ATTEMPTS_PER_EXAM,
+        date: new Date().toLocaleString(),
+        totalQuestions: activeTest.questions.length,
+        totalMarks,
+        correct,
+        wrong,
+        unattempted,
+        posMarks,
+        negMarks,
+        netScore,
+        accuracy,
+        timeTaken: elapsedSeconds,
+        subjectStats,
+        userResponses: { ...userResponses },
+        questions: activeTest.questions
+      };
+
+      if (usedBefore < MAX_ATTEMPTS_PER_EXAM) {
+        userAttempts.unshift(record);
+        localStorage.setItem('appsc_user_attempts_v2', JSON.stringify(userAttempts.slice(0, 150)));
+      }
+
+      updateDashboardStats();
+      renderTestCards();
+      displayResultRecord(record);
+    }
+
+    function previewTestSolutions(testId) {
+      const test = allTests.find(t => t.test_id === testId);
+      if (!test) return;
+
+      // If the user has already attempted this exam (Attempt 1 or Attempt 2), open their latest attempt scorecard & solutions
+      const examAtts = getExamAttempts(testId);
+      if (examAtts.length > 0) {
+        displayResultRecord(examAtts[examAtts.length - 1]);
+        return;
+      }
+
+      const subjectStats = {};
+      test.questions.forEach(q => {
+        const subj = q.subject || 'General Studies';
+        if (!subjectStats[subj]) {
+          subjectStats[subj] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+        }
+        subjectStats[subj].total++;
+        subjectStats[subj].unattempted++;
+      });
+
+      const previewRecord = {
+        testId: test.test_id,
+        testTitle: test.title + ' (Official Answer Key & Explanations)',
+        examGroup: test.exam_group,
+        attemptNumber: 0,
+        maxAttempts: MAX_ATTEMPTS_PER_EXAM,
+        date: 'Master Solution Sheet (2/2 Chances Remaining)',
+        totalQuestions: test.questions.length,
+        totalMarks: test.questions.length,
+        correct: 0,
+        wrong: 0,
+        unattempted: test.questions.length,
+        posMarks: 0,
+        negMarks: 0,
+        netScore: 0,
+        accuracy: 0,
+        timeTaken: 0,
+        subjectStats,
+        userResponses: {},
+        questions: test.questions
+      };
+      displayResultRecord(previewRecord);
+    }
+
+    function openSavedAttempt(idx) {
+      const rec = userAttempts[idx];
+      if (!rec) return;
+      displayResultRecord(rec);
+    }
+
+    function openExamAttemptByNumber(testId, attIndex) {
+      const examAtts = getExamAttempts(testId);
+      if (examAtts[attIndex]) {
+        displayResultRecord(examAtts[attIndex]);
+      }
+    }
+
+    function displayResultRecord(rec) {
+      activeResultRecord = rec;
+      currentSolFilter = 'all';
+
+      document.getElementById('dashboardView').classList.add('hidden');
+      document.getElementById('examView').classList.add('hidden');
+      document.getElementById('resultView').classList.remove('hidden');
+
+      const examAtts = getExamAttempts(rec.testId);
+      const used = examAtts.length;
+      const left = Math.max(0, MAX_ATTEMPTS_PER_EXAM - used);
+      const attNo = rec.attemptNumber || (examAtts.findIndex(a => a.date === rec.date) + 1) || 0;
+
+      document.getElementById('resExamBadge').textContent = attNo > 0
+        ? `${rec.examGroup} • Attempt ${attNo} of ${MAX_ATTEMPTS_PER_EXAM} Report (${left} Chance${left === 1 ? '' : 's'} Left)`
+        : `${rec.examGroup} • Master Answer Key (${left} Chance${left === 1 ? '' : 's'} Left)`;
+      document.getElementById('resAttemptLabel').textContent = attNo > 0 ? `Attempt ${attNo}/${MAX_ATTEMPTS_PER_EXAM} Score` : 'Net Exam Score';
+      document.getElementById('resExamTitle').textContent = rec.testTitle;
+      document.getElementById('resExamMeta').textContent = `Completed: ${rec.date} • Attempts Used: ${used}/${MAX_ATTEMPTS_PER_EXAM} • Negative Marking: -1/3 (0.33)`;
+      document.getElementById('resNetScore').textContent = `${rec.netScore.toFixed(2)} / ${rec.totalMarks}`;
+
+      // Render switcher between Attempt 1 and Attempt 2 if attempts exist
+      const switcherEl = document.getElementById('resAttemptSwitcher');
+      if (examAtts.length > 0) {
+        switcherEl.innerHTML = examAtts.map((a, i) => {
+          const isCurrent = a.date === rec.date;
+          return `<button class="btn ${isCurrent ? 'btn-accent' : 'btn-header'}" style="padding:6px 11px; font-size:12px;" onclick="openExamAttemptByNumber('${rec.testId}', ${i})">Attempt ${i + 1}: ${a.netScore.toFixed(2)}</button>`;
+        }).join('');
+      } else {
+        switcherEl.innerHTML = '';
+      }
+
+      // Show Retake button if chances remain (< 2 attempts used)
+      const retakeBtn = document.getElementById('btnRetakeFromResult');
+      if (left > 0) {
+        retakeBtn.className = 'btn btn-success';
+        retakeBtn.disabled = false;
+        retakeBtn.textContent = used === 0
+          ? `▶ Write Chance 1 of 2`
+          : `🔄 Write 2nd Chance (1 Left)`;
+        retakeBtn.onclick = () => openInstructionsModal(rec.testId);
+      } else {
+        retakeBtn.className = 'btn btn-disabled';
+        retakeBtn.disabled = true;
+        retakeBtn.textContent = '🔒 2/2 Chances Exhausted';
+        retakeBtn.onclick = null;
+      }
+
+      const pct = (rec.netScore / rec.totalMarks) * 100;
+      const verdict = pct >= 55 ? '🏆 Above Safe APPSC Cutoff' : (pct >= 40 ? '📈 Borderline Cutoff - Revise Wrong Areas' : '📚 Focus on Solutions Below');
+      document.getElementById('resVerdictBadge').textContent = `${verdict} (${pct.toFixed(1)}%)`;
+
+      document.getElementById('resCorrectCount').textContent = rec.correct;
+      document.getElementById('resPositiveMarks').textContent = `+${rec.posMarks.toFixed(2)} Positive Marks`;
+      document.getElementById('resWrongCount').textContent = rec.wrong;
+      document.getElementById('resNegativeMarks').textContent = `-${rec.negMarks.toFixed(2)} Negative Penalty`;
+      document.getElementById('resUnattemptedCount').textContent = rec.unattempted;
+      document.getElementById('resAccuracyVal').textContent = `${rec.accuracy.toFixed(1)}%`;
+      document.getElementById('resTimeTaken').textContent = `Time Taken: ${formatSeconds(rec.timeTaken)}`;
+
+      const tbody = document.getElementById('resSubjectTableBody');
+      tbody.innerHTML = Object.entries(rec.subjectStats).map(([subj, st]) => {
+        const net = st.correct - (st.wrong / 3.0);
+        const att = st.correct + st.wrong;
+        const acc = att > 0 ? ((st.correct / att) * 100).toFixed(1) + '%' : '--';
+        return `
+          <tr>
+            <td><b>${subj}</b></td>
+            <td>${st.total}</td>
+            <td style="color:var(--success); font-weight:700;">${st.correct}</td>
+            <td style="color:var(--danger); font-weight:700;">${st.wrong}</td>
+            <td>${st.unattempted}</td>
+            <td><b>${net.toFixed(2)}</b></td>
+            <td>${acc}</td>
+          </tr>
+        `;
+      }).join('');
+
+      renderSolutionsList();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterSolutions(mode) {
+      currentSolFilter = mode;
+      ['all', 'correct', 'wrong', 'unattempted'].forEach(k => {
+        document.getElementById('sol-tab-' + k).classList.toggle('active', k === mode);
+      });
+      renderSolutionsList();
+    }
+
+    function renderSolutionsList() {
+      const rec = activeResultRecord;
+      if (!rec) return;
+      const letters = ['A', 'B', 'C', 'D'];
+      const container = document.getElementById('solutionsContainer');
+
+      const itemsHtml = rec.questions.map((q, idx) => {
+        const userAns = rec.userResponses[idx];
+        const isUnattempted = userAns === undefined;
+        const isCorrect = userAns === q.correct_index;
+        const statusKey = isUnattempted ? 'unattempted' : (isCorrect ? 'correct' : 'wrong');
+
+        if (currentSolFilter !== 'all' && currentSolFilter !== statusKey) {
+          return '';
+        }
+
+        const cardClass = isUnattempted ? 'sol-unattempted' : (isCorrect ? 'sol-correct' : 'sol-wrong');
+        const statusBadge = isUnattempted
+          ? `<span class="badge badge-cat">○ Unattempted (0.00)</span>`
+          : (isCorrect
+              ? `<span class="badge badge-g2">✓ Correct (+1.00 Mark)</span>`
+              : `<span class="badge" style="background:var(--danger-bg); color:var(--danger);">✗ Wrong (-0.33 Mark)</span>`);
+
+        const optsHtml = q.options.map((optText, oIdx) => {
+          let cls = 'sol-opt';
+          let tag = '';
+          if (oIdx === q.correct_index) {
+            cls += ' right-ans';
+            tag = '<span>✓ Correct Answer</span>';
+          } else if (oIdx === userAns && userAns !== q.correct_index) {
+            cls += ' user-wrong';
+            tag = '<span>✗ Your Selection</span>';
+          }
+          return `<div class="${cls}"><span><b>(${letters[oIdx]})</b> ${optText}</span>${tag}</div>`;
+        }).join('');
+
+        return `
+          <div class="solution-card ${cardClass}">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+              <div>
+                <b style="color:var(--primary); font-size:15px;">Question ${idx + 1}</b>
+                <span class="badge badge-g1" style="margin-left:8px;">${q.subject}</span>
+                <span class="badge badge-cat" style="margin-left:4px;">${q.topic || ''}</span>
+              </div>
+              ${statusBadge}
+            </div>
+            <div style="font-size:15px; font-weight:600; white-space:pre-line; margin-bottom:14px; color:#0f172a;">${q.question}</div>
+            <div>${optsHtml}</div>
+            <div class="explanation-box">
+              <b style="color:var(--primary-dark);">💡 Detailed Solution & Explanation:</b><br/>
+              ${q.explanation}
+              <div><span class="source-tag">📌 Official Source: ${q.source || 'PIB / APPSC Official Reference'}</span></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = itemsHtml || `<div style="background:#fff; padding:28px; text-align:center; border-radius:10px;">No questions match this filter.</div>`;
+    }
+
+    function showDashboard() {
+      if (timerInterval) clearInterval(timerInterval);
+      document.getElementById('examView').classList.add('hidden');
+      document.getElementById('resultView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('hidden');
+    }
+
+    function formatSeconds(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${m}m ${s}s`;
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
