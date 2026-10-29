@@ -1520,16 +1520,19 @@
 
         let chanceBadgeHtml = '';
         let scoreSummaryHtml = '';
+        let solutionsBtnHtml = '';
         let startBtnHtml = '';
 
         if (used === 0) {
           chanceBadgeHtml = `<span class="badge badge-chance-2">🎯 2 / 2 Chances Available</span>`;
-          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">${currentUser ? `For ${currentUser.email}` : '2 Chances Per Email ID'}</span>`;
+          scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">🔒 Solutions unlock after test</span>`;
+          solutionsBtnHtml = '';
           startBtnHtml = `<button class="btn ${pyq ? 'btn-purple' : 'btn-primary'}" onclick="openInstructionsModal('${t.test_id}')">▶ Start (Chance 1/2)</button>`;
         } else if (used === 1) {
           const a1 = examAtts[0];
           chanceBadgeHtml = `<span class="badge badge-chance-1">⚠️ 1 / 2 Chances Left</span>`;
           scoreSummaryHtml = `<span class="badge badge-g2">Attempt 1: ${a1.netScore.toFixed(2)}/${a1.totalMarks}</span>`;
+          solutionsBtnHtml = `<button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Your Attempt 1 Solutions & Explanations">📖 Solutions</button>`;
           startBtnHtml = `<button class="btn btn-accent" onclick="openInstructionsModal('${t.test_id}')">🔄 Retake (Chance 2/2)</button>`;
         } else {
           const a1 = examAtts[0];
@@ -1537,6 +1540,7 @@
           const best = Math.max(a1.netScore, a2.netScore);
           chanceBadgeHtml = `<span class="badge badge-chance-0">🔒 0 / 2 Chances Left</span>`;
           scoreSummaryHtml = `<span class="badge badge-g2" title="Attempt 1: ${a1.netScore.toFixed(2)} | Attempt 2: ${a2.netScore.toFixed(2)}">Best: ${best.toFixed(2)}/${a1.totalMarks} (2/2 Used)</span>`;
+          solutionsBtnHtml = `<button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Solutions & Explanations">📖 Solutions</button>`;
           startBtnHtml = `<button class="btn btn-disabled" disabled title="Both 2 allowed chances used for ${currentUser ? currentUser.email : 'this account'}">🔒 2/2 Chances Used</button>`;
         }
 
@@ -1562,7 +1566,7 @@
             <div class="test-footer">
               <div>${scoreSummaryHtml}</div>
               <div style="display:flex; gap:6px;">
-                <button class="btn btn-outline" onclick="previewTestSolutions('${t.test_id}')" title="View Solutions & Explanations">📖 Solutions</button>
+                ${solutionsBtnHtml}
                 ${startBtnHtml}
               </div>
             </div>
@@ -1944,50 +1948,23 @@
     }
 
     function previewTestSolutions(testId) {
-      const test = allTests.find(t => t.test_id === testId);
-      if (!test) return;
-
-      // If the user has already attempted this exam (Attempt 1 or Attempt 2), open their latest attempt scorecard & solutions
-      const examAtts = getExamAttempts(testId);
-      if (examAtts.length > 0) {
-        displayResultRecord(examAtts[examAtts.length - 1]);
+      if (!currentUser || !currentUser.email) {
+        pendingExamTestId = testId;
+        openLoginModal();
         return;
       }
 
-      const subjectStats = {};
-      test.questions.forEach(q => {
-        const subj = q.subject || 'General Studies';
-        if (!subjectStats[subj]) {
-          subjectStats[subj] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
-        }
-        subjectStats[subj].total++;
-        subjectStats[subj].unattempted++;
-      });
+      const test = allTests.find(t => t.test_id === testId);
+      if (!test) return;
 
-      const previewRecord = {
-        testId: test.test_id,
-        testTitle: test.title + ' (Official Answer Key & Explanations)',
-        examGroup: test.exam_group,
-        userName: currentUser ? currentUser.name : 'Guest Preview',
-        userEmail: currentUser ? currentUser.email : 'Not Logged In',
-        attemptNumber: 0,
-        maxAttempts: MAX_ATTEMPTS_PER_EXAM,
-        date: 'Master Solution Sheet (2/2 Chances Remaining)',
-        totalQuestions: test.questions.length,
-        totalMarks: test.questions.length,
-        correct: 0,
-        wrong: 0,
-        unattempted: test.questions.length,
-        posMarks: 0,
-        negMarks: 0,
-        netScore: 0,
-        accuracy: 0,
-        timeTaken: 0,
-        subjectStats,
-        userResponses: {},
-        questions: test.questions
-      };
-      displayResultRecord(previewRecord);
+      // Solutions are strictly visible ONLY after the candidate has completed and submitted the test at least once
+      const examAtts = getExamAttempts(testId);
+      if (examAtts.length === 0) {
+        alert(`🔒 Solutions Locked!\n\nSolutions and detailed explanations for "${test.title}" are only visible after you complete and submit the exam.`);
+        return;
+      }
+
+      displayResultRecord(examAtts[examAtts.length - 1]);
     }
 
     function openSavedAttempt(idx) {
