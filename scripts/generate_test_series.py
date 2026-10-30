@@ -411,60 +411,60 @@ INDIAN_HISTORY_FACTS = [
 
 PIB_CURRENT_AFFAIRS_FACTS = [
     {
-        "topic": "Jan 2027 Exam (Last 6M: Jul–Dec 2026): PM Surya Ghar Muft Bijli Yojana + Static Solar Mission",
-        "fact": "Under 'PM Surya Ghar: Muft Bijli Yojana' (outlay Rs. 75,021 crore, active saturation across 2026), 1 crore households receive rooftop solar installations providing up to 300 units of free electricity monthly, with Central Financial Assistance (CFA) of Rs. 30,000 for 1 kW, Rs. 60,000 for 2 kW, and Rs. 78,000 for 3 kW systems.",
-        "detail": "STATIC ENERGY LINK: India's Panchamrit targets set at UNFCCC COP26/COP30 commit to 500 GW of non-fossil fuel installed electricity capacity by 2030 (with ~280 GW from solar energy) and achieving Net-Zero carbon emissions by 2070; photovoltaic (PV) cells convert sunlight directly into Direct Current (DC) electricity via the semiconductor photoelectric effect.",
-        "false_stmt": "PM Surya Ghar Yojana provides free diesel generators to industrial factories with zero subsidy for residential rooftop solar.",
-        "source": "Jan–Dec 2026 Current Affairs (MNRE) + Static Renewable Energy Syllabus"
+        "topic": "PM Surya Ghar: Muft Bijli Yojana & National Solar Mission",
+        "fact": "Under 'PM Surya Ghar: Muft Bijli Yojana' (outlay Rs. 75,021 crore), 1 crore households are supported with rooftop solar installations providing up to 300 units of free electricity monthly, with Central Financial Assistance (CFA) of Rs. 30,000 for 1 kW, Rs. 60,000 for 2 kW, and Rs. 78,000 capped for systems of 3 kW and above.",
+        "detail": "India's Nationally Determined Contributions (NDCs) commit to achieving 500 GW of non-fossil fuel installed electricity capacity by 2030 and Net-Zero carbon emissions by 2070, while developing one Model Solar Village per district under the scheme.",
+        "false_stmt": "Under PM Surya Ghar Yojana, Central Financial Assistance (CFA) increases linearly without any upper cap for residential systems up to 25 kW and is implemented by the Ministry of Power.",
+        "source": "Ministry of New and Renewable Energy (MNRE)"
     },
     {
-        "topic": "Jan 2027 Exam (1-Year: Jan–Dec 2026): Ayushman Vaya Vandana Card (70+ Seniors) + Static Article 41 & 47",
-        "fact": "Under the expanded Ayushman Bharat PM-JAY Vaya Vandana scheme implemented across 2025–2026, all senior citizens aged 70 years and above receive universal free health insurance coverage of Rs. 5 lakh per year per family regardless of income, along with an additional Rs. 5 lakh top-up for seniors in existing AB PM-JAY families.",
-        "detail": "STATIC POLITY & WELFARE LINK: This universal geriatric healthcare aligns with Directive Principles of State Policy in Part IV of the Constitution—specifically Article 41 (Right to public assistance in cases of old age and sickness) and Article 47 (Duty of the State to raise the level of nutrition and standard of living and to improve public health). In Andhra Pradesh, it converges with Dr. NTR Vaidya Seva health coverage.",
-        "false_stmt": "The expanded AB PM-JAY 70+ scheme is restricted only to retired central government defense officers earning below Rs. 10,000 per year.",
-        "source": "Jan–Dec 2026 Current Affairs (MoHFW) + Static Polity (DPSP Articles 41 & 47)"
+        "topic": "Ayushman Bharat Vaya Vandana (70+ Senior Citizens) & Directive Principles",
+        "fact": "Under the expanded Ayushman Bharat PM-JAY Vaya Vandana scheme, all senior citizens aged 70 years and above receive universal free health coverage of Rs. 5 lakh per year on a family basis regardless of income, along with an additional Rs. 5 lakh shared top-up for seniors within existing AB PM-JAY beneficiary families.",
+        "detail": "This universal geriatric health assurance operationalizes Article 41 (Right to public assistance in cases of old age, sickness, and disablement) and Article 47 (Duty of the State to improve public health) under Part IV of the Constitution, converging with Dr. NTR Vaidya Seva in Andhra Pradesh.",
+        "false_stmt": "Senior citizens aged 70 years and above who are covered under the Central Government Health Scheme (CGHS) or ECHS are permanently debarred from opting into AB PM-JAY even if they surrender their existing card.",
+        "source": "National Health Authority (MoHFW) & Part IV of the Constitution"
     },
     {
-        "topic": "Jan 2027 Exam (Last 6M: Jul–Dec 2026): Amaravati Capital, Polavaram Phase-I & Static AP Reorganization Act 2014",
-        "fact": "In 2026, the Central Government disbursed financial assistance from the Rs. 15,000 crore multilateral package for Andhra Pradesh's greenfield capital Amaravati and fast-tracked the Polavaram National Irrigation Project (+41.15m Phase-I contour) alongside the Kopparthy (VCIC) and Orvakal (HBIC) industrial smart nodes.",
-        "detail": "STATIC AP REORGANIZATION LINK: Under the Andhra Pradesh Reorganization Act, 2014 (Act 6 of 2014), Section 90 declares Polavaram a National Project executed by the Union, Section 94 & Schedule XIII mandate central support for the new capital city, rapid rail/metro, and industrial corridors (VCIC, CBIC, HBIC).",
-        "false_stmt": "The Union Budget repealed the AP Reorganization Act, 2014 and canceled all central funding for Polavaram and industrial corridors.",
-        "source": "Union & AP Budget 2026–27 + Static AP Reorganization Act, 2014 (Section 90 & Schedule XIII)"
+        "topic": "Amaravati Capital Infrastructure, Polavaram Project & AP Reorganization Act, 2014",
+        "fact": "Multilateral funding of Rs. 15,000 crore co-financed by the World Bank and Asian Development Bank supports Phase-I trunk infrastructure in Amaravati Capital City, alongside central financial assistance for the Polavaram National Irrigation Project (+41.15m Phase-I contour) and the Kopparthy (VCIC) and Orvakal (HBIC) industrial smart nodes.",
+        "detail": "Under the Andhra Pradesh Reorganization Act, 2014 (Act 6 of 2014), Section 90 declares Polavaram a National Project executed by the Union, while Section 94 and Schedule XIII mandate central support for the new capital city, rapid rail connectivity, and industrial corridors.",
+        "false_stmt": "Under the AP Reorganization Act, 2014, Polavaram is classified as a state municipal project under Schedule IX, and Orvakal Industrial Node is part of the East Coast Economic Corridor in Srikakulam district.",
+        "source": "Union & AP Budget Documents and AP Reorganization Act, 2014"
     },
     {
-        "topic": "Jan 2027 Exam (1-Year: Jan–Dec 2026): 11 Classical Languages of India + Static Telugu Epigraphy",
-        "fact": "With the Union Cabinet's addition of Marathi, Pali, Prakrit, Assamese, and Bengali, India officially recognizes 11 Classical Languages (joining Tamil, Sanskrit, Telugu, Kannada, Malayalam, and Odia).",
-        "detail": "STATIC AP HISTORY LINK: Telugu was accorded Classical Language status in 2008, with the Centre of Excellence for Studies in Classical Telugu (CESCT) located at Nellore, AP. The Kalamalla Inscription (c. 575 CE, Kadapa district) issued by Renati Chola king Dhananjaya Erikal Mutturaju is the earliest known complete Telugu prose inscription.",
-        "false_stmt": "India recognizes only two Classical Languages, and Telugu has never been granted Classical Language status by the Ministry of Culture.",
-        "source": "Jan–Dec 2026 Current Affairs (Ministry of Culture) + Static AP History & Literature"
+        "topic": "Classical Languages of India & Early Telugu Epigraphy",
+        "fact": "With the Union Cabinet's inclusion of Marathi, Pali, Prakrit, Assamese, and Bengali, India officially recognizes 11 Classical Languages (joining Tamil, Sanskrit, Telugu, Kannada, Malayalam, and Odia).",
+        "detail": "Telugu was accorded Classical Language status in 2008, with the Centre of Excellence for Studies in Classical Telugu (CESCT) located at Venkatachalam in SPSR Nellore district; the Kalamalla Inscription (c. 575 CE, YSR Kadapa district) of Renati Chola king Dhananjaya Erikal Mutturaju is the earliest known complete Telugu prose inscription.",
+        "false_stmt": "To qualify for Classical Language status under Ministry of Culture guidelines, a language's literary tradition must be an direct offshoot borrowed from another modern language with an antiquity of at least 200 years.",
+        "source": "Ministry of Culture Notification & Epigraphia Andhrica"
     },
     {
-        "topic": "Jan 2027 Exam (Last 6M: Jul–Dec 2026): Dharti Aaba Abhiyan & PM-JANMAN + Static Fifth Schedule & PVTGs",
-        "fact": "Implemented across 2026 with a combined outlay exceeding Rs. 1,03,000 crore, the 'Dharti Aaba Janjatiya Gram Utkarsh Abhiyan' (Rs. 79,156 crore across 63,000 tribal villages) and 'PM-JANMAN' (Rs. 24,104 crore for 75 PVTGs) saturate housing, road connectivity, mobile health, and Van Dhan Kendras across Scheduled Areas including AP's ITDAs (Paderu, Rampachodavaram, Parvathipuram, Seethampeta, Srisailam).",
-        "detail": "STATIC SOCIETY & POLITY LINK: Scheduled Areas in Andhra Pradesh are administered under the Fifth Schedule (Article 244(1)) of the Constitution and the PESA Act, 1996, where the Governor possesses special powers to regulate land transfer and money-lending through a Tribes Advisory Council (TAC). AP's notified PVTGs include Chenchu, Gadaba, Khond, Konda Reddi, Konda Savara, and Porja.",
-        "false_stmt": "Dharti Aaba Abhiyan is an urban metro rail privatization scheme limited solely to tier-1 metropolitan cities.",
-        "source": "Jan–Dec 2026 Current Affairs (Ministry of Tribal Affairs) + Static Fifth Schedule & PVTGs"
+        "topic": "Dharti Aaba Janjatiya Gram Utkarsh Abhiyan, PM-JANMAN & Fifth Schedule",
+        "fact": "With a combined outlay exceeding Rs. 1,03,000 crore, the 'Dharti Aaba Janjatiya Gram Utkarsh Abhiyan' (Rs. 79,156 crore across ~63,000 tribal villages converging 25 interventions of 17 Ministries) and 'PM-JANMAN' (Rs. 24,104 crore for 75 PVTGs) saturate housing, road connectivity, mobile health, and Van Dhan Kendras across Scheduled Areas including AP's ITDAs (Paderu, Rampachodavaram, Parvathipuram, Seethampeta, Srisailam).",
+        "detail": "Scheduled Areas in Andhra Pradesh are administered under the Fifth Schedule (Article 244(1)) of the Constitution and the PESA Act, 1996, where the Governor possesses special powers to regulate land transfer and money-lending in consultation with the Tribes Advisory Council (TAC).",
+        "false_stmt": "Scheduled Areas in Andhra Pradesh are governed under the Sixth Schedule (Article 244(2)) through Autonomous District Councils that possess plenary judicial and legislative powers over reserved forests.",
+        "source": "Ministry of Tribal Affairs & Fifth Schedule of the Constitution"
     },
     {
-        "topic": "Jan 2027 Exam (Last 6M: Jul–Dec 2026): BioE3 Policy, IndiaAI & Quantum Mission + Static Biotechnology",
-        "fact": "During 2026, the Department of Biotechnology operationalized Bio-Enabler Hubs and Biofoundries under the 'BioE3 Policy' (Biotechnology for Economy, Environment and Employment) across six verticals: bio-based chemicals, smart proteins, precision biotherapeutics, climate-resilient agriculture, carbon capture, and marine/space biotechnology.",
-        "detail": "STATIC SCIENCE LINK: Precision biotherapeutics rely on recombinant DNA technology, Monoclonal Antibodies, CRISPR-Cas9 gene editing (using guide RNA + Cas9 endonuclease enzyme to make site-specific double-stranded DNA breaks), and indigenous CAR-T cell therapy (such as India's NexCAR19 modifying patient T-lymphocytes).",
-        "false_stmt": "The BioE3 Policy bans all fermentation and biomanufacturing research in Indian universities.",
-        "source": "Jan–Dec 2026 Current Affairs (DBT / Science & Tech) + Static Biotechnology"
+        "topic": "BioE3 Policy, Indigenous CAR-T Therapy (NexCAR19) & Genome Editing",
+        "fact": "The Department of Biotechnology's 'BioE3 Policy' (Biotechnology for Economy, Environment and Employment) establishes Bio-AI Hubs and Biofoundries across six thematic verticals: bio-based chemicals, smart proteins, precision biotherapeutics, climate-resilient agriculture, carbon capture, and marine/space biotechnology.",
+        "detail": "India's indigenous precision biotherapeutics include 'NexCAR19' (developed by ImmunoACT, IIT Bombay, and Tata Memorial Centre), a Chimeric Antigen Receptor T-cell (CAR-T) therapy that genetically engineers a patient's T-lymphocytes to target the CD19 protein on B-cell lymphomas and leukaemias.",
+        "false_stmt": "NexCAR19 is an mRNA prophylactic vaccine developed by ICMR that modifies red blood cells (erythrocytes) to prevent dengue hemorrhagic fever.",
+        "source": "Department of Biotechnology (DBT) & CDSCO"
     },
     {
-        "topic": "Jan 2027 Exam (Last 6M: Jul–Dec 2026): Swarna Andhra @ 2047, AP Budget 2026–27 & Static GSVA/FRBM",
-        "fact": "Andhra Pradesh's 'Swarna Andhra @ 2047' vision and 2026–27 State Budget focus on achieving a >15% annual growth rate, Zero Poverty via the P4 (Public-Private-People Partnership) model, Deepam-2.0, Annadata Sukhibhava (Rs. 20,000/year to farmers), Talliki Vandanam, and NTR Bharosa Pensions.",
-        "detail": "STATIC AP ECONOMY LINK: Agriculture and Allied Sectors (Horticulture, Livestock, and Marine/Brackish-water Aquaculture) contribute over 34% of Andhra Pradesh's Gross State Value Added (GSVA), making AP India's #1 producer of shrimp, fish, oil palm, papaya, lemon, and chili.",
-        "false_stmt": "Under Swarna Andhra @ 2047, agriculture and aquaculture are completely banned across Coastal Andhra.",
-        "source": "AP Socio-Economic Survey 2025–26 & AP Budget 2026–27 + Static AP Economy"
+        "topic": "Swarna Andhra @ 2047 Vision, AP State Budget & GSVA Structure",
+        "fact": "Andhra Pradesh's 'Swarna Andhra @ 2047' vision targets a $2.4 trillion state economy and >$42,000 per capita income by 2047 through a >15% annual growth rate, the P4 (Public-Private-People Partnership) zero-poverty model, Deepam-2.0, Annadata Sukhibhava (Rs. 20,000/year to farmers), Talliki Vandanam, and NTR Bharosa Pensions.",
+        "detail": "Agriculture and Allied Sectors (led by Horticulture, Livestock, and Marine/Brackish-water Aquaculture) contribute over 34% of Andhra Pradesh's Gross State Value Added (GSVA), making AP India's leading producer of cultured shrimp, fish, oil palm, papaya, lime, and tomato.",
+        "false_stmt": "In Andhra Pradesh's Gross State Value Added (GSVA), the share of the Agriculture and Allied sector is less than 8%, which is less than half of the national average.",
+        "source": "AP Socio-Economic Survey & AP State Budget Documents"
     },
     {
-        "topic": "Jan 2027 Exam (1-Year: Jan–Dec 2026): 16th Finance Commission (2026–31) + Static Article 280 & 275",
-        "fact": "Chaired by Dr. Arvind Panagariya, the 16th Finance Commission's recommendations govern the five-year fiscal award period from April 1, 2026 to March 31, 2031, determining the vertical share of states in the divisible pool of central taxes and horizontal devolution weights across states.",
-        "detail": "STATIC POLITY LINK: Constituted by the President under Article 280, the Finance Commission makes recommendations on net tax distribution (Article 270), principles governing Grants-in-Aid to states out of the Consolidated Fund of India (Article 275), and resources for local bodies based on State Finance Commissions (Articles 243-I and 243-Y).",
-        "false_stmt": "The 16th Finance Commission is a private banking body under SEBI that sets daily commercial bank repo rates.",
-        "source": "16th Finance Commission (2026–31 Award Period) + Static Indian Polity (Article 280)"
+        "topic": "Sixteenth Finance Commission (2026–31) & Constitutional Fiscal Transfers",
+        "fact": "Chaired by Dr. Arvind Panagariya, the Sixteenth Finance Commission's recommendations cover the five-year award period from April 1, 2026 to March 31, 2031, evaluating vertical tax devolution between the Union and States and horizontal distribution weights across States.",
+        "detail": "Constituted by the President under Article 280 of the Constitution, the Finance Commission recommends net tax proceeds distribution (Article 270), principles governing Grants-in-Aid to States out of the Consolidated Fund of India (Article 275), and measures to augment State Consolidated Funds for Panchayats and Municipalities based on State Finance Commission reports (Articles 243-I and 243-Y).",
+        "false_stmt": "Under Article 280 of the Constitution, the Union Finance Commission directly prepares the annual budgets of Panchayats and Municipalities without any role for State Finance Commissions.",
+        "source": "Sixteenth Finance Commission & Constitution of India (Articles 270, 275, 280)"
     }
 ]
 
@@ -605,26 +605,31 @@ def create_questions_from_bank():
         })
         qid += 1
 
-        # Pattern 5: Identify the Incorrect Statement
+        # Pattern 5: 3-Statement "Which of the statements given above is/are NOT correct?"
         pool.append({
             "id": f"Q{qid:04d}",
             "subject": subj,
             "topic": item["topic"],
             "question_type": "Critical Verification",
             "question": (
-                f"Which ONE of the following statements regarding {item['topic']} is NOT correct?"
+                f"With reference to {item['topic']}, consider the following three statements:\n"
+                f"1. {item['fact']}\n"
+                f"2. {item['false_stmt']}\n"
+                f"3. {item['detail']}\n\n"
+                f"Which of the statements given above is/are NOT correct?"
             ),
             "options": [
-                item["fact"],
-                item["detail"],
-                item["false_stmt"],
-                f"Official records under {item['source']} document key provisions on {item['topic']}."
+                "1 and 2 only",
+                "2 only",
+                "2 and 3 only",
+                "1, 2 and 3"
             ],
-            "correct_index": 2,
+            "correct_index": 1,
             "explanation": (
-                f"Option (C) is NOT correct.\n"
-                f"• Correct facts: {item['fact']} Furthermore, {item['detail']}\n"
-                f"• Option (C) states '{item['false_stmt']}', which is false."
+                f"Only Statement 2 is NOT correct (Statements 1 and 3 are correct).\n"
+                f"• Statement 1 is correct: {item['fact']}\n"
+                f"• Statement 3 is correct: {item['detail']}\n"
+                f"• Statement 2 is incorrect: '{item['false_stmt']}' is factually false."
             ),
             "source": item["source"]
         })
@@ -660,6 +665,26 @@ def create_questions_from_bank():
             "source": f"{item['source']} (APPSC 2024 PYQ Pattern)"
         })
         qid += 1
+
+    # Inject the 40 hand-crafted, authentic APPSC Group-I & Group-II Current Affairs + Static GS questions
+    try:
+        from pib_scraper import AUTHENTIC_CA_EXAM_QUESTIONS
+        for ca_q in AUTHENTIC_CA_EXAM_QUESTIONS:
+            ca_copy = dict(ca_q)
+            ca_copy["id"] = f"Q{qid:04d}"
+            ca_copy["is_authentic_ca"] = True
+            pool.append(ca_copy)
+            qid += 1
+            # Also add under 'PIB & Govt Schemes Current Affairs' if its primary subject is another GS subject
+            if ca_q["subject"] != "PIB & Govt Schemes Current Affairs":
+                ca_pib_copy = dict(ca_q)
+                ca_pib_copy["id"] = f"Q{qid:04d}"
+                ca_pib_copy["subject"] = "PIB & Govt Schemes Current Affairs"
+                ca_pib_copy["is_authentic_ca"] = True
+                pool.append(ca_pib_copy)
+                qid += 1
+    except Exception as exc:
+        print(f"[WARN] Could not import AUTHENTIC_CA_EXAM_QUESTIONS: {exc}")
 
     # Authentic APPSC Group-I & Group-II Previous Year Questions (2019, 2023, 2024 Official Papers)
     authentic_pyq_items = [
@@ -1213,42 +1238,42 @@ TEST_SERIES_CATALOG = [
         "description": "Comprehensive Group-II Prelims + Mains integrated championship exam for complete syllabus mastery."
     },
 
-    # --- TARGET JANUARY 2027 EXAM: LAST 6 MONTHS (JUL-DEC 2026) & 1-YEAR (JAN-DEC 2026) CURRENT AFFAIRS + STATIC GS TESTS ---
+    # --- CURRENT AFFAIRS & STATIC GS INTEGRATED TESTS ---
     {
         "test_id": "APPSC-PIB-19",
-        "title": "Test 19: Target Jan 2027 Exam — Last 6 Months High-Yield Current Affairs (July–Dec 2026) + Static GS I",
+        "title": "Test 19: National & Andhra Pradesh Current Affairs + Static Economy & Welfare (Test I)",
         "exam_group": "Group 1 & 2",
-        "category": "Jan 2027 CA (6M-1Y) + Static",
+        "category": "Current Affairs & Static GS",
         "duration_minutes": 45,
         "question_count": 40,
         "marks_per_question": 1.0,
         "negative_marking": 0.3333,
         "subjects": ["PIB & Govt Schemes Current Affairs", "Indian & AP Economy", "Indian Society & Welfare"],
-        "description": "High-yield Last 6 Months Current Affairs (July–December 2026) for Jan 2027 APPSC Group-I & II exams paired with Static Economy & Welfare (PM Surya Ghar, Ayushman 70+, PM-JANMAN, Dharti Aaba & DPSP Articles)."
+        "description": "Exam-standard Current Affairs integrated with Static Economy & Welfare: Union & AP Welfare Schemes, Fiscal Consolidation, Multidimensional Poverty Index, and Constitutional DPSP linkages."
     },
     {
         "test_id": "APPSC-PIB-20",
-        "title": "Test 20: Target Jan 2027 Exam — Full 1-Year Current Affairs (Jan–Dec 2026) + Static Polity & S&T II",
+        "title": "Test 20: National Current Affairs + Static Polity, Science & Technology (Test II)",
         "exam_group": "Group 1 & 2",
-        "category": "Jan 2027 CA (6M-1Y) + Static",
+        "category": "Current Affairs & Static GS",
         "duration_minutes": 45,
         "question_count": 40,
         "marks_per_question": 1.0,
         "negative_marking": 0.3333,
         "subjects": ["PIB & Govt Schemes Current Affairs", "Science, Tech & Environment", "Indian Polity & Constitution"],
-        "description": "Full 1-Year Current Affairs (January–December 2026) paired with Static Polity & Science: ISRO 2026–27 Roadmap (Gaganyaan, NISAR), IndiaAI, Quantum Mission, BioE3, 11 Classical Languages & SC Sub-Classification."
+        "description": "Exam-standard Current Affairs integrated with Static Polity & Science: ISRO Space Missions (Gaganyaan, NISAR, Aditya-L1), Defence Tech, BioE3, Quantum Mission, and Supreme Court Constitution Bench Rulings."
     },
     {
         "test_id": "APPSC-APG-21",
-        "title": "Test 21: Target Jan 2027 Exam — AP State 1-Year Current Affairs, Budget 2026–27, Swarna Andhra 2047 & Static AP GS",
+        "title": "Test 21: Andhra Pradesh State Current Affairs, Budget, Socio-Economic Survey & AP Reorganization Act",
         "exam_group": "Group 1 & 2",
-        "category": "Jan 2027 CA (6M-1Y) + Static",
+        "category": "Current Affairs & Static GS",
         "duration_minutes": 45,
         "question_count": 40,
         "marks_per_question": 1.0,
         "negative_marking": 0.3333,
         "subjects": ["Indian & AP Economy", "Geography of India & AP", "PIB & Govt Schemes Current Affairs", "AP History & Reorganization"],
-        "description": "Dedicated Andhra Pradesh 1-Year Current Affairs (Jan–Dec 2026) + Static AP GS: AP Budget 2026–27, Socio-Economic Survey, Swarna Andhra @ 2047, Polavaram Phase-I, Amaravati, Kopparthy & Orvakal Nodes + AP Reorganization Act 2014."
+        "description": "Dedicated Andhra Pradesh Current Affairs & Static AP GS: AP State Budget, Socio-Economic Survey, Swarna Andhra @ 2047, Polavaram Project, Amaravati Capital, Industrial Corridors (VCIC/HBIC/CBIC) & AP Reorganization Act 2014."
     },
     {
         "test_id": "APPSC-SEC-22",
@@ -1360,27 +1385,27 @@ TEST_SERIES_CATALOG = [
     },
     {
         "test_id": "APPSC-PIB-31",
-        "title": "Test 31: Target Jan 2027 Exam — Union Budget 2026–27, 16th Finance Commission & Static Fiscal Policy",
+        "title": "Test 31: Union & AP Budget, 16th Finance Commission, RBI Monetary Policy & Fiscal Federalism",
         "exam_group": "Group 1 & 2",
-        "category": "Jan 2027 CA (6M-1Y) + Static",
+        "category": "Current Affairs & Static GS",
         "duration_minutes": 45,
         "question_count": 40,
         "marks_per_question": 1.0,
         "negative_marking": 0.3333,
         "subjects": ["PIB & Govt Schemes Current Affairs", "Indian & AP Economy", "Indian Polity & Constitution"],
-        "description": "Covers 1-Year Economic & Governance Roundup (Jan–Dec 2026) for Jan 2027 Exam: Union Budget 2026–27 Fiscal Consolidation, 16th Finance Commission (2026–31) + Static Articles 270/275/280 & RBI MPC."
+        "description": "In-depth Economic & Governance test: Union & AP Budget Fiscal Consolidation, 16th Finance Commission (2026–31), Articles 270/275/280, GST Council, and RBI Monetary Policy Committee."
     },
     {
         "test_id": "APPSC-REV-32",
-        "title": "Test 32: Target Jan 2027 Exam — Integrated 1-Year Current Affairs (Jan–Dec 2026) + Static GS Grand Revision",
+        "title": "Test 32: Integrated Current Affairs & General Studies Grand Revision Mock (50 Qs)",
         "exam_group": "Group 1 & 2",
-        "category": "Jan 2027 CA (6M-1Y) + Static",
+        "category": "Current Affairs & Static GS",
         "duration_minutes": 60,
         "question_count": 50,
         "marks_per_question": 1.0,
         "negative_marking": 0.3333,
         "subjects": ["AP History & Reorganization", "Indian Polity & Constitution", "Indian & AP Economy", "Geography of India & AP", "Indian Society & Welfare", "Science, Tech & Environment", "PIB & Govt Schemes Current Affairs"],
-        "description": "Ultimate 50-question revision test for the January 2027 APPSC Group-I & Group-II exams combining Last 6 Months & 1-Year Current Affairs (Jan–Dec 2026) with all Static GS modules."
+        "description": "Comprehensive 50-question revision test for APPSC Group-I & Group-II aspirants integrating National & AP Current Affairs with core General Studies subjects."
     }
 ]
 
@@ -1396,10 +1421,14 @@ def build_all_tests():
         target_count = meta["question_count"]
         allowed_subjects = meta["subjects"]
 
-        # Gather candidate questions matching this test's subjects
+        # Gather deduplicated candidate questions matching this test's subjects
         candidates = []
+        seen_q_texts = set()
         for s in allowed_subjects:
-            candidates.extend(by_subject.get(s, []))
+            for q in by_subject.get(s, []):
+                if q["question"] not in seen_q_texts:
+                    seen_q_texts.add(q["question"])
+                    candidates.append(q)
 
         # Deterministically shuffle with test index offset so every test has a distinct question order & selection
         rng = random.Random(20261000 + idx * 97)
@@ -1408,10 +1437,15 @@ def build_all_tests():
 
         # If this is an Official Previous Year Question Paper (PYQ), prioritize PYQ-tagged questions first
         is_pyq_paper = "PYQ" in meta["category"]
+        is_ca_paper = "Current Affairs" in meta["category"]
         if is_pyq_paper:
             pyq_first = [q for q in shuffled if "PYQ" in q.get("question_type", "")]
             other_q = [q for q in shuffled if "PYQ" not in q.get("question_type", "")]
             shuffled = pyq_first + other_q
+        elif is_ca_paper:
+            ca_first = [q for q in shuffled if q.get("is_authentic_ca")]
+            other_q = [q for q in shuffled if not q.get("is_authentic_ca")]
+            shuffled = ca_first + other_q
 
         selected = []
         while len(selected) < target_count:

@@ -862,13 +862,13 @@
       <div class="brand-emblem">AP</div>
       <div class="brand-text">
         <h1>APPSC Group-I & Group-II Test Series</h1>
-        <p>Target Jan 2027 Exam • 6M–1Y CA + Static • Official PYQs</p>
+        <p>Official PYQs • Current Affairs & Static GS • Full CBT Mocks</p>
       </div>
     </div>
     <div class="header-actions no-print">
       <button class="btn btn-header" onclick="filterTests('all')">📚 All Exams</button>
       <button class="btn btn-header" onclick="filterTests('PYQ')">📜 PYQ Papers</button>
-      <button class="btn btn-header" onclick="filterTests('PIB')">🎯 Jan 2027 CA</button>
+      <button class="btn btn-header" onclick="filterTests('PIB')">🎯 Current Affairs</button>
       <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results</button>
       <div id="headerUserArea" style="display:flex; align-items:center; gap:6px;"></div>
     </div>
@@ -885,7 +885,7 @@
       <div class="stat-card">
         <div class="stat-label">Question Bank</div>
         <div class="stat-value" id="statTotalQuestions">2,365</div>
-        <div class="stat-sub">Jan–Dec 2026 CA + Static GS</div>
+        <div class="stat-sub">Current Affairs + Static GS</div>
       </div>
       <div class="stat-card">
         <div class="stat-label" id="statCompletedLabel">Attempts Completed</div>
@@ -904,21 +904,21 @@
       <div class="qb-left">
         <div class="qb-icon">🎯</div>
         <div class="qb-info">
-          <h3>Custom Practice Builder (Target Jan 2027 Exam)</h3>
-          <p>Generate an instant timed test from Last 6M–1Y Current Affairs (Jan–Dec 2026) & Static GS</p>
+          <h3>Custom Practice Exam Builder</h3>
+          <p>Generate an instant exam-standard test from National & AP Current Affairs and Static GS</p>
         </div>
       </div>
       <div class="pib-controls">
-        <select id="caWindowSelect" title="Select Topic Window">
-          <option value="6M_STATIC" selected>🔥 Last 6 Months (Jul–Dec 2026) + Static</option>
-          <option value="1Y_STATIC">📅 Full 1-Year (Jan–Dec 2026) + Static</option>
-          <option value="AP_SPECIAL">🏛️ AP State CA, Budget & Static AP GS</option>
-          <option value="PURE_STATIC">📘 Pure Static GS Foundation</option>
+        <select id="caWindowSelect" title="Select Exam Focus">
+          <option value="6M_STATIC" selected>🔥 National & AP Current Affairs + Static GS</option>
+          <option value="1Y_STATIC">⚖️ Polity, Economy, Budget & SC Rulings + Static</option>
+          <option value="AP_SPECIAL">🏛️ Andhra Pradesh State CA, Budget & Reorganization</option>
+          <option value="PURE_STATIC">📘 Pure Static General Studies (All Subjects)</option>
         </select>
         <select id="pibQuestionCount">
           <option value="25">25 Qs (25m)</option>
           <option value="30" selected>30 Qs (30m)</option>
-          <option value="50">50 Qs (50m)</option>
+          <option value="40">40 Qs (45m)</option>
         </select>
         <button class="btn btn-primary" id="btnPibSync" onclick="triggerLivePibSync()">⚡ Create Custom Test</button>
       </div>
@@ -929,7 +929,7 @@
       <div class="tabs">
         <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (41)</button>
         <button class="tab-btn" id="tab-pyq" onclick="filterTests('PYQ')">📜 Official PYQs (8)</button>
-        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">🎯 Jan 2027 CA + Static (6)</button>
+        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">🎯 Current Affairs + Static (6)</button>
         <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Mocks</button>
         <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Mocks</button>
         <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Subject-Wise</button>
@@ -1404,8 +1404,9 @@
         }
       }
 
-      // Merge any custom PIB live tests saved in localStorage
-      const localPibTests = JSON.parse(localStorage.getItem('appsc_custom_pib_tests') || '[]');
+      // Purge legacy custom tests and merge clean custom tests saved in localStorage
+      localStorage.removeItem('appsc_custom_pib_tests');
+      const localPibTests = JSON.parse(localStorage.getItem('appsc_custom_ca_tests_v4') || '[]');
       if (localPibTests.length > 0) {
         const existingIds = new Set(allTests.map(t => t.test_id));
         for (const lt of localPibTests) {
@@ -1540,7 +1541,7 @@
         if (currentFilter === 'PYQ' && !isPyqTest(t)) return false;
         if (currentFilter === 'Group 1' && t.exam_group !== 'Group 1') return false;
         if (currentFilter === 'Group 2' && t.exam_group !== 'Group 2') return false;
-        if (currentFilter === 'PIB' && !(t.category.includes('PIB') || t.category.includes('Jan 2027') || t.category.includes('CA'))) return false;
+        if (currentFilter === 'PIB' && !(t.category.includes('Current Affairs') || t.category.includes('PIB') || t.category.includes('CA'))) return false;
         if (currentFilter === 'Subject-Wise' && !t.category.includes('Subject')) return false;
         if (query) {
           const hay = `${t.title} ${t.description} ${(t.subjects || []).join(' ')} ${t.category} ${t.exam_year || ''}`.toLowerCase();
@@ -1611,14 +1612,14 @@
       }).join('');
     }
 
-    // Target January 2027 Exam: Last 6 Months (Jul–Dec 2026) & 1-Year (Jan–Dec 2026) Current Affairs + Static GS Custom Test Builder
+    // Custom Current Affairs & Static GS Exam Builder
     async function triggerLivePibSync() {
       const btn = document.getElementById('btnPibSync');
       const qCount = parseInt(document.getElementById('pibQuestionCount').value || '30', 10);
       const windowMode = (document.getElementById('caWindowSelect') && document.getElementById('caWindowSelect').value) || '6M_STATIC';
       const origText = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = '⏳ Building Jan 2027 Target Exam...';
+      btn.innerHTML = '⏳ Building Custom Exam...';
 
       const candidatePool = [];
       const seenQuestions = new Set();
@@ -1629,17 +1630,16 @@
           if (seenQuestions.has(qKey)) return;
 
           const hay = `${q.topic || ''} ${q.question_type || ''} ${q.subject || ''} ${q.source || ''} ${q.question || ''}`;
+          const isAuthCa = Boolean(q.is_authentic_ca || (q.id && q.id.startsWith('APPSC-CA-Q')));
           let matches = false;
 
-          if (windowMode === '6M_STATIC') {
-            matches = hay.includes('Last 6M') || hay.includes('Last 6 Months') || hay.includes('Jan 2027') || q.subject.includes('PIB') || q.subject.includes('Economy') || q.subject.includes('Science');
-          } else if (windowMode === '1Y_STATIC') {
-            matches = hay.includes('Jan 2027') || hay.includes('1-Year') || hay.includes('2026') || q.subject.includes('PIB') || q.subject.includes('Polity') || q.subject.includes('Economy');
+          if (windowMode === '6M_STATIC' || windowMode === '1Y_STATIC') {
+            matches = isAuthCa || q.subject.includes('PIB') || q.subject.includes('Economy') || q.subject.includes('Polity') || q.subject.includes('Science');
           } else if (windowMode === 'AP_SPECIAL') {
             matches = hay.includes('Andhra') || hay.includes('Polavaram') || hay.includes('Amaravati') || hay.includes('Swarna Andhra') || q.subject.includes('AP') || q.subject.includes('Geography');
           } else {
             // PURE_STATIC
-            matches = !q.subject.includes('PIB') && !hay.includes('Last 6M');
+            matches = !q.subject.includes('PIB') && !isAuthCa;
           }
 
           if (matches) {
@@ -1649,46 +1649,45 @@
         });
       });
 
-      // prioritize Jan 2027 / 2026 CA+Static questions at the top when 6M_STATIC or 1Y_STATIC is chosen
+      // Prioritize authentic APPSC Group-I & Group-II Current Affairs & Static GS questions first
       const priorityQs = candidatePool.filter(q =>
-        (q.topic && (q.topic.includes('2026') || q.topic.includes('Jan 2027'))) ||
-        (q.question_type && q.question_type.includes('Jan 2027'))
+        Boolean(q.is_authentic_ca || (q.id && q.id.startsWith('APPSC-CA-Q')))
       ).sort(() => Math.random() - 0.5);
       const otherQs = candidatePool.filter(q => !priorityQs.includes(q)).sort(() => Math.random() - 0.5);
 
       const combined = [...priorityQs, ...otherQs].slice(0, qCount).map((q, i) => ({
         ...q,
         q_no: i + 1,
-        id: `JAN2027-CUST-Q${i + 1}`
+        id: `APPSC-CUST-Q${i + 1}`
       }));
 
       const modeLabels = {
-        '6M_STATIC': 'Last 6 Months High-Yield (July–Dec 2026) CA + Static GS',
-        '1Y_STATIC': 'Full 1-Year Roundup (Jan–Dec 2026) CA + Static GS',
-        'AP_SPECIAL': 'AP State 1-Year Current Affairs, Budget 2026–27 & Static AP GS',
-        'PURE_STATIC': 'Pure Static GS Foundation (History, Polity, Economy, Geography, S&T)'
+        '6M_STATIC': 'Current Affairs & Static GS (Polity, Economy, S&T, Schemes)',
+        '1Y_STATIC': 'Comprehensive Current Affairs & Static GS Paper',
+        'AP_SPECIAL': 'Andhra Pradesh State Economy, Projects, Governance & Geography',
+        'PURE_STATIC': 'Core Static GS Foundation (History, Polity, Economy, Geography, S&T)'
       };
       const label = modeLabels[windowMode] || modeLabels['6M_STATIC'];
 
       const newTest = {
-        test_id: 'APPSC-JAN2027-' + Date.now().toString().slice(-5),
-        title: `Target Jan 2027 Exam: ${label} (${qCount} Qs)`,
+        test_id: 'APPSC-CUSTOM-' + Date.now().toString().slice(-5),
+        title: `Custom Practice Exam: ${label} (${qCount} Qs)`,
         exam_group: 'Group 1 & 2',
-        category: 'Jan 2027 CA (6M-1Y) + Static',
+        category: 'Current Affairs & Static GS',
         duration_minutes: qCount,
         question_count: combined.length,
         total_marks: combined.length,
         marks_per_question: 1.0,
         negative_marking: 0.3333,
         subjects: ['PIB & Govt Schemes Current Affairs', 'Indian & AP Economy', 'Indian Polity & Constitution', 'Geography of India & AP', 'Science, Tech & Environment'],
-        description: `Custom Target January 2027 APPSC Group-I & Group-II Exam (${label}) featuring ${qCount} questions with 1/3rd negative marking and Static GS linkage explanations.`,
+        description: `Custom APPSC Group-I & Group-II Practice Exam (${label}) featuring ${qCount} questions with 1/3rd negative marking and detailed solutions.`,
         questions: combined
       };
 
       allTests.unshift(newTest);
-      const savedLocal = JSON.parse(localStorage.getItem('appsc_custom_pib_tests') || '[]');
+      const savedLocal = JSON.parse(localStorage.getItem('appsc_custom_ca_tests_v4') || '[]');
       savedLocal.unshift(newTest);
-      localStorage.setItem('appsc_custom_pib_tests', JSON.stringify(savedLocal.slice(0, 15)));
+      localStorage.setItem('appsc_custom_ca_tests_v4', JSON.stringify(savedLocal.slice(0, 15)));
 
       updateDashboardStats();
       renderTestCards();
