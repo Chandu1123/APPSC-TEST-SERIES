@@ -1418,14 +1418,24 @@ def run_compiler(question_count=40, save_to_db=True):
             t for t in db["tests"]
             if not str(t.get("test_id", "")).startswith("APPSC-PIB-LIVE-")
             and t.get("test_id") != "APPSC-JAN2027-CA-STATIC"
+            and not str(t.get("test_id", "")).startswith("APPSC-MICRO-")
         ]
         insert_pos = 8 if len(db["tests"]) >= 8 else 0
         db["tests"].insert(insert_pos, new_test)
+
+        # Append high-yield topic micro-drills
+        try:
+            from high_yield_micro_tests import HIGH_YIELD_MICRO_TESTS
+            for mt in HIGH_YIELD_MICRO_TESTS:
+                db["tests"].append(mt)
+        except Exception as e:
+            print(f"[WARN] Could not load HIGH_YIELD_MICRO_TESTS: {e}")
+
         db["total_tests"] = len(db["tests"])
         db["generated_at"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(DB_PATH, "w", encoding="utf-8") as f:
             json.dump(db, f, indent=2, ensure_ascii=False)
-        print(f"[2/2] Added '{new_test['test_id']}' ({len(questions)} Qs) to database! Total tests now: {db['total_tests']}")
+        print(f"[2/2] Added '{new_test['test_id']}' and {len(HIGH_YIELD_MICRO_TESTS)} Micro-Drills to database! Total tests now: {db['total_tests']}")
     else:
         out_single = os.path.join(DATA_DIR, "latest_pib_test.json")
         with open(out_single, "w", encoding="utf-8") as f:

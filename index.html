@@ -848,9 +848,108 @@
       color: #334155;
     }
     .inst-list li { margin-bottom: 7px; }
+    .mistake-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .mistake-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      border-left: 4px solid var(--danger);
+    }
+    .mistake-card.warning { border-left-color: var(--accent); }
+    .mistake-card.purple { border-left-color: var(--purple); }
+    .mistake-card.success { border-left-color: var(--success); }
+    .radar-container {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+    .radar-row {
+      display: grid;
+      grid-template-columns: 200px 1fr 100px 120px;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 13.5px;
+    }
+    .radar-row:last-child { border-bottom: none; }
+    .progress-bar-bg {
+      background: #e2e8f0;
+      border-radius: 8px;
+      height: 12px;
+      overflow: hidden;
+      display: flex;
+    }
+    .progress-bar-fill-correct {
+      background: var(--success);
+      height: 100%;
+    }
+    .progress-bar-fill-wrong {
+      background: var(--danger);
+      height: 100%;
+    }
+    .cutoff-badge-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .memory-trick-box {
+      margin-top: 10px;
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #92400e;
+    }
+    .btn-bookmark {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #475569;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-bookmark:hover, .btn-bookmark.bookmarked {
+      background: #fef3c7;
+      border-color: #f59e0b;
+      color: #b45309;
+      font-weight: 700;
+    }
+    .badge-micro {
+      background: #fef08a;
+      color: #854d0e;
+      border: 1px solid #fde047;
+      font-weight: 700;
+    }
     @media print {
-      .top-header, .no-print { display: none !important; }
-      body { background: #fff; }
+      .top-header, .no-print, .toolbar, .pib-controls, .pib-card, .quick-builder-card { display: none !important; }
+      body { background: #fff; font-size: 12px; }
+      .container { max-width: 100% !important; padding: 0 !important; }
+      .solution-card { page-break-inside: avoid; border: 1px solid #ccc !important; margin-bottom: 12px !important; }
+      .result-banner { background: #0f172a !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -867,9 +966,12 @@
     </div>
     <div class="header-actions no-print">
       <button class="btn btn-header" onclick="filterTests('all')">📚 All Exams</button>
+      <button class="btn btn-header" onclick="filterTests('MICRO')">⚡ Micro-Drills (4)</button>
       <button class="btn btn-header" onclick="filterTests('PYQ')">📜 PYQ Papers</button>
       <button class="btn btn-header" onclick="filterTests('PIB')">🎯 Current Affairs</button>
-      <button class="btn btn-header" onclick="filterTests('attempts')">📊 My Results</button>
+      <button class="btn btn-header" onclick="filterTests('mistakes')">📕 Mistake Notebook</button>
+      <button class="btn btn-header" onclick="filterTests('bookmarks')">⭐ Starred Qs</button>
+      <button class="btn btn-header" onclick="filterTests('attempts')">📊 Analytics</button>
       <div id="headerUserArea" style="display:flex; align-items:center; gap:6px;"></div>
     </div>
   </header>
@@ -927,15 +1029,18 @@
     <!-- Filter Tabs & Search -->
     <div class="toolbar">
       <div class="tabs">
-        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (41)</button>
+        <button class="tab-btn active" id="tab-all" onclick="filterTests('all')">All Exams (45)</button>
+        <button class="tab-btn" id="tab-micro" onclick="filterTests('MICRO')">⚡ High-Yield Micro-Drills (4)</button>
         <button class="tab-btn" id="tab-pyq" onclick="filterTests('PYQ')">📜 Official PYQs (8)</button>
-        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">🎯 Current Affairs + Static (6)</button>
-        <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I Mocks</button>
-        <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II Mocks</button>
+        <button class="tab-btn" id="tab-pib" onclick="filterTests('PIB')">🎯 Current Affairs (6)</button>
+        <button class="tab-btn" id="tab-mistakes" onclick="filterTests('mistakes')">📕 Mistake Notebook (<span id="tabMistakeCount">0</span>)</button>
+        <button class="tab-btn" id="tab-bookmarks" onclick="filterTests('bookmarks')">⭐ Starred (<span id="tabBookmarkCount">0</span>)</button>
+        <button class="tab-btn" id="tab-g1" onclick="filterTests('Group 1')">Group-I</button>
+        <button class="tab-btn" id="tab-g2" onclick="filterTests('Group 2')">Group-II</button>
         <button class="tab-btn" id="tab-sec" onclick="filterTests('Subject-Wise')">Subject-Wise</button>
-        <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">📊 My Attempts</button>
+        <button class="tab-btn" id="tab-attempts" onclick="filterTests('attempts')">📊 Analytics</button>
       </div>
-      <input type="text" id="searchBox" class="search-input" placeholder="🔍 Search exams, PYQ, Polity, Economy..." oninput="renderTestCards()" />
+      <input type="text" id="searchBox" class="search-input" placeholder="🔍 Search exams, Reorganisation Act, Budget, Rivers, Articles..." oninput="renderTestCards()" />
     </div>
 
     <!-- Cards Container -->
@@ -966,8 +1071,11 @@
             <span class="badge badge-g1" id="qSubjectBadge" style="margin-left:10px;">Subject</span>
             <span class="badge badge-cat" id="qTypeBadge" style="margin-left:6px;">Statement-Based</span>
           </div>
-          <div class="q-marks-pill">
-            Marks: <span class="pos">+1.00</span> | Negative: <span class="neg">-0.33</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button class="btn-bookmark" id="btnExamBookmark" onclick="toggleActiveQuestionBookmark()" title="Star this question for quick revision">⭐ Star Question</button>
+            <div class="q-marks-pill">
+              Marks: <span class="pos">+1.00</span> | Negative: <span class="neg">-0.33</span>
+            </div>
           </div>
         </div>
 
@@ -1012,6 +1120,7 @@
         <span class="badge badge-pib" id="resExamBadge">APPSC Official Result & Solutions</span>
         <h2 id="resExamTitle" style="font-size:22px; margin-top:6px;">Test Title</h2>
         <p id="resExamMeta" style="font-size:13.5px; color:#cbd5e1; margin-top:4px;"></p>
+        <div class="cutoff-badge-box" id="resCutoffBox"></div>
       </div>
       <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
         <div class="score-circle">
@@ -1022,7 +1131,8 @@
         <div class="no-print" style="display:flex; flex-direction:column; gap:8px;">
           <div id="resAttemptSwitcher" style="display:flex; gap:6px; flex-wrap:wrap;"></div>
           <button class="btn btn-success hidden" id="btnRetakeFromResult" onclick="">🔄 Write 2nd Chance (1 Left)</button>
-          <button class="btn btn-accent" onclick="window.print()">🖨️ Print / Save PDF Solutions</button>
+          <button class="btn btn-accent" onclick="window.print()">🖨️ Print / Save 1-Page PDF & Memory Tricks</button>
+          <button class="btn btn-purple" id="btnGenerateMistakeExamFromReport" onclick="generateMistakeReTest()">📕 Create Mistake Re-Test</button>
           <button class="btn btn-header" onclick="showDashboard()">⬅ Back to All Tests</button>
         </div>
       </div>
@@ -1046,14 +1156,23 @@
         <div class="stat-sub">0 Marks Deducted</div>
       </div>
       <div class="stat-card purple">
-        <div class="stat-label">Time Taken & Accuracy</div>
-        <div class="stat-value" id="resAccuracyVal">0%</div>
+        <div class="stat-label">Pacing & Average Time</div>
+        <div class="stat-value" id="resPacingVal">-- sec/Q</div>
         <div class="stat-sub" id="resTimeTaken">Time: 0m 0s</div>
       </div>
     </div>
 
+    <!-- Subject-Wise Weak-Spot Radar & Accuracy Breakdown -->
+    <div class="radar-container" id="resRadarContainer">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+        <h3 style="color:var(--primary-dark); font-size:16px;">🎯 Subject-Wise Weak-Spot Radar & Accuracy Breakdown</h3>
+        <span style="font-size:12px; color:var(--muted);">🟢 Correct &nbsp;|&nbsp; 🔴 Negative Loss &nbsp;|&nbsp; ⚪ Skipped</span>
+      </div>
+      <div id="radarBarsList"></div>
+    </div>
+
     <!-- Subject-wise Breakdown Table -->
-    <h3 style="margin-bottom:10px; color:var(--primary-dark);">📊 Subject-Wise Performance Breakdown</h3>
+    <h3 style="margin-bottom:10px; color:var(--primary-dark);">📊 Detailed Subject-Wise Performance Table</h3>
     <table class="subject-table">
       <thead>
         <tr>
@@ -1063,6 +1182,7 @@
           <th>Wrong (-0.33)</th>
           <th>Unattempted</th>
           <th>Net Score</th>
+          <th>Negative Loss</th>
           <th>Accuracy</th>
         </tr>
       </thead>
@@ -1071,7 +1191,7 @@
 
     <!-- Detailed Question-by-Question Solutions & Explanations -->
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin: 24px 0 14px;">
-      <h3 style="color:var(--primary-dark);">📖 Detailed Solutions & Explanations with Official Sources</h3>
+      <h3 style="color:var(--primary-dark);">📖 Detailed Solutions, Explanations & Exam Memory Tricks</h3>
       <div class="tabs no-print">
         <button class="tab-btn active" id="sol-tab-all" onclick="filterSolutions('all')">All Questions</button>
         <button class="tab-btn" id="sol-tab-correct" onclick="filterSolutions('correct')">✓ Correct</button>
@@ -1429,6 +1549,179 @@
       }
     }
 
+    // ==========================================
+    // BOOKMARKS & STARRED QUESTIONS SYSTEM
+    // ==========================================
+    function getBookmarksKey() {
+      const email = currentUser ? normalizeEmail(currentUser.email) : 'guest';
+      return `appsc_bookmarks_${email}_v2`;
+    }
+
+    function getBookmarks() {
+      try {
+        return JSON.parse(localStorage.getItem(getBookmarksKey()) || '{}') || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveBookmarks(bObj) {
+      localStorage.setItem(getBookmarksKey(), JSON.stringify(bObj));
+      updateDashboardStats();
+    }
+
+    function isBookmarked(qId) {
+      if (!qId) return false;
+      const b = getBookmarks();
+      return Boolean(b[qId]);
+    }
+
+    function toggleBookmark(q) {
+      if (!q) return false;
+      const qId = q.id || (q.question ? q.question.slice(0, 100) : 'Q_UNKNOWN');
+      const b = getBookmarks();
+      let state = false;
+      if (b[qId]) {
+        delete b[qId];
+        state = false;
+      } else {
+        b[qId] = {
+          id: qId,
+          question: q.question,
+          options: q.options,
+          correct_index: q.correct_index,
+          explanation: q.explanation,
+          subject: q.subject || 'General Studies',
+          topic: q.topic || '',
+          source: q.source || '',
+          memory_trick: q.memory_trick || getMemoryTrick(q),
+          savedAt: new Date().toLocaleDateString()
+        };
+        state = true;
+      }
+      saveBookmarks(b);
+      return state;
+    }
+
+    function toggleActiveQuestionBookmark() {
+      if (!activeTest || !activeTest.questions) return;
+      const q = activeTest.questions[currentQIndex];
+      if (!q) return;
+      const isNowBookmarked = toggleBookmark(q);
+      updateActiveQuestionBookmarkBtn(isNowBookmarked);
+    }
+
+    function updateActiveQuestionBookmarkBtn(isBookmarked) {
+      const btn = document.getElementById('btnExamBookmark');
+      if (!btn) return;
+      if (isBookmarked) {
+        btn.classList.add('bookmarked');
+        btn.innerHTML = '⭐ Starred';
+      } else {
+        btn.classList.remove('bookmarked');
+        btn.innerHTML = '⭐ Star Question';
+      }
+    }
+
+    function toggleSolutionBookmark(qId) {
+      if (!activeResultRecord || !activeResultRecord.questions) return;
+      const q = activeResultRecord.questions.find(x => (x.id === qId) || (x.question && x.question.slice(0, 100) === qId));
+      if (!q) return;
+      toggleBookmark(q);
+      renderSolutionsList();
+    }
+
+    // ==========================================
+    // EXAM MEMORY TRICKS & MNEMONICS
+    // ==========================================
+    function getMemoryTrick(q) {
+      if (q && q.memory_trick) return q.memory_trick;
+      const qText = ((q ? q.question : '') + ' ' + (q ? (q.explanation || '') : '')).toLowerCase();
+
+      if (qText.includes('73rd') || qText.includes('74th') || qText.includes('panchayat') || qText.includes('municipality') || qText.includes('243')) {
+        return '💡 <b>Exam Memory Trick:</b> 73rd Act = 11th Sch (29 items, Art 243A-O) | 74th Act = 12th Sch (18 items, Art 243P-ZG). Total Local Body powers = 29 + 18 = 47 items.';
+      }
+      if (qText.includes('reorganisation') || qText.includes('section') || qText.includes('schedule') || qText.includes('2014')) {
+        return '💡 <b>Exam Memory Trick:</b> AP Reorg Act 2014 = 108 Sections & 13 Schedules. Sec 8 = Governor powers in joint capital | Sec 47 = Deficit allocation | Sec 90 = Polavaram declared National Project.';
+      }
+      if (qText.includes('polavaram') || qText.includes('godavari') || qText.includes('krishna') || qText.includes('river') || qText.includes('prakasam')) {
+        return '💡 <b>Exam Memory Trick:</b> North-to-South Rivers: Vamsadhara ➔ Nagavali ➔ Godavari ➔ Krishna ➔ Penna. Polavaram Right Main Canal diverts 80 TMC Godavari floodwaters to Prakasam Barrage.';
+      }
+      if (qText.includes('budget') || qText.includes('survey') || qText.includes('gva') || qText.includes('swarna andhra') || qText.includes('growth rate')) {
+        return '💡 <b>Exam Memory Trick:</b> AP Sectoral Contribution Hierarchy: Services > Agriculture & Allied > Industry. Agriculture in AP consistently outperforms national average due to Marine/Aquaculture & Horticulture.';
+      }
+      if (qText.includes('pib') || qText.includes('scheme') || qText.includes('mission') || qText.includes('yojana') || qText.includes('centrally sponsored')) {
+        return '💡 <b>Exam Memory Trick:</b> APPSC Trap Alert: Always verify Central Sector (100% Union budget) vs Centrally Sponsored (60:40 standard or 90:10 Himalayan/Special) and the designated Nodal Ministry.';
+      }
+      return '💡 <b>Exam Memory Hack:</b> In multi-statement APPSC questions, eliminate extreme absolutes ("strictly impossible", "solely", "without exception") unless confirming specific constitutional/statutory limits.';
+    }
+
+    // ==========================================
+    // MISTAKE NOTEBOOK AGGREGATION & RE-TEST
+    // ==========================================
+    function getAllMistakes() {
+      const mistakeMap = {};
+      userAttempts.forEach(rec => {
+        (rec.questions || []).forEach((q, idx) => {
+          const userAns = rec.userResponses ? rec.userResponses[idx] : undefined;
+          const isWrong = userAns !== undefined && userAns !== q.correct_index;
+          const isSkipped = userAns === undefined;
+          if (isWrong || isSkipped) {
+            const qKey = q.id || (q.question ? q.question.slice(0, 100) : 'Q' + idx);
+            if (!mistakeMap[qKey] || isWrong) {
+              mistakeMap[qKey] = {
+                questionObj: q,
+                testId: rec.testId,
+                testTitle: rec.testTitle,
+                examGroup: rec.examGroup,
+                status: isWrong ? 'wrong' : 'unattempted',
+                userAns: userAns,
+                correctIndex: q.correct_index,
+                date: rec.date
+              };
+            }
+          }
+        });
+      });
+      return mistakeMap;
+    }
+
+    function generateMistakeReTest(onlyWrong = false) {
+      const mistakes = Object.values(getAllMistakes());
+      const pool = onlyWrong ? mistakes.filter(m => m.status === 'wrong') : mistakes;
+
+      if (pool.length === 0) {
+        alert('🎉 Excellent! You have 0 mistakes recorded. Write some APPSC mock exams or PYQ papers first to automatically build your Mistake Notebook.');
+        return;
+      }
+
+      const selected = pool.sort(() => Math.random() - 0.5).slice(0, 25);
+      const questions = selected.map((item, i) => ({
+        ...item.questionObj,
+        q_no: i + 1,
+        id: `APPSC-MISTAKE-${i + 1}`
+      }));
+
+      const count = questions.length;
+      const reTest = {
+        test_id: 'APPSC-MISTAKE-RETEST-' + Date.now().toString().slice(-5),
+        title: `⚡ Personalized Mistake Re-Test (${count} Targeted Questions)`,
+        exam_group: 'Group 1 & 2',
+        category: 'Mistake Notebook Re-Test',
+        duration_minutes: Math.ceil(count * 1.2),
+        question_count: count,
+        total_marks: count,
+        marks_per_question: 1.0,
+        negative_marking: 0.3333,
+        subjects: ['High-Yield Revision Drill: Weak Spots & Trapped Questions'],
+        description: `Custom CBT re-test generated from your previous incorrect & skipped APPSC questions. Features 1/3rd negative marking to turn weak spots into strengths.`,
+        questions: questions
+      };
+
+      allTests.unshift(reTest);
+      openInstructionsModal(reTest.test_id);
+    }
+
     function updateDashboardStats() {
       document.getElementById('statTotalTests').textContent = allTests.length;
       const totalQ = allTests.reduce((acc, t) => acc + (t.question_count || (t.questions ? t.questions.length : 0)), 0);
@@ -1436,10 +1729,21 @@
       document.getElementById('statCompleted').textContent = userAttempts.length;
 
       const pyqCount = allTests.filter(t => isPyqTest(t)).length;
+      const microCount = allTests.filter(t => isMicroTest(t)).length;
+      const mistakesCount = Object.keys(getAllMistakes()).length;
+      const bookmarksCount = Object.keys(getBookmarks()).length;
+
       const tabAllEl = document.getElementById('tab-all');
       if (tabAllEl) tabAllEl.textContent = `All Exams (${allTests.length})`;
+      const tabMicroEl = document.getElementById('tab-micro');
+      if (tabMicroEl) tabMicroEl.textContent = `⚡ High-Yield Micro-Drills (${microCount})`;
       const tabPyqEl = document.getElementById('tab-pyq');
       if (tabPyqEl) tabPyqEl.textContent = `📜 Official PYQs (${pyqCount})`;
+
+      const mistakeSpan = document.getElementById('tabMistakeCount');
+      if (mistakeSpan) mistakeSpan.textContent = mistakesCount;
+      const bookmarkSpan = document.getElementById('tabBookmarkCount');
+      if (bookmarkSpan) bookmarkSpan.textContent = bookmarksCount;
 
       const userSubEl = document.getElementById('statUserSub');
       if (userSubEl) {
@@ -1466,19 +1770,30 @@
       );
     }
 
+    function isMicroTest(t) {
+      return Boolean(
+        t &&
+        ((t.category && t.category.toLowerCase().includes('micro')) ||
+         (t.test_id && t.test_id.toUpperCase().includes('MICRO')))
+      );
+    }
+
     function filterTests(filterKey) {
       currentFilter = filterKey;
       document.querySelectorAll('.toolbar .tab-btn').forEach(b => b.classList.remove('active'));
       const mapId = {
         'all': 'tab-all',
+        'MICRO': 'tab-micro',
         'PYQ': 'tab-pyq',
         'Group 1': 'tab-g1',
         'Group 2': 'tab-g2',
         'PIB': 'tab-pib',
         'Subject-Wise': 'tab-sec',
+        'mistakes': 'tab-mistakes',
+        'bookmarks': 'tab-bookmarks',
         'attempts': 'tab-attempts'
       };
-      if (mapId[filterKey]) {
+      if (mapId[filterKey] && document.getElementById(mapId[filterKey])) {
         document.getElementById(mapId[filterKey]).classList.add('active');
       }
       showDashboard();
@@ -1489,6 +1804,172 @@
       const grid = document.getElementById('testsGrid');
       const query = (document.getElementById('searchBox').value || '').toLowerCase().trim();
 
+      // VIEW: MISTAKE NOTEBOOK
+      if (currentFilter === 'mistakes') {
+        if (!currentUser) {
+          grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
+            <h3>🔑 Please Login with Your Email ID</h3>
+            <p style="color:var(--muted); margin:8px 0 16px;">Log in to access your automatic personal Mistake Notebook and launch targeted re-tests.</p>
+            <button class="btn btn-primary" onclick="openLoginModal()">🔑 Login with Email ID</button>
+          </div>`;
+          return;
+        }
+
+        const mistakes = Object.values(getAllMistakes());
+        if (mistakes.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
+            <h3>📕 No Mistakes Recorded Yet</h3>
+            <p style="color:var(--muted); margin:8px 0 16px;">As you write mock exams and PYQ papers, any incorrect or unattempted questions are automatically captured here with memory tricks and targeted re-test capability.</p>
+            <button class="btn btn-primary" onclick="filterTests('all')">📚 Browse & Write Exams</button>
+          </div>`;
+          return;
+        }
+
+        const wrongCount = mistakes.filter(m => m.status === 'wrong').length;
+        const skipCount = mistakes.filter(m => m.status === 'unattempted').length;
+        const letters = ['A', 'B', 'C', 'D'];
+
+        let mistakeListHtml = mistakes.slice(0, 50).map((m, idx) => {
+          const q = m.questionObj;
+          const isWrong = m.status === 'wrong';
+          const trick = getMemoryTrick(q);
+
+          const optsHtml = (q.options || []).map((opt, oIdx) => {
+            let cls = 'sol-opt';
+            let tag = '';
+            if (oIdx === q.correct_index) {
+              cls += ' right-ans';
+              tag = '<span>✓ Correct Answer</span>';
+            } else if (isWrong && oIdx === m.userAns) {
+              cls += ' user-wrong';
+              tag = '<span>✗ Your Selection</span>';
+            }
+            return `<div class="${cls}"><span><b>(${letters[oIdx]})</b> ${opt}</span>${tag}</div>`;
+          }).join('');
+
+          return `
+            <div class="solution-card ${isWrong ? 'sol-wrong' : 'sol-unattempted'}" style="margin-bottom:16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+                <div>
+                  <b style="color:var(--primary); font-size:15px;">Mistake #${idx + 1}</b>
+                  <span class="badge badge-g1" style="margin-left:8px;">${q.subject || 'General Studies'}</span>
+                  <span class="badge badge-cat" style="margin-left:4px;">${m.testTitle}</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="badge ${isWrong ? 'badge-g1' : 'badge-cat'}" style="${isWrong ? 'background:var(--danger-bg); color:var(--danger);' : ''}">${isWrong ? '✗ Incorrectly Marked (-0.33)' : '○ Skipped / Unattempted'}</span>
+                  <button class="btn-bookmark ${isBookmarked(q.id) ? 'bookmarked' : ''}" onclick="toggleBookmark(${JSON.stringify(q).replace(/"/g, '&quot;')}); renderTestCards();">⭐ Star</button>
+                </div>
+              </div>
+              <div style="font-size:15px; font-weight:600; white-space:pre-line; margin-bottom:14px; color:#0f172a;">${q.question}</div>
+              <div>${optsHtml}</div>
+              <div class="explanation-box">
+                <b style="color:var(--primary-dark);">💡 Detailed Solution:</b><br/>
+                ${q.explanation}
+                ${trick ? `<div class="memory-trick-box">${trick}</div>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        grid.innerHTML = `
+          <div style="grid-column:1/-1;">
+            <div class="mistake-stat-grid">
+              <div class="mistake-card">
+                <div class="stat-label">Total Mistakes in Notebook</div>
+                <div class="stat-value" style="color:var(--danger);">${mistakes.length}</div>
+                <div class="stat-sub">Across all completed exam attempts</div>
+              </div>
+              <div class="mistake-card warning">
+                <div class="stat-label">Incorrect Answers (Negative Loss)</div>
+                <div class="stat-value" style="color:var(--accent);">${wrongCount}</div>
+                <div class="stat-sub">Lost marks due to traps / guesses</div>
+              </div>
+              <div class="mistake-card purple">
+                <div class="stat-label">Skipped / Unattempted Qs</div>
+                <div class="stat-value" style="color:var(--purple);">${skipCount}</div>
+                <div class="stat-sub">High-yield questions to master</div>
+              </div>
+            </div>
+
+            <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 22px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 style="color:var(--primary-dark); font-size:16px;">🚀 Automatic Mistake Re-Test Generator</h3>
+                <p style="color:var(--muted); font-size:13px; margin-top:2px;">Launch a timed CBT re-test targeting these exact mistake questions with APPSC 1/3rd negative marking.</p>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="generateMistakeReTest(false)">⚡ Launch 25-Q Mistake Re-Test</button>
+                <button class="btn btn-purple" onclick="generateMistakeReTest(true)">🎯 Retake Only Incorrect Qs (${wrongCount})</button>
+              </div>
+            </div>
+
+            <h3 style="margin-bottom:14px; color:var(--primary-dark);">📖 Question-by-Question Mistake Review & Explanations</h3>
+            ${mistakeListHtml}
+          </div>
+        `;
+        return;
+      }
+
+      // VIEW: STARRED QUESTIONS
+      if (currentFilter === 'bookmarks') {
+        const bookmarks = Object.values(getBookmarks());
+        if (bookmarks.length === 0) {
+          grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
+            <h3>⭐ No Starred Questions Yet</h3>
+            <p style="color:var(--muted); margin:8px 0 16px;">Click the <b>⭐ Star Question</b> button during exams or inside solutions to bookmark tricky questions for one-click quick revision.</p>
+            <button class="btn btn-primary" onclick="filterTests('all')">📚 Browse Exams & Star Questions</button>
+          </div>`;
+          return;
+        }
+
+        const letters = ['A', 'B', 'C', 'D'];
+        grid.innerHTML = `
+          <div style="grid-column:1/-1;">
+            <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 22px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div>
+                <h3 style="color:var(--primary-dark); font-size:16px;">⭐ Starred High-Priority Questions (${bookmarks.length})</h3>
+                <p style="color:var(--muted); font-size:13px; margin-top:2px;">Personal quick-revision bank for last-minute APPSC revision before exam day.</p>
+              </div>
+              <button class="btn btn-accent" onclick="window.print()">🖨️ Print Starred Revision Sheet</button>
+            </div>
+
+            ${bookmarks.map((q, idx) => {
+              const trick = q.memory_trick || getMemoryTrick(q);
+              const optsHtml = (q.options || []).map((opt, oIdx) => {
+                let cls = 'sol-opt';
+                let tag = '';
+                if (oIdx === q.correct_index) {
+                  cls += ' right-ans';
+                  tag = '<span>✓ Correct Answer</span>';
+                }
+                return `<div class="${cls}"><span><b>(${letters[oIdx]})</b> ${opt}</span>${tag}</div>`;
+              }).join('');
+
+              return `
+                <div class="solution-card sol-correct" style="margin-bottom:16px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+                    <div>
+                      <b style="color:var(--primary); font-size:15px;">Starred Q #${idx + 1}</b>
+                      <span class="badge badge-g1" style="margin-left:8px;">${q.subject}</span>
+                      <span class="badge badge-cat" style="margin-left:4px;">${q.topic || ''}</span>
+                    </div>
+                    <button class="btn-bookmark bookmarked" onclick="toggleBookmark(${JSON.stringify(q).replace(/"/g, '&quot;')}); renderTestCards();">⭐ Remove Star</button>
+                  </div>
+                  <div style="font-size:15px; font-weight:600; white-space:pre-line; margin-bottom:14px; color:#0f172a;">${q.question}</div>
+                  <div>${optsHtml}</div>
+                  <div class="explanation-box">
+                    <b style="color:var(--primary-dark);">💡 Solution & Explanation:</b><br/>
+                    ${q.explanation}
+                    ${trick ? `<div class="memory-trick-box">${trick}</div>` : ''}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+        return;
+      }
+
+      // VIEW: PREVIOUS ATTEMPTS & ANALYTICS
       if (currentFilter === 'attempts') {
         if (!currentUser) {
           grid.innerHTML = `<div style="grid-column:1/-1; background:#fff; padding:36px; text-align:center; border-radius:10px; border:1px solid var(--border);">
@@ -1537,7 +2018,9 @@
         return;
       }
 
+      // VIEW: STANDARD CATALOG FILTERS
       const filtered = allTests.filter(t => {
+        if (currentFilter === 'MICRO' && !isMicroTest(t)) return false;
         if (currentFilter === 'PYQ' && !isPyqTest(t)) return false;
         if (currentFilter === 'Group 1' && t.exam_group !== 'Group 1') return false;
         if (currentFilter === 'Group 2' && t.exam_group !== 'Group 2') return false;
@@ -1552,6 +2035,7 @@
 
       grid.innerHTML = filtered.map(t => {
         const pyq = isPyqTest(t);
+        const micro = isMicroTest(t);
         const badgeClass = t.exam_group === 'Group 1' ? 'badge-g1' : (t.exam_group === 'Group 2' ? 'badge-g2' : 'badge-pib');
         const examAtts = getExamAttempts(t.test_id);
         const used = examAtts.length;
@@ -1565,7 +2049,7 @@
           chanceBadgeHtml = `<span class="badge badge-chance-2">2/2 Chances</span>`;
           scoreSummaryHtml = `<span style="font-size:12px; color:var(--muted);">🔒 Solutions after test</span>`;
           solutionsBtnHtml = '';
-          startBtnHtml = `<button class="btn ${pyq ? 'btn-purple' : 'btn-primary'}" onclick="openInstructionsModal('${t.test_id}')">Start Exam →</button>`;
+          startBtnHtml = `<button class="btn ${micro ? 'btn-accent' : (pyq ? 'btn-purple' : 'btn-primary')}" onclick="openInstructionsModal('${t.test_id}')">Start Exam →</button>`;
         } else if (used === 1) {
           const a1 = examAtts[0];
           chanceBadgeHtml = `<span class="badge badge-chance-1">1/2 Left</span>`;
@@ -1588,7 +2072,7 @@
               <div class="test-badges">
                 <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
                   <span class="badge ${badgeClass}">${t.exam_group}</span>
-                  ${pyq ? `<span class="badge badge-pyq">📜 Official PYQ</span>` : `<span class="badge badge-cat">${t.category}</span>`}
+                  ${micro ? `<span class="badge badge-micro">⚡ High-Yield Micro-Drill</span>` : (pyq ? `<span class="badge badge-pyq">📜 Official PYQ</span>` : `<span class="badge badge-cat">${t.category}</span>`)}
                 </div>
                 ${chanceBadgeHtml}
               </div>
@@ -1649,7 +2133,6 @@
         });
       });
 
-      // Prioritize authentic APPSC Group-I & Group-II Current Affairs & Static GS questions first
       const priorityQs = candidatePool.filter(q =>
         Boolean(q.is_authentic_ca || (q.id && q.id.startsWith('APPSC-CA-Q')))
       ).sort(() => Math.random() - 0.5);
@@ -1819,6 +2302,8 @@
       document.getElementById('qSubjectBadge').textContent = q.subject;
       document.getElementById('qTypeBadge').textContent = q.question_type || 'APPSC MCQ';
       document.getElementById('qTextDisplay').textContent = q.question;
+
+      updateActiveQuestionBookmarkBtn(isBookmarked(q.id));
 
       const letters = ['A', 'B', 'C', 'D'];
       const selectedOpt = userResponses[currentQIndex];
@@ -1992,7 +2477,6 @@
       const test = allTests.find(t => t.test_id === testId);
       if (!test) return;
 
-      // Solutions are strictly visible ONLY after the candidate has completed and submitted the test at least once
       const examAtts = getExamAttempts(testId);
       if (examAtts.length === 0) {
         alert(`🔒 Solutions Locked!\n\nSolutions and detailed explanations for "${test.title}" are only visible after you complete and submit the exam.`);
@@ -2037,7 +2521,7 @@
       document.getElementById('resExamMeta').textContent = `👤 Candidate: ${rec.userName || (currentUser ? currentUser.name : 'Candidate')} (${candLabel}) • Completed: ${rec.date} • Attempts Used: ${used}/${MAX_ATTEMPTS_PER_EXAM} • Negative Marking: -1/3 (0.33)`;
       document.getElementById('resNetScore').textContent = `${rec.netScore.toFixed(2)} / ${rec.totalMarks}`;
 
-      // Render switcher between Attempt 1 and Attempt 2 if attempts exist
+      // Switcher between Attempt 1 and Attempt 2
       const switcherEl = document.getElementById('resAttemptSwitcher');
       if (examAtts.length > 0) {
         switcherEl.innerHTML = examAtts.map((a, i) => {
@@ -2048,7 +2532,7 @@
         switcherEl.innerHTML = '';
       }
 
-      // Show Retake button if chances remain (< 2 attempts used)
+      // Retake button
       const retakeBtn = document.getElementById('btnRetakeFromResult');
       if (left > 0) {
         retakeBtn.className = 'btn btn-success';
@@ -2065,20 +2549,77 @@
       }
 
       const pct = (rec.netScore / rec.totalMarks) * 100;
-      const verdict = pct >= 55 ? '🏆 Above Safe APPSC Cutoff' : (pct >= 40 ? '📈 Borderline Cutoff - Revise Wrong Areas' : '📚 Focus on Solutions Below');
+      const verdict = pct >= 55 ? '🏆 Above Safe APPSC Cutoff' : (pct >= 40 ? '📈 Borderline Cutoff - Revise Weak Spots' : '📚 Needs Focused Revision');
       document.getElementById('resVerdictBadge').textContent = `${verdict} (${pct.toFixed(1)}%)`;
+
+      // Cut-off & Over/Under-Attempting Advisor Box
+      let cutoffText = '';
+      if (pct >= 55) {
+        cutoffText = `🏆 <b>SAFE SCORE (Estimated Cut-Off Cleared):</b> Your Net Score of <b>${rec.netScore.toFixed(2)} (${pct.toFixed(1)}%)</b> exceeds the safe qualifying threshold (>55%) for APPSC Group-I & Group-II Prelims.`;
+      } else if (pct >= 40) {
+        cutoffText = `⚠️ <b>BORDERLINE ZONE (40% - 55%):</b> Your Net Score of <b>${rec.netScore.toFixed(2)} (${pct.toFixed(1)}%)</b> is in the competitive borderline zone. Review incorrect questions below to avoid negative marking.`;
+      } else {
+        cutoffText = `📚 <b>NEEDS FOCUSED REVISION (<40%):</b> Your Net Score of <b>${rec.netScore.toFixed(2)} (${pct.toFixed(1)}%)</b> is below qualifying cut-offs. Use the Mistake Notebook and Re-Test feature below.`;
+      }
+
+      let strategyWarning = '';
+      if (rec.negMarks > 0.15 * rec.posMarks && rec.wrong >= 6) {
+        strategyWarning = `<div style="margin-top:6px; color:#fde047; font-size:12.5px;">⚠️ <b>Over-Attempting Penalty Loss:</b> You lost <b>${rec.negMarks.toFixed(2)} marks</b> to negative marking (${rec.wrong} wrong answers). Focus on eliminating options before attempting.</div>`;
+      } else if (rec.unattempted > rec.totalQuestions * 0.4) {
+        strategyWarning = `<div style="margin-top:6px; color:#93c5fd; font-size:12.5px;">ℹ️ <b>Under-Attempting Notice:</b> You skipped ${rec.unattempted} questions (${((rec.unattempted/rec.totalQuestions)*100).toFixed(0)}%). Practice 50-50 elimination techniques to safely raise attempts.</div>`;
+      }
+
+      document.getElementById('resCutoffBox').innerHTML = `
+        <div style="flex:1;">
+          <div>${cutoffText}</div>
+          ${strategyWarning}
+        </div>
+        <button class="btn btn-purple" style="font-size:11.5px; padding:5px 12px; white-space:nowrap;" onclick="filterTests('mistakes')">Open Mistake Bank ➡</button>
+      `;
 
       document.getElementById('resCorrectCount').textContent = rec.correct;
       document.getElementById('resPositiveMarks').textContent = `+${rec.posMarks.toFixed(2)} Positive Marks`;
       document.getElementById('resWrongCount').textContent = rec.wrong;
       document.getElementById('resNegativeMarks').textContent = `-${rec.negMarks.toFixed(2)} Negative Penalty`;
       document.getElementById('resUnattemptedCount').textContent = rec.unattempted;
-      document.getElementById('resAccuracyVal').textContent = `${rec.accuracy.toFixed(1)}%`;
+
+      // Pacing calculation
+      const pacingSecs = rec.totalQuestions > 0 ? Math.round(rec.timeTaken / rec.totalQuestions) : 0;
+      document.getElementById('resPacingVal').textContent = `${pacingSecs}s / Q`;
       document.getElementById('resTimeTaken').textContent = `Time Taken: ${formatSeconds(rec.timeTaken)}`;
 
+      // Subject-Wise Weak-Spot Radar Bars
+      const radarListEl = document.getElementById('radarBarsList');
+      if (radarListEl) {
+        radarListEl.innerHTML = Object.entries(rec.subjectStats).map(([subj, st]) => {
+          const attempted = st.correct + st.wrong;
+          const accPct = attempted > 0 ? Math.round((st.correct / attempted) * 100) : 0;
+          const corrWidth = (st.correct / Math.max(1, st.total)) * 100;
+          const wrongWidth = (st.wrong / Math.max(1, st.total)) * 100;
+          const net = (st.correct - (st.wrong / 3.0)).toFixed(2);
+          const accColor = accPct >= 70 ? 'var(--success)' : (accPct >= 45 ? 'var(--accent)' : 'var(--danger)');
+
+          return `
+            <div class="radar-row">
+              <div><b>${subj}</b> <span style="font-size:11.5px; color:var(--muted);">(${st.total} Qs)</span></div>
+              <div>
+                <div class="progress-bar-bg" title="Correct: ${st.correct}, Wrong: ${st.wrong}, Unattempted: ${st.unattempted}">
+                  <div class="progress-bar-fill-correct" style="width:${corrWidth}%"></div>
+                  <div class="progress-bar-fill-wrong" style="width:${wrongWidth}%"></div>
+                </div>
+              </div>
+              <div style="font-weight:700; color:${accColor};">${attempted > 0 ? accPct + '% Acc' : '--'}</div>
+              <div style="font-size:12.5px; color:#334155; text-align:right;">Net: <b>${net}</b> (${st.correct}✓ / ${st.wrong}✗)</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Subject table
       const tbody = document.getElementById('resSubjectTableBody');
       tbody.innerHTML = Object.entries(rec.subjectStats).map(([subj, st]) => {
         const net = st.correct - (st.wrong / 3.0);
+        const negLoss = st.wrong * (1.0 / 3.0);
         const att = st.correct + st.wrong;
         const acc = att > 0 ? ((st.correct / att) * 100).toFixed(1) + '%' : '--';
         return `
@@ -2089,6 +2630,7 @@
             <td style="color:var(--danger); font-weight:700;">${st.wrong}</td>
             <td>${st.unattempted}</td>
             <td><b>${net.toFixed(2)}</b></td>
+            <td style="color:var(--danger); font-weight:600;">-${negLoss.toFixed(2)}</td>
             <td>${acc}</td>
           </tr>
         `;
@@ -2101,7 +2643,8 @@
     function filterSolutions(mode) {
       currentSolFilter = mode;
       ['all', 'correct', 'wrong', 'unattempted'].forEach(k => {
-        document.getElementById('sol-tab-' + k).classList.toggle('active', k === mode);
+        const tabEl = document.getElementById('sol-tab-' + k);
+        if (tabEl) tabEl.classList.toggle('active', k === mode);
       });
       renderSolutionsList();
     }
@@ -2129,6 +2672,9 @@
               ? `<span class="badge badge-g2">✓ Correct (+1.00 Mark)</span>`
               : `<span class="badge" style="background:var(--danger-bg); color:var(--danger);">✗ Wrong (-0.33 Mark)</span>`);
 
+        const trick = getMemoryTrick(q);
+        const bookmarked = isBookmarked(q.id);
+
         const optsHtml = q.options.map((optText, oIdx) => {
           let cls = 'sol-opt';
           let tag = '';
@@ -2150,14 +2696,18 @@
                 <span class="badge badge-g1" style="margin-left:8px;">${q.subject}</span>
                 <span class="badge badge-cat" style="margin-left:4px;">${q.topic || ''}</span>
               </div>
-              ${statusBadge}
+              <div style="display:flex; align-items:center; gap:8px;">
+                ${statusBadge}
+                <button class="btn-bookmark ${bookmarked ? 'bookmarked' : ''}" onclick="toggleBookmark(${JSON.stringify(q).replace(/"/g, '&quot;')}); renderSolutionsList();">⭐ Star</button>
+              </div>
             </div>
             <div style="font-size:15px; font-weight:600; white-space:pre-line; margin-bottom:14px; color:#0f172a;">${q.question}</div>
             <div>${optsHtml}</div>
             <div class="explanation-box">
               <b style="color:var(--primary-dark);">💡 Detailed Solution & Explanation:</b><br/>
               ${q.explanation}
-              <div><span class="source-tag">📌 Official Source: ${q.source || 'PIB / APPSC Official Reference'}</span></div>
+              ${trick ? `<div class="memory-trick-box">${trick}</div>` : ''}
+              <div style="margin-top:6px;"><span class="source-tag">📌 Official Source: ${q.source || 'PIB / APPSC Official Reference'}</span></div>
             </div>
           </div>
         `;
